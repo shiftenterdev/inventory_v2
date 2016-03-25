@@ -14,12 +14,10 @@
 
     @include('admin.layout.header')
 
-    <div class="row">
-        
-        @include('admin.layout.sidebar')
+    @include('admin.layout.sidebar')
 
-        @yield('content')
-    </div>
+    @yield('content')
+    
 
     <script src="admin/js/jquery.min.js"></script>
     <script src="admin/js/bootstrap.min.js"></script>
