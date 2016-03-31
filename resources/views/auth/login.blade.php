@@ -21,7 +21,8 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form action="auth/secure-login" class="form-horizontal">
+                        <form action="auth" class="form-horizontal" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                                 <div class="col-lg-10">

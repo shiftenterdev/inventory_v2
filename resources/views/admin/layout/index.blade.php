@@ -14,6 +14,8 @@
 
     @include('admin.layout.header')
 
+    @include('admin.layout.toast')
+
     @include('admin.layout.sidebar')
 
     @yield('content')
