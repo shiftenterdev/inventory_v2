@@ -60,6 +60,7 @@
         </div>
     </div>
 
+    @include('admin.layout.img_modal')
 @endsection
 
 @section('script')
@@ -67,6 +68,40 @@
     <script>
         $('.add-product').on('click',function(){
             $('#productModal').modal('show');
+        });
+        $('.uI').on('click',function(){
+            $('#aIL').load('ajax/images',function(){
+                $('#imgModal').modal('show');
+            });
+
+        });
+        $('.uui').on('click',function(){
+            $('.img-upload').click();
+        });
+        $('.img-upload').on('change', function () {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            if (this.files[0].size / 1024 > 512) {
+                alert('File size cannot greater than 500KB');
+                return false;
+            }
+
+            var myFormData = new FormData();
+            myFormData.append('image', $(this).prop("files")[0]);
+            myFormData.append('_token', CSRF_TOKEN);
+
+
+            $.ajax({
+                url: 'ajax/upload-image',
+                type: 'POST',
+                processData: false, // important
+                contentType: false, // important
+                dataType: 'json',
+                data: myFormData,
+                success: function (rs) {
+                    $('#aIL').load('ajax/images');
+                }
+            });
+
         });
     </script>
 @stop
