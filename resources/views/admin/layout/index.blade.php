@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Test Admin</title>
+    <title>My Shop</title>
     <base href="/" />
     <link rel="stylesheet" href="admin/css/bootstrap.min.css">
     <link rel="stylesheet" href="admin/css/bb.css">
@@ -21,9 +21,12 @@
     @yield('content')
     
 
-    <script src="admin/js/jquery.min.js"></script>
-    <script src="admin/js/bootstrap.min.js"></script>
-    <script src="admin/js/bb.js"></script>
+    @section('script')
+        <script src="admin/js/jquery.min.js"></script>
+        <script src="admin/js/bootstrap.min.js"></script>
+        <script src="admin/js/bb.js"></script>
+    @show
+
 </body>
 
 </html>

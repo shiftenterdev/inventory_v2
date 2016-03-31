@@ -104,3 +104,7 @@ a.nB{
 .breadcrumb a {
     color: #3F51B5;
 }
+
+textarea{
+    resize: none;
+}
