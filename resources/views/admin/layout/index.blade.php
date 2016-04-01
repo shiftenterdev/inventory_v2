@@ -20,12 +20,14 @@
     @include('admin.layout.sidebar')
 
     @yield('content')
-    
+
+    @include('admin.layout.img_modal')
 
     @section('script')
         <script src="admin/js/jquery.min.js"></script>
         <script src="admin/js/bootstrap.min.js"></script>
         <script src="admin/js/bb.js"></script>
+        <script src="admin/js/custom.js"></script>
     @show
 
 </body>

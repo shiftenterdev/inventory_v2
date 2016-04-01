@@ -7,6 +7,7 @@
         width: 100%;
         display: inline-table;
         margin-bottom: 5px;
+        position: relative;
     }
     .iMP .img-thumbnail{
         max-height: 100px;
@@ -14,8 +15,10 @@
         cursor: pointer;
     }
     .iMP a{
-        float: right;
-        margin-top: -6px;
+        position: absolute;
+        top: -6px;
+        right: 0px;
+        font-size: 16px;
     }
 </style>
 <div class="row">

@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\Category;
 use App\Models\Image;
 use Illuminate\Http\Request;
 
@@ -43,8 +44,14 @@ class AjaxController extends Controller
 
     public function get_image_name($id)
     {
-        $image = Image::where('id',$id)->pluck('img_title');
+        $image = Image::where('id',$id)->first(['id','img_title']);
         return $image;
+    }
+
+    public function get_sub_category($id)
+    {
+        $categories = Category::where('cat_parent_id',$id)->get(['id','cat_title']);
+        return $categories;
     }
 
 }

@@ -15,6 +15,8 @@ Route::get('/', 'AdminController@get_index');
 Route::controller('auth', 'AuthController');
 Route::controller('product','ProductController');
 Route::controller('ajax','AjaxController');
+Route::controller('settings','SettingsController');
+Route::controller('category','CategoryController');
 
 get('pass',function(){
 	return bcrypt('112233');
