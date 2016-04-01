@@ -21,6 +21,7 @@
                         <th>Title</th>
                         <th>Stock</th>
                         <th>Price</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -31,6 +32,7 @@
                             <td>{{$p->pro_title}}</td>
                             <td>{{$p->pro_stock}}</td>
                             <td>{{$p->pro_price}}</td>
+                            <td>{{$p->pro_status==1?'Active':'Inactive'}}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
@@ -69,15 +71,37 @@
         $('.add-product').on('click',function(){
             $('#productModal').modal('show');
         });
+        var uBt = '';
         $('.uI').on('click',function(){
+            uBt = $(this);
             $('#aIL').load('ajax/images',function(){
+                $('#productModal').modal('hide');
                 $('#imgModal').modal('show');
             });
 
         });
+        $('#imgModal').on('hidden.bs.modal', function () {
+            $('#productModal').modal('show');
+        });
         $('.uui').on('click',function(){
             $('.img-upload').click();
         });
+
+        $('body').on('click','#aIL .dImg',function(){
+            var id = $(this).data('id');
+            $.get('ajax/delete-image/'+id).done(function(){
+                $('#aIL').load('ajax/images');
+            });
+        });
+
+        $('body').on('click','#aIL .gImg',function(){
+            var id = $(this).data('id');
+            $.get('ajax/image-name/'+id).done(function(result){
+                $('#imgModal').modal('hide');
+                $('input[name=pro_image_id]').val(result);
+            });
+        });
+
         $('.img-upload').on('change', function () {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             if (this.files[0].size / 1024 > 512) {
@@ -101,6 +125,7 @@
                     $('#aIL').load('ajax/images');
                 }
             });
+
 
         });
     </script>

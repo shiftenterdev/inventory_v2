@@ -11,13 +11,21 @@
     .iMP .img-thumbnail{
         max-height: 100px;
         max-width: 110px;
+        cursor: pointer;
+    }
+    .iMP a{
+        float: right;
+        margin-top: -6px;
     }
 </style>
 <div class="row">
     @foreach($images as $i)
         <div class="col-md-3">
             <div class="iMP">
-                <img src="/uploads/{{$i->img_title}}" alt="" class="img-thumbnail">
+                <a href="javascript:" data-id="{{$i->id}}" class="dImg">
+                    <i class="fa fa-times-circle text-danger"></i>
+                </a>
+                <img src="/uploads/{{$i->img_title}}" class="img-thumbnail gImg" data-id="{{$i->id}}">
             </div>
         </div>
     @endforeach

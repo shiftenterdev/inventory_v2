@@ -33,4 +33,18 @@ class AjaxController extends Controller
         }
     }
 
+    public function get_delete_image($id)
+    {
+        $image = Image::where('id',$id)->pluck('img_title');
+        unlink(public_path('uploads/'.$image));
+        Image::destroy($id);
+        return 1;
+    }
+
+    public function get_image_name($id)
+    {
+        $image = Image::where('id',$id)->pluck('img_title');
+        return $image;
+    }
+
 }

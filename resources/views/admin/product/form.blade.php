@@ -1,4 +1,5 @@
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="product/create">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="form-group">
         <label class="col-lg-2 control-label">Title</label>
 
@@ -42,11 +43,12 @@
     <div class="form-group">
         <label class="col-lg-2 control-label">Image</label>
 
-        <div class="col-lg-2">
-            <button class="btn btn-sm btn-info uI" type="button">Upload</button>
-        </div>
-        <div class="col-lg-8">
+
+        <div class="col-lg-7">
             <input type="text" class="form-control" name="pro_image_id">
+        </div>
+        <div class="col-lg-1">
+            <button class="btn btn-info uI" type="button">Upload</button>
         </div>
     </div>
 

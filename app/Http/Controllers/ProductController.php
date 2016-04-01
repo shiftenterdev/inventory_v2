@@ -20,6 +20,12 @@ class ProductController extends Controller {
             ->with(compact('products'));
     }
 
+    public function post_create(Request $request)
+    {
+        Product::create($request->all());
+        return redirect('/product');
+    }
+
     public function post_update($id,Request $request)
     {
 
