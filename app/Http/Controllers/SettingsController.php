@@ -12,14 +12,20 @@ class SettingsController extends Controller {
         $this->middleware('auth');
     }
 
-    public function get_update_password()
+    public function get_update_password(Request $request)
     {
+	$current_pass = User::where('id',Auth::user()->id)
+		->pluck('password');
+	if(password_verify()){
 
+	}else{
+
+	}
     }
 
     public function post_update_password()
     {
-        
+
     }
 
 }
