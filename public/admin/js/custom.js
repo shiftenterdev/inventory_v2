@@ -51,8 +51,13 @@ $('.img-upload').on('change', function () {
         }
     });
 
-
 });
+
+$('.confirm').on('click',function(){
+    return confirm('Are you sure ?');
+});
+
+$('.nD').delay(3000).slideUp();
 
 $('.parCat').on('change',function(){
     var v = $(this).val();

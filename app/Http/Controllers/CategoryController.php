@@ -37,19 +37,32 @@ class CategoryController extends Controller {
     public function post_store(Request $request)
     {
         Category::create($request->all());
-        return redirect('/category');
+        return redirect('/category')
+            ->with('success','Category created');
+    }
+
+    public function get_edit($id)
+    {
+        $categories = Category::all();
+        $category = Category::where('id',$id)->first();
+        return view('admin.category.edit')
+            ->with(compact('category','categories'));
     }
 
     public function post_update($id,Request $request)
     {
-        Category::where('id',$id)->update($request->all());
-        return redirect('/category');
+        $input = $request->all();
+        unset($input['_token']);
+        Category::where('id',$id)->update($input);
+        return redirect('/category')
+            ->with('success','Category updated');
     }
 
     public function get_delete($id)
     {
         Category::destroy($id);
-        return redirect('/admin/category');
+        return redirect('/category')
+            ->with('success','Category deleted');
     }
 
 }

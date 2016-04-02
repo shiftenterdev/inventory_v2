@@ -31,8 +31,8 @@
                             <td>{{$c->parent}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
-                                    <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="category/edit/{{$c->id}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+                                    <a href="category/delete/{{$c->id}}" class="btn btn-sm btn-danger confirm"><i class="fa fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>
