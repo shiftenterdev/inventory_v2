@@ -9,6 +9,8 @@
         <hr>
         <a href="product" class="list-group-item {{Request::segment(1)=='product'?'active':''}}">
             <i class="fa fa-cubes"></i> Product</a>
+        <a href="brand" class="list-group-item {{Request::segment(1)=='brand'?'active':''}}">
+            <i class="fa fa-contao"></i> Brand</a>
         <a href="category" class="list-group-item {{Request::segment(1)=='category'?'active':''}}">
             <i class="fa fa-building"></i> Category</a>
         <hr>

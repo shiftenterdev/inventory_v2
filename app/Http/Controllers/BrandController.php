@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\Brand;
+use App\Repo\CoreTrait;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -18,7 +20,12 @@ class BrandController extends Controller
 	 */
 	public function get_index()
 	{
-		//
+		$brands = Brand::all();
+		foreach($brands as $b){
+			$b->logo = CoreTrait::imageById($b->brand_logo_id);
+		}
+		return view('admin.brand.index')
+				->with(compact('brands'));
 	}
 
 	/**
@@ -26,9 +33,9 @@ class BrandController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function get_create()
 	{
-		//
+		return view('admin.brand.create');
 	}
 
 	/**
@@ -36,9 +43,11 @@ class BrandController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function post_store(Request $request)
 	{
-		//
+		$input = $request->all();
+		Brand::create($input);
+		return redirect('/brand');
 	}
 
 	/**
@@ -80,9 +89,10 @@ class BrandController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function get_delete($id)
 	{
-		//
+		Brand::destroy($id);
+		return redirect('/brand');
 	}
 
 }

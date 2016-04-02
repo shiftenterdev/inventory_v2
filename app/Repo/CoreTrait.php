@@ -4,6 +4,7 @@ namespace App\Repo;
 
 
 use App\Models\Customer;
+use App\Models\Image;
 
 trait CoreTrait
 {
@@ -16,5 +17,11 @@ trait CoreTrait
             $customer_id = $customer_id +1;
         }
         return $customer_id;
+    }
+
+    public static function imageById($id)
+    {
+        $name = Image::where('id',$id)->pluck('img_title');
+        return $name;
     }
 }

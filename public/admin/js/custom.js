@@ -23,7 +23,7 @@ $('body').on('click','#aIL .gImg',function(){
     $.get('ajax/image-name/'+id).done(function(result){
         $('#imgModal').modal('hide');
         $('.prvImg').attr('src','uploads/'+result.img_title);
-        $('input[name=pro_image_id]').val(result.id);
+        $('#imgIdVal').val(result.id);
     });
 });
 
