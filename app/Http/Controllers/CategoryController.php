@@ -29,7 +29,7 @@ class CategoryController extends Controller {
 
     public function get_create()
     {
-        $categories = Category::all();
+        $categories = Category::where('cat_parent_id','-1')->get();
         return view('admin.category.create')
             ->with(compact('categories'));
     }
@@ -43,7 +43,7 @@ class CategoryController extends Controller {
 
     public function get_edit($id)
     {
-        $categories = Category::all();
+        $categories = Category::where('cat_parent_id','-1')->get();
         $category = Category::where('id',$id)->first();
         return view('admin.category.edit')
             ->with(compact('category','categories'));

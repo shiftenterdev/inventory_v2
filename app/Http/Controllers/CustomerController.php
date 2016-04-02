@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -18,9 +19,11 @@ class CustomerController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function get_index()
 	{
-		//
+		$customers = Customer::all();
+		return view('admin.customer.index')
+				->with(compact('customers'));
 	}
 
 	/**
@@ -28,9 +31,9 @@ class CustomerController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function get_create()
 	{
-		//
+		return view('admin.customer.create');
 	}
 
 	/**
