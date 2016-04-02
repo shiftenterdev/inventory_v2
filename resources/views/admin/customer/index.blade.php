@@ -19,21 +19,23 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Parent</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($customers as $c)
                         <tr>
-                            <td>{{$c->id}}</td>
-                            <td>{{$c->cat_title}}</td>
-                            <td>{{$c->parent}}</td>
+                            <td>{{$c->customer_id}}</td>
+                            <td>{{$c->customer_name}}</td>
+                            <td>{{$c->customer_email}}</td>
+                            <td>{{$c->customer_phone}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="category/edit/{{$c->id}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
-                                    <a href="category/delete/{{$c->id}}" class="btn btn-sm btn-danger confirm"><i class="fa fa-trash"></i></a>
+                                    <a href="customer/edit/{{$c->id}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+                                    <a href="customer/delete/{{$c->id}}" class="btn btn-sm btn-danger confirm"><i class="fa fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>

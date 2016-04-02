@@ -1,9 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use App\Models\Customer;
+use App\Repo\CoreTrait;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -41,9 +40,14 @@ class CustomerController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function post_store(Request $request)
 	{
-		//
+		$input = $request->all();
+		$input['customer_id'] = CoreTrait::customerId();
+		unset($input['_token']);
+		Customer::create($input);
+		return redirect('/customer')
+				->with('success','Customer Added');
 	}
 
 	/**
@@ -63,9 +67,11 @@ class CustomerController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function get_edit($id)
 	{
-		//
+		$customer = Customer::find($id);
+		return view('admin.customer.edit')
+				->with(compact('customer'));
 	}
 
 	/**
@@ -74,9 +80,13 @@ class CustomerController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function post_update($id,Request $request)
 	{
-		//
+		$input = $request->all();
+		unset($input['_token']);
+		Customer::where('id',$id)->update($input);
+		return redirect('/customer')
+				->with('success','Customer Updated');
 	}
 
 	/**
@@ -85,9 +95,11 @@ class CustomerController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function get_delete($id)
 	{
-		//
+		Customer::destroy($id);
+		return redirect('/customer')
+				->with('success','Customer Deleted Successfully');
 	}
 
 }
