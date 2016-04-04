@@ -5,6 +5,7 @@ namespace App\Repo;
 
 use App\Models\Customer;
 use App\Models\Image;
+use App\Models\Category;
 
 trait CoreTrait
 {
@@ -23,5 +24,11 @@ trait CoreTrait
     {
         $name = Image::where('id',$id)->pluck('img_title');
         return $name;
+    }
+
+    public static function catById($id)
+    {
+        $cat_name = Category::where('id',$id)->pluck('cat_title');
+        return $cat_name;        
     }
 }

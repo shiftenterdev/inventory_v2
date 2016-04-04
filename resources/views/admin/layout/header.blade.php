@@ -29,8 +29,8 @@
                             <i class="fa fa-user-md"></i> Admin 
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Users</a></li>
-                            <li><a href="#">Products</a></li>
+                            <li><a href="user">Users</a></li>
+                            <li><a href="product">Products</a></li>
                             <li class="divider"></li>
                             <li><a href="settings/update-password">Update Password</a></li>
                             <li class="divider"></li>

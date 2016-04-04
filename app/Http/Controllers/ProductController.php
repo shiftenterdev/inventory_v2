@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Repo\CoreTrait;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -17,6 +17,10 @@ class ProductController extends Controller {
     public function get_index()
     {
         $products = Product::all();
+        foreach($products as $p){
+            $p->category = CoreTrait::catById($p->pro_cat_id);
+            $p->sub_category = CoreTrait::catById($p->pro_subcat_id);
+        }
         return view('admin.product.index')
             ->with(compact('products'));
     }

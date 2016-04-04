@@ -6,20 +6,20 @@
     <div class="col-md-9 mB">
         <ul class="breadcrumb">
             <li><a href="#">Home</a></li>
-            <li class="active">Product</li>
+            <li class="active">Stock</li>
         </ul>
         <div class="cN">
             <fieldset>
                 <legend>
-                    Add Product
+                    Add Stock
                 </legend>
-                <form action="product/store" class="form-horizontal" method="post">
+                <form action="stock/store" class="form-horizontal" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Category</label>
 
                         <div class="col-lg-8">
-                            <select name="pro_cat_id" class="form-control parCat" required>
+                            <select class="form-control parCat">
                                 <option value="">Select Category</option>
                                 @foreach($categories as $c)
                                     <option value="{{$c->id}}">{{$c->cat_title}}</option>
@@ -31,23 +31,25 @@
                         <label class="col-lg-2 control-label">Sub Category</label>
 
                         <div class="col-lg-8">
-                            <select name="pro_subcat_id" class="form-control parSubCat">
+                            <select class="form-control parSubCat">
                                 <option value="">Sub Category</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Title</label>
+                        <label class="col-lg-2 control-label">Product</label>
 
                         <div class="col-lg-8">
-                            <input class="form-control" placeholder="Title" type="text" name="pro_title">
+                            <select name="pro_id" class="form-control parProduct">
+                                <option value="" >Product</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Description</label>
+                        <label class="col-lg-2 control-label">Quantity</label>
 
                         <div class="col-lg-8">
-                            <textarea name="pro_description" class="form-control" placeholder="Description"></textarea>
+                            <input type="number" name="pro_stock" class="form-control" placeholder="Quantity">
                         </div>
                     </div>
                     <div class="form-group">
@@ -58,34 +60,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Status</label>
-                        <div class="col-lg-8">
-                            <div class="radio">
-                                <label>
-                                    <input name="pro_status" value="1" checked="" type="radio">
-                                    Active
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input name="pro_status" value="2" type="radio">
-                                    Inactive
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Image</label>
-
-
-                        <div class="col-lg-7">
-                            <img src="preview.jpeg" alt="" style="height:120px;max-width: 120px;margin-right: 20px" class="img-thumbnail prvImg">
-                            <input type="hidden" name="pro_image_id" id="imgIdVal">
-                            <button class="btn btn-info uI" type="button">Upload</button>
-                        </div>
-                    </div>
+                    
                     <hr>
                     <div class="form-group">
                         <div class="col-lg-8 col-lg-offset-2">

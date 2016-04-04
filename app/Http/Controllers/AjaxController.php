@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -52,6 +53,12 @@ class AjaxController extends Controller
     {
         $categories = Category::where('cat_parent_id',$id)->get(['id','cat_title']);
         return $categories;
+    }
+
+    public function get_products($id)
+    {
+        $products = Product::where('pro_subcat_id',$id)->get(['id','pro_title']);
+        return $products;
     }
 
 }

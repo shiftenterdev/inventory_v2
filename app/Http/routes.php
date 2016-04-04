@@ -19,6 +19,10 @@ Route::controller('settings','SettingsController');
 Route::controller('category','CategoryController');
 Route::controller('customer','CustomerController');
 Route::controller('brand','BrandController');
+Route::controller('stock','StockController');
+Route::controller('user','UserController');
+Route::controller('sell','SellController');
+Route::controller('purchase','BuyController');
 
 get('pass',function(){
 	return bcrypt('112233');
