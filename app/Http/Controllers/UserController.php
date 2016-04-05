@@ -29,7 +29,7 @@ class UserController extends Controller {
 		$input = $request->all();
 		$input['password'] = bcrypt('demo');
 		unset($input['_token']);
-		User::create($request->all());
+		User::create($input);
 		return redirect('/user')
 			->with('success','User Created Successfully');
 	}

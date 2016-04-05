@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BuyController extends Controller 
@@ -19,7 +19,9 @@ class BuyController extends Controller
 	 */
 	public function get_index()
 	{
-		return view('admin.buy.index');
+		$products = Product::get(['pro_code']);
+		return view('admin.buy.index')
+			->with(compact('products'));
 	}
 
 	/**

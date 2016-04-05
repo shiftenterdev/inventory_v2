@@ -6,6 +6,7 @@ namespace App\Repo;
 use App\Models\Customer;
 use App\Models\Image;
 use App\Models\Category;
+use App\Models\Product;
 
 trait CoreTrait
 {
@@ -30,5 +31,24 @@ trait CoreTrait
     {
         $cat_name = Category::where('id',$id)->pluck('cat_title');
         return $cat_name;        
+    }
+
+    public static function productCode()
+    {
+        $product_code = Product::orderBy('id','desc')->pluck('pro_code');
+        if(empty($product_code)){
+            $product_code = 'P1000001';
+        }else{
+            $product_code = str_replace('P', '', $product_code);
+            $product_code = 'P'.(intval($product_code)+1);
+        }
+        return $product_code;
+
+    }
+
+    public static function productTitleByCode($id)
+    {
+        $title = Product::where('pro_code',$id)->pluck('pro_title');
+        return $title;
     }
 }

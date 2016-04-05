@@ -2,8 +2,9 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SellController extends Controller 
 {
@@ -19,7 +20,16 @@ class SellController extends Controller
 	 */
 	public function get_index()
 	{
-		return view('admin.sell.index');
+		Session::forget('sell_items');
+		$products = Product::get(['pro_code']);
+		if(Session::has('sell_items')){
+			$temp_pro = Session::get('sell_items');
+			$temp_pro = json_decode(json_encode($temp_pro), FALSE);
+		}else{
+			$temp_pro = 0;
+		}
+		return view('admin.sell.index')
+			->with(compact('products','temp_pro'));
 	}
 
 	/**
@@ -27,9 +37,16 @@ class SellController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function get_product_list()
 	{
-		//
+		if(Session::has('sell_items')){
+			$temp_pro = Session::get('sell_items');
+			$temp_pro = json_decode(json_encode($temp_pro), FALSE);
+		}else{
+			$temp_pro = 0;
+		}
+		return view('admin.sell.product_list')
+			->with(compact('products','temp_pro'));
 	}
 
 	/**

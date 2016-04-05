@@ -17,7 +17,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Code</th>
                         <th>Title</th>
                         <th>Category</th>
                         <th>Sub-Category</th>
@@ -30,7 +30,7 @@
                     <tbody>
                     @foreach($products as $p)
                         <tr>
-                            <td>{{$p->id}}</td>
+                            <td>{{$p->pro_code}}</td>
                             <td>{{$p->pro_title}}</td>
                             <td>{{$p->category}}</td>
                             <td>{{$p->sub_category}}</td>

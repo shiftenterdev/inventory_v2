@@ -34,7 +34,10 @@ class ProductController extends Controller {
 
     public function post_store(Request $request)
     {
-        Product::create($request->all());
+        $input = $request->all();
+        $input['pro_code'] = CoreTrait::productCode();
+        unset($input['_token']);
+        Product::create($input);
         return redirect('/product');
     }
 

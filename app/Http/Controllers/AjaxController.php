@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
+use App\Repo\CoreTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AjaxController extends Controller
 {
@@ -59,6 +61,39 @@ class AjaxController extends Controller
     {
         $products = Product::where('pro_subcat_id',$id)->get(['id','pro_title']);
         return $products;
+    }
+
+    public function get_product_by_code($id)
+    {
+        $products = Product::where('pro_code',$id)->first();
+        return $products;
+    }
+
+    public function post_sell_list(Request $request)
+    {
+        $input = $request->all();
+        $true = false;
+        $new = [];
+        if(Session::has('sell_items')) {
+            $current_list = Session::get('sell_items');
+
+            foreach ($current_list as $cl) {
+                if ($cl['pro_code'] == $input['pro_code']) {
+                    $true = true;
+                    $cl['pro_quantity'] = $input['pro_quantity'];
+                }
+                $new[] = $cl;
+            }
+        }
+        if($true == false) {
+            $input['pro_title'] = CoreTrait::productTitleByCode($input['pro_code']);
+            unset($input['_token']);
+            Session::push('sell_items',$input);
+        }else{
+            Session::put('sell_items',$new);
+        }
+
+        return 1;
     }
 
 }
