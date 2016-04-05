@@ -43,7 +43,7 @@ class SellController extends Controller
 			$temp_pro = Session::get('sell_items');
 			$temp_pro = json_decode(json_encode($temp_pro), FALSE);
 		}else{
-			$temp_pro = 0;
+			$temp_pro = [];
 		}
 		return view('admin.sell.product_list')
 			->with(compact('products','temp_pro'));

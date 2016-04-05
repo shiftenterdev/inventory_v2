@@ -96,4 +96,12 @@ class AjaxController extends Controller
         return 1;
     }
 
+    public function get_remove_product($id)
+    {
+        $session = Session::get('sell_items');
+        unset($session[$id]);
+        Session::put('sell_items',$session);
+        return 1;
+    }
+
 }

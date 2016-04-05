@@ -123,3 +123,13 @@ $('.add-pro-s').on('click', function(e) {
         $('#productList').load('sell/product-list');
     });
 });
+
+/**
+ * remove product form append[session] list
+ */
+$('body').on('click','.rI',function(){
+    var v = $(this).data('key');
+    $.get('ajax/remove-product/'+v).done(function(result){
+        $('#productList').load('sell/product-list');
+    });
+});
