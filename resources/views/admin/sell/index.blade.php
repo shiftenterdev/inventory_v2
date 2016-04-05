@@ -7,9 +7,9 @@
     <div class="cN">
         <fieldset>
             <legend>
-                Sell Product
+                Customer Info
             </legend>
-            <form action="sell/store" class="form-horizontal" method="post">
+            <form action="sell/store" class="form-horizontal" method="post" style="margin-bottom: 200px">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="row">
                     <div class="col-md-6">
@@ -46,7 +46,9 @@
                     </div>
                 </div>
                 <hr>
-                <legend>Product List</legend>
+                <legend>
+                    Product List
+                </legend>
                 <div id="productList">
                     @include('admin.sell.product_list')
                 </div>
@@ -85,8 +87,6 @@
                     </div>
                 </div>
             </form>
-            <br>
-            <br>
         </fieldset>
     </div>
 </div>
