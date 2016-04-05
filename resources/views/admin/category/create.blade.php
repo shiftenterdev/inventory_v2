@@ -17,14 +17,6 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Title</label>
-
-                        <div class="col-lg-6">
-                            <input class="form-control" placeholder="Title" type="text" name="cat_title">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label class="col-lg-2 control-label">Parent</label>
 
                         <div class="col-lg-6">
@@ -35,6 +27,14 @@
                                     <option value="{{$c->id}}">{{$c->cat_title}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Title</label>
+
+                        <div class="col-lg-6">
+                            <input class="form-control" placeholder="Title" type="text" name="cat_title">
                         </div>
                     </div>
 
