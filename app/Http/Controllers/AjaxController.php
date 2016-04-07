@@ -96,11 +96,46 @@ class AjaxController extends Controller
         return 1;
     }
 
-    public function get_remove_product($id)
+    public function post_buy_list(Request $request)
+    {
+        $input = $request->all();
+        $true = false;
+        $new = [];
+        if(Session::has('buy_items')) {
+            $current_list = Session::get('buy_items');
+
+            foreach ($current_list as $cl) {
+                if ($cl['pro_code'] == $input['pro_code']) {
+                    $true = true;
+                    $cl['pro_quantity'] = $input['pro_quantity'];
+                }
+                $new[] = $cl;
+            }
+        }
+        if($true == false) {
+            $input['pro_title'] = CoreTrait::productTitleByCode($input['pro_code']);
+            unset($input['_token']);
+            Session::push('buy_items',$input);
+        }else{
+            Session::put('buy_items',$new);
+        }
+
+        return 1;
+    }
+
+    public function get_remove_sell_product($id)
     {
         $session = Session::get('sell_items');
         unset($session[$id]);
         Session::put('sell_items',$session);
+        return 1;
+    }
+
+    public function get_remove_buy_product($id)
+    {
+        $session = Session::get('buy_items');
+        unset($session[$id]);
+        Session::put('buy_items',$session);
         return 1;
     }
 

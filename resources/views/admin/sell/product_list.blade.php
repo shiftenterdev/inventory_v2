@@ -27,7 +27,7 @@
 						<td>{{money_format('%!i',$p->pro_price)}}</td>
 						<td>{{$p->pro_quantity}}</td>
 						<td>{{money_format('%!i',($p->pro_quantity * $p->pro_price))}}</td>
-						<td><a href="javascript:" class="btn btn-xs btn-danger rI" data-key="{{$k}}"><i class="fa fa-times"></i></a></td>
+						<td><a href="javascript:" class="btn btn-xs btn-danger rSI" data-key="{{$k}}"><i class="fa fa-times"></i></a></td>
 					</tr>
 					<?php $total +=  $p->pro_quantity * $p->pro_price?>
 				@endforeach

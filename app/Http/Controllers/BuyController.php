@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class BuyController extends Controller 
 {
@@ -29,9 +31,16 @@ class BuyController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function get_product_list()
 	{
-		//
+		if(Session::has('buy_items')){
+			$temp_pro = Session::get('buy_items');
+			$temp_pro = json_decode(json_encode($temp_pro), FALSE);
+		}else{
+			$temp_pro = [];
+		}
+		return view('admin.buy.product_list')
+			->with(compact('products','temp_pro'));
 	}
 
 	/**

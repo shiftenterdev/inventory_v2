@@ -125,11 +125,40 @@ $('.add-pro-s').on('click', function(e) {
 });
 
 /**
+ * Add product for buy
+ */
+$('.add-pro-b').on('click', function(e) {
+    e.preventDefault();
+    var product = {
+        pro_code : $('select[name=pro_code]').val(),
+        pro_price : $('input[name=pro_price]').val(),
+        pro_quantity : $('input[name=pro_quantity]').val(),
+        _token : $('meta[name="csrf-token"]').attr('content')
+    };
+
+    $.post('ajax/buy-list',product).done(function(result){
+        $('.spo').val('');
+        $('.pqj').text('');
+        $('#productList').load('purchase/product-list');
+    });
+});
+
+/**
  * remove product form append[session] list
  */
-$('body').on('click','.rI',function(){
+$('body').on('click','.rSI',function(){
     var v = $(this).data('key');
-    $.get('ajax/remove-product/'+v).done(function(result){
+    $.get('ajax/remove-sell-product/'+v).done(function(result){
         $('#productList').load('sell/product-list');
+    });
+});
+
+/**
+ * remove product form append[session] list
+ */
+$('body').on('click','.rBI',function(){
+    var v = $(this).data('key');
+    $.get('ajax/remove-buy-product/'+v).done(function(result){
+        $('#productList').load('purchase/product-list');
     });
 });
