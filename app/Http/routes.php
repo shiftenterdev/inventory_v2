@@ -23,6 +23,7 @@ Route::controller('stock','StockController');
 Route::controller('user','UserController');
 Route::controller('sell','SellController');
 Route::controller('purchase','BuyController');
+Route::controller('refund','RefundController');
 
 get('pass',function(){
 	return bcrypt('112233');

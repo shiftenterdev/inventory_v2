@@ -18,6 +18,8 @@
             <i class="fa fa-user"></i> Customer</a>
         <a href="stock" class="list-group-item {{Request::segment(1)=='stock'?'active':''}}">
             <i class="fa fa-cubes"></i> Stock</a>
+        <a href="refund" class="list-group-item {{Request::segment(1)=='refund'?'active':''}}">
+            <i class="fa fa-share-square-o"></i> Refund/Return</a>
         <hr>
         <a href="user" class="list-group-item {{Request::segment(1)=='user'?'active':''}}">
             <i class="fa fa-users"></i> Users</a>
