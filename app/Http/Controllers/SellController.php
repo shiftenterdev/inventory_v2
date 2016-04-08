@@ -20,7 +20,7 @@ class SellController extends Controller
 	 */
 	public function get_index()
 	{
-		Session::forget('sell_items');
+		//Session::forget('sell_items');
 		$products = Product::get(['pro_code']);
 		if(Session::has('sell_items')){
 			$temp_pro = Session::get('sell_items');

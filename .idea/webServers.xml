@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="657c6423-ce77-44d8-945c-aecc79147103" name="techjobs" url="http://techjobs.com.bd">
+        <fileTransfer host="techjobs.com.bd" port="21" rootFolder="/public_html" username="techjobs">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

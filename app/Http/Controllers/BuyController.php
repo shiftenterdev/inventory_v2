@@ -22,8 +22,14 @@ class BuyController extends Controller
 	public function get_index()
 	{
 		$products = Product::get(['pro_code']);
+		if(Session::has('buy_items')){
+			$temp_pro = Session::get('buy_items');
+			$temp_pro = json_decode(json_encode($temp_pro), FALSE);
+		}else{
+			$temp_pro = 0;
+		}
 		return view('admin.buy.index')
-			->with(compact('products'));
+			->with(compact('products','temp_pro'));
 	}
 
 	/**
