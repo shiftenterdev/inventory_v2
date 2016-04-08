@@ -1,40 +1,41 @@
-.cN{
+.cN {
     background-color: #f9f9f9;
     border-radius: 3px;
     padding: 3px;
 }
-.navbar{
+
+.navbar {
     border-radius: 0px;
 }
 
-.sidebar a.list-group-item{
+.sidebar a.list-group-item {
     border: 0px;
     font-size: 14px;
 }
 
-.sidebar .list-group-item{
+.sidebar .list-group-item {
     padding: 8px;
 }
 
-.sidebar i.fa{
-        font-size: 18px;
+.sidebar i.fa {
+    font-size: 18px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.sidebar .list-group-item:first-child{
-    border-radius: 2px; 
+.sidebar .list-group-item:first-child {
+    border-radius: 2px;
 }
 
-.sidebar .list-group-item:last-child{
-    border-radius: 2px; 
+.sidebar .list-group-item:last-child {
+    border-radius: 2px;
 }
 
-.sidebar .list-group-item.active{
+.sidebar .list-group-item.active {
     background-color: #3F51B5;
 }
 
-.h{
+.h {
     display: none;
 }
 
@@ -47,13 +48,16 @@
     font-size: 15px;
 }
 
-.navbar-inverse .navbar-form input[type=text], .navbar-inverse .navbar-form input[type=password] {
+.navbar-inverse .navbar-form input[type=text],
+.navbar-inverse .navbar-form input[type=password] {
     color: #fff;
     -webkit-box-shadow: inset 0 -1px 0 #EFEFEF;
     box-shadow: inset 0 -1px 0 #FFFFFF;
 }
 
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>.open>a:focus {
     background-color: rgb(93, 59, 154);
     color: #ffffff;
 }
@@ -67,20 +71,20 @@
     width: 20%;
 }
 
-.sidebar hr{
+.sidebar hr {
     margin-top: 5px;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
 }
 
-.btn{
+.btn {
     border-radius: 2px;
 }
 
-.btn-link:hover{
+.btn-link:hover {
     box-shadow: 0px 0px 10px gray;
 }
 
-.btn-link{
+.btn-link {
     box-shadow: 0px 0px 1px rgba(128, 128, 128, 0.28);
 }
 
@@ -88,15 +92,15 @@
     color: #3F51B5;
 }
 
-.mB a{
+.mB a {
     color: #ffffff;
 }
 
-.lP{
-    margin-top: 160px; 
+.lP {
+    margin-top: 160px;
 }
 
-a.nB{
+a.nB {
     color: white;
     overflow: hidden;
 }
@@ -105,18 +109,57 @@ a.nB{
     color: #3F51B5;
 }
 
-textarea{
+textarea {
     resize: none;
 }
-textarea:focus, textarea.form-control:focus, input.form-control:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="number"]:focus, .form-control[type="text"]:focus, .form-control[type="password"]:focus, .form-control[type="email"]:focus, .form-control[type="tel"]:focus, .form-control[contenteditable]:focus {
+
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+.form-control[type="text"]:focus,
+.form-control[type="password"]:focus,
+.form-control[type="email"]:focus,
+.form-control[type="tel"]:focus,
+.form-control[contenteditable]:focus {
     box-shadow: 0px -2px 0px #673AB7 inset;
 }
-select:focus, select.form-control:focus {
+
+select:focus,
+select.form-control:focus {
     box-shadow: 0px -2px 0px #673AB7 inset;
 }
+
+
 /*Project CSS*/
 
-.nD{
+.card {
+    height: 250px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card h5 {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 0px;
+    background-color: #ddd;
+    text-align: center;
+}
+
+.card img {
+    max-height: 200px;
+    max-width: 100%
+}
+
+.nD {
     position: fixed;
     top: 10px;
     right: 10px;
@@ -126,6 +169,120 @@ select:focus, select.form-control:focus {
     letter-spacing: 1px;
 }
 
-.t-imp{
+
+/*
+ribbon start
+ */
+
+.corner-ribbon {
+    width: 200px;
+    background: #e43;
+    position: absolute;
+    top: 25px;
+    left: -50px;
+    text-align: center;
+    line-height: 30px;
+    letter-spacing: 1px;
+    color: #f0f0f0;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+
+/* Custom styles */
+
+.corner-ribbon.sticky {
+    position: fixed;
+}
+
+.corner-ribbon.shadow {
+    box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+}
+
+
+/* Different positions */
+
+.corner-ribbon.top-left {
+    top: 25px;
+    left: -50px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.corner-ribbon.top-right {
+    top: 25px;
+    right: -50px;
+    left: auto;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.corner-ribbon.bottom-left {
+    top: auto;
+    bottom: 25px;
+    left: -50px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.corner-ribbon.bottom-right {
+    top: auto;
+    right: -50px;
+    bottom: 25px;
+    left: auto;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+
+/* Colors */
+
+.corner-ribbon.white {
+    background: #f0f0f0;
+    color: #555;
+}
+
+.corner-ribbon.black {
+    background: #333;
+}
+
+.corner-ribbon.grey {
+    background: #999;
+}
+
+.corner-ribbon.blue {
+    background: #39d;
+}
+
+.corner-ribbon.green {
+    background: #2c7;
+}
+
+.corner-ribbon.turquoise {
+    background: #1b9;
+}
+
+.corner-ribbon.purple {
+    background: #95b;
+}
+
+.corner-ribbon.red {
+    background: #e43;
+}
+
+.corner-ribbon.orange {
+    background: #e82;
+}
+
+.corner-ribbon.yellow {
+    background: #ec0;
+}
+
+
+/*
+ribbon end
+ */
+
+.t-imp {
     background-color: #ddd;
 }

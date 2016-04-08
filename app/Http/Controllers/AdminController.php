@@ -2,7 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Repo\CoreTrait;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller {
@@ -14,7 +15,12 @@ class AdminController extends Controller {
     
     public function get_index()
     {
-        return view('admin.home');
+    	$products = Product::all();
+    	foreach($products as $p){
+    		$p->image = CoreTrait::imageById($p->pro_image_id);
+    	}
+        return view('admin.home')
+        	->with(compact('products'));
     }
 
 }

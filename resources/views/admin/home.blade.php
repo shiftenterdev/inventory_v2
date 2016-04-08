@@ -2,19 +2,28 @@
 
 
 @section('content')
-
+<style>
+  
+</style>
 <div class="col-md-9 mB">
-            <ul class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Product</li>
-            </ul>
-            <div class="cN">
-                <div class="jumbotron">
-  <h1>Home</h1>
-  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <p><button class="btn btn-primary btn-lg">Learn more</button></p>
-</div>
-            </div>
+  <ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Product</li>
+  </ul>
+  <div class="cN">
+    <div class="row">
+      @foreach($products as $p)
+        <div class="col-md-3 text-center">
+
+          <div class="card">
+          <div class="corner-ribbon top-right turquoise shadow">New</div>
+            <img src="/uploads/{{$p->image}}">
+          <h5>{{$p->pro_title}}</h5>
+          </div>
         </div>
+      @endforeach
+    </div>
+  </div>
+</div>
 
 @endsection
