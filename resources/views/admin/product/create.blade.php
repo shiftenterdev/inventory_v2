@@ -37,6 +37,18 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-lg-2 control-label">Brand</label>
+
+                        <div class="col-lg-8">
+                            <select name="brand_id" class="form-control">
+                                <option value="">Select Brand</option>
+                                @foreach($brands as $b)
+                                    <option value="{{$b->id}}">{{$b->brand_title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-lg-2 control-label">Title</label>
 
                         <div class="col-lg-8">

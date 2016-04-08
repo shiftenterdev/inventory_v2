@@ -39,7 +39,7 @@
                             <td>{{$p->pro_status==1?'Active':'Inactive'}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+                                    <a href="product/edit/{{$p->id}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
                                     <a href="product/delete/{{$p->id}}" class="btn btn-sm btn-danger confirm"><i class="fa fa-trash"></i></a>
                                 </div>
                             </td>
