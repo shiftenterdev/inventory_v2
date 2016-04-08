@@ -6,7 +6,7 @@
     <div class="col-md-9 mB">
         <ul class="breadcrumb">
             <li><a href="#">Home</a></li>
-            <li class="active">Category</li>
+            <li class="active">Brand</li>
         </ul>
         <div class="cN">
             <fieldset>

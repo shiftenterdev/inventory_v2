@@ -99,7 +99,7 @@ $('#pro_code').on('change', function() {
     if (v != '') {
         $.get('ajax/product-by-code/' + v).done(function(result) {
             $('.ppj').val(result.pro_price);
-            $('.pqj').text('Max: ' + result.pro_stock);
+            $('.pqj').text('Stock Limit: ' + result.pro_stock);
             $('input[name=pro_quantity]').attr('max', result.pro_stock).focus();
         });
     }

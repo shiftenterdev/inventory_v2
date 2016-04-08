@@ -70,8 +70,9 @@ class CustomerController extends Controller
 	public function get_edit($id)
 	{
 		$customer = Customer::find($id);
+		$image = CoreTrait::imageById($customer->customer_logo_id);
 		return view('admin.customer.edit')
-				->with(compact('customer'));
+				->with(compact('customer','image'));
 	}
 
 	/**

@@ -46,6 +46,7 @@ class BrandController extends Controller
 	public function post_store(Request $request)
 	{
 		$input = $request->all();
+		unset($input['_token']);
 		Brand::create($input);
 		return redirect('/brand');
 	}
@@ -67,9 +68,12 @@ class BrandController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function get_edit($id)
 	{
-		//
+		$brand = Brand::where('id',$id)->first();
+		$image = CoreTrait::imageById($brand->brand_logo_id);
+		return view('admin.brand.edit')
+			->with(compact('brand','image'));
 	}
 
 	/**
@@ -78,9 +82,13 @@ class BrandController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function post_update($id,Request $request)
 	{
-		//
+		$input = $request->all();
+		unset($input['_token']);
+		Brand::where('id',$id)->update($input);
+		return redirect('/brand')
+			->with('success','Brand Updated');
 	}
 
 	/**
@@ -92,7 +100,8 @@ class BrandController extends Controller
 	public function get_delete($id)
 	{
 		Brand::destroy($id);
-		return redirect('/brand');
+		return redirect('/brand')
+			->with('success','Brand Deleted Successfully');
 	}
 
 }
