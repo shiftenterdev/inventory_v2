@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -21,6 +22,7 @@ class BuyController extends Controller
 	 */
 	public function get_index()
 	{
+		$phones= Customer::get(['customer_phone','customer_id']);
 		$products = Product::get(['pro_code']);
 		if(Session::has('buy_items')){
 			$temp_pro = Session::get('buy_items');
@@ -29,7 +31,7 @@ class BuyController extends Controller
 			$temp_pro = 0;
 		}
 		return view('admin.buy.index')
-			->with(compact('products','temp_pro'));
+			->with(compact('products','temp_pro','phones'));
 	}
 
 	/**

@@ -162,3 +162,15 @@ $('body').on('click','.rBI',function(){
         $('#productList').load('purchase/product-list');
     });
 });
+
+/**
+ * get customer info by mobile no
+ */
+$('.c-p').on('input',functuion(){
+    var m = $(this).val();
+    if(m!=''){
+        $.get('ajax/mobile-suggestion/'+m).done(function(result){
+            
+        });
+    }
+});
