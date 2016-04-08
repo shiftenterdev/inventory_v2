@@ -12,7 +12,7 @@
         <a href="brand" class="list-group-item {{Request::segment(1)=='brand'?'active':''}}">
             <i class="fa fa-contao"></i> Brand</a>
         <a href="category" class="list-group-item {{Request::segment(1)=='category'?'active':''}}">
-            <i class="fa fa-building"></i> Category</a>
+            <i class="fa fa-clone"></i> Category</a>
         <hr>
         <a href="customer" class="list-group-item {{Request::segment(1)=='customer'?'active':''}}">
             <i class="fa fa-user"></i> Customer</a>
