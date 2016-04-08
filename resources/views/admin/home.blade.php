@@ -17,7 +17,11 @@
 
           <div class="card">
           <div class="corner-ribbon top-right turquoise shadow">New</div>
+          @if(empty($p->image))
+            <img src="/default/product.png">
+          @else
             <img src="/uploads/{{$p->image}}">
+          @endif
           <h5>{{$p->pro_title}}</h5>
           </div>
         </div>
