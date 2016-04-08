@@ -21,6 +21,11 @@
     font-size: 18px;
     padding-left: 10px;
     padding-right: 10px;
+    color: #3F51B5;
+}
+
+.active i.fa{
+    color: #fff;
 }
 
 .sidebar .list-group-item:first-child {
