@@ -1,5 +1,5 @@
 .cN {
-    background-color: #f9f9f9;
+    /*background-color: #f9f9f9;*/
     border-radius: 3px;
     padding: 3px;
 }
@@ -143,10 +143,11 @@ select.form-control:focus {
 
 .card {
     height: 250px;
-    background-color: #fff;
+    /*background-color: #fff;*/
     margin-bottom: 10px;
     position: relative;
     overflow: hidden;
+    border: 1px solid #ddd;
 }
 
 .card h5 {
@@ -157,6 +158,8 @@ select.form-control:focus {
     margin-bottom: 0px;
     background-color: #ddd;
     text-align: center;
+    color: #fff;
+    background-color: #109CE9;
 }
 
 .card img {

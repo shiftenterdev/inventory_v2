@@ -101,7 +101,7 @@
                     <hr>
                     <div class="form-group">
                         <div class="col-lg-8 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">Add Product</button>
                         </div>
                     </div>
                 </form>
