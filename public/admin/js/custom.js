@@ -1,3 +1,12 @@
+var load = {
+    on:function(){
+        $('.waiting').show();
+    },
+    off: function(){
+        $('.waiting').hide();
+    }
+}
+
 $('.uI').on('click', function() {
     uBt = $(this);
     $('#aIL').load('ajax/images', function() {
@@ -28,7 +37,9 @@ $('body').on('click', '#aIL .gImg', function() {
 
 $('.img-upload').on('change', function() {
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    load.on();
     if (this.files[0].size / 1024 > 512) {
+        load.off();
         alert('File size cannot greater than 500KB');
         return false;
     }
@@ -46,13 +57,15 @@ $('.img-upload').on('change', function() {
         dataType: 'json',
         data: myFormData,
         success: function(rs) {
-            $('#aIL').load('ajax/images');
+            $('#aIL').load('ajax/images',function(){
+                load.off();
+            });
         }
     });
 
 });
 
-$('.confirm').on('click', function() {
+$('.cN').on('click','.confirm', function() {
     return confirm('Are you sure ?');
 });
 
@@ -110,6 +123,7 @@ $('#pro_code').on('change', function() {
  */
 $('.add-pro-s').on('click', function(e) {
     e.preventDefault();
+    load.on();
     var product = {
         pro_code : $('select[name=pro_code]').val(),
         pro_price : $('input[name=pro_price]').val(),
@@ -120,7 +134,9 @@ $('.add-pro-s').on('click', function(e) {
     $.post('ajax/sell-list',product).done(function(result){
         $('.spo').val('');
         $('.pqj').text('');
-        $('#productList').load('sell/product-list');
+        $('#productList').load('sell/product-list',function(){
+            load.off();
+        });
     });
 });
 
@@ -129,6 +145,7 @@ $('.add-pro-s').on('click', function(e) {
  */
 $('.add-pro-b').on('click', function(e) {
     e.preventDefault();
+    load.on();
     var product = {
         pro_code : $('select[name=pro_code]').val(),
         pro_price : $('input[name=pro_price]').val(),
@@ -139,7 +156,9 @@ $('.add-pro-b').on('click', function(e) {
     $.post('ajax/buy-list',product).done(function(result){
         $('.spo').val('');
         $('.pqj').text('');
-        $('#productList').load('purchase/product-list');
+        $('#productList').load('purchase/product-list',function(){
+            load.off();
+        });
     });
 });
 

@@ -13,6 +13,8 @@
 
 <body>
 
+    <div class="waiting"><i class="fa fa-spinner fa-pulse"></i></div>
+
     @include('admin.layout.header')
 
     @include('admin.layout.toast')

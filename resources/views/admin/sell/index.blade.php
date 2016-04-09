@@ -139,14 +139,17 @@
     s2.on("select2:select", function (e) { 
         var phone = $(this).val();
         if(phone != ''){
+            load.on();
             $.get('ajax/customer-by-phone/'+phone).done(function(result){
             
             if(result.length==0){
+                load.off();
                 // alert('No Result');
             }else{
                 $('input[name=customer_address]').val(result.customer_address);
                 $('input[name=customer_name]').val(result.customer_name);
                 $('input[name=customer_id]').val(result.customer_id);
+                load.off();
             }
         });
         }
