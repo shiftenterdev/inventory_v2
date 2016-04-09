@@ -22,7 +22,6 @@ class SellController extends Controller
 	public function get_index()
 	{
 		//Session::forget('sell_items');
-		$phones= Customer::get(['customer_phone','customer_id']);
 		$products = Product::get(['pro_code']);
 		if(Session::has('sell_items')){
 			$temp_pro = Session::get('sell_items');
@@ -56,9 +55,14 @@ class SellController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function get_invoice()
 	{
-		//
+		$customer = Session::get('sell_customer');
+		$customer = json_decode(json_encode($customer), FALSE);
+		$products = Session::get('sell_items');
+		$products = json_decode(json_encode($products), FALSE);
+		return view('admin.sell.invoice')
+			->with(compact('customer','products'));
 	}
 
 	/**

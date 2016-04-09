@@ -39,13 +39,14 @@
         <li class="active">Sell</li>
     </ul>
     <div class="cN">
-        <fieldset>
+        <fieldset style="margin-bottom: 200px">
             <legend>
                 Customer Info
             </legend>
-            <form action="sell/store" class="form-horizontal" method="post" style="margin-bottom: 200px">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                
                 <div class="row">
+                <form action="javascript:" id="customerForm" class="form-horizontal">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Name</label>
@@ -60,9 +61,6 @@
                             <div class="col-lg-8">
                                 <select name="customer_id" class="form-control s2">
                                     <option value="">Select</option>
-                                    @foreach($phones as $p)
-                                        <option value="{{$p->customer_id}}">{{$p->customer_id}}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -81,13 +79,11 @@
                             <div class="col-lg-8">
                                 <select name="customer_phone" class="form-control s2">
                                     <option value="">Select</option>
-                                    @foreach($phones as $p)
-                                        <option value="{{$p->customer_phone}}">{{$p->customer_phone}}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
                 <hr>
                 <legend>
@@ -130,7 +126,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
         </fieldset>
     </div>
 </div>
@@ -143,6 +138,18 @@
     var s2 = $('.s2').select2({
         tags: true,
         tokenSeparators: [' ']
+    });
+    s2.on("select2:select", function (e) { 
+        var phone = $(this).val();
+        if(phone != ''){
+            $.get('ajax/customer-by-phone/'+phone).done(function(result){
+            $('input[name=customer_address]').val(result.customer_address);
+            $('input[name=customer_name]').val(result.customer_name);
+            if(result.length==0){
+                alert('No Result');
+            }
+        });
+        }
     });
     </script>
 @endsection

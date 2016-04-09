@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Category;
 use App\Models\Image;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Repo\CoreTrait;
 use Illuminate\Http\Request;
@@ -136,6 +137,20 @@ class AjaxController extends Controller
         $session = Session::get('buy_items');
         unset($session[$id]);
         Session::put('buy_items',$session);
+        return 1;
+    }
+
+    public function get_customer_by_phone($phone)
+    {
+        $customer = Customer::where('customer_phone',$phone)->first();
+        return $customer;
+    }
+
+    public function post_store_sell_customer(Request $request)
+    {
+        $input = $request->all();
+        unset($input['_token']);
+        Session::put('sell_customer',$input);
         return 1;
     }
 

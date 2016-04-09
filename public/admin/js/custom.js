@@ -174,3 +174,14 @@ $('body').on('click','.rBI',function(){
         });
     }
 });*/
+/**
+ * Save customer and go to sell invoice
+ */
+$('.cN').on('click','.sell-invoice',function(){
+    var customer = $('#customerForm').serializeArray();
+    $.post('ajax/store-sell-customer',customer).done(function(result){
+        if(result==1){
+            window.location = 'sell/invoice';
+        }
+    })
+});
