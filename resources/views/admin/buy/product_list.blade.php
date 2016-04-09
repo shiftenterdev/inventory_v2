@@ -8,7 +8,7 @@
 				<thead>
 				<tr class="t-imp">
 					<th>Sl</th>
-					<th>Core</th>
+					<th>Product Code</th>
 					<th>Title</th>
 					<th>Price</th>
 					<th>Quantity</th>
@@ -35,7 +35,7 @@
 				<tfooter>
 					<tr class="t-imp">
 
-						<th colspan="5">Grand Total :</th>
+						<th colspan="5" class="text-right">Net Total :</th>
 						<th colspan="2">{{money_format('%!i', $total)}}</th>
 					</tr>
 				</tfooter>

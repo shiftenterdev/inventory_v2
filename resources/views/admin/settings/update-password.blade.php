@@ -13,7 +13,7 @@
                 <legend>
                     Update Password
                 </legend>
-                <form action="settings/update-password" class="form-horizontal" method="post">
+                <form action="settings/update-passwordm" class="form-horizontal" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Current Password</label>
@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Update Password</button>
+                            <button type="submit" class="btn btn-primary" disabled>Update Password</button>
                         </div>
                     </div>
                 </form>
