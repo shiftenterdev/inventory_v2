@@ -71,9 +71,12 @@ class SellController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function post_store(Request $request)
 	{
-		//
+		$input = $request->all();
+		unset($input['_token']);
+		$customer = Session::get('sell_customer');
+		$products = Session::get('sell_items');
 	}
 
 	/**

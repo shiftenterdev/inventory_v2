@@ -143,10 +143,12 @@
         var phone = $(this).val();
         if(phone != ''){
             $.get('ajax/customer-by-phone/'+phone).done(function(result){
-            $('input[name=customer_address]').val(result.customer_address);
-            $('input[name=customer_name]').val(result.customer_name);
+            
             if(result.length==0){
                 alert('No Result');
+            }else{
+                $('input[name=customer_address]').val(result.customer_address);
+                $('input[name=customer_name]').val(result.customer_name);
             }
         });
         }
