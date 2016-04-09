@@ -1,9 +1,13 @@
-<?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Customer;
+use App\Models\Sell;
+use App\Models\InvoiceProduct;
+use App\Repo\CoreTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -76,7 +80,23 @@ class SellController extends Controller
 		$input = $request->all();
 		unset($input['_token']);
 		$customer = Session::get('sell_customer');
+		if($customer['customer_id']==''){
+			$customer['customer_id'] = CoreTrait::customerId();
+			$customer = Customer::create($customer);
+		}
+		$input['customer_id'] = $customer['customer_id'];
+		$input['invoice_id'] = CoreTrait::SellInvoiceId();
+		Sell::create($input);
 		$products = Session::get('sell_items');
+		foreach ($products as $key => $p) {
+			unset($p['pro_title']);
+			$p['invoice_id'] = $input['invoice_id'];
+			InvoiceProduct::create($p);
+		}
+		Session::forget('sell_customer');
+		Session::forget('sell_items');
+		return redirect('sell')
+			->with('success','Invoice Saved');
 	}
 
 	/**
@@ -85,9 +105,11 @@ class SellController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function history()
 	{
-		//
+		$sells = Sell::all();
+		return view('admin.sell.history')
+			->with(compact('sells'));
 	}
 
 	/**

@@ -22,8 +22,14 @@ Route::controller('brand','BrandController');
 Route::controller('stock','StockController');
 Route::controller('user','UserController');
 Route::controller('sell','SellController');
-Route::controller('purchase','BuyController');
+Route::controller('purchase','PurchaseController');
 Route::controller('refund','RefundController');
+
+/**
+ * Custom Route
+ */
+Route::get('sells-history','SellController@history');
+Route::get('purchase-history','PurchaseController@history');
 
 get('pass',function(){
 	return bcrypt('112233');

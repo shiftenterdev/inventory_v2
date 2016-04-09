@@ -55,7 +55,7 @@
         </tr>
         <tr>
           <th colspan="4" class="text-right">Sales Tax</th>
-          <th><input type="text" class="form-control input-sm s-t" name="sells_discount" value="0.0"></th>
+          <th><input type="text" class="form-control input-sm s-t" name="sells_discount" placeholder="5.00"></th>
         </tr>
         <tr>
           <th colspan="4" class="text-right ">Payment Option</th>
@@ -77,6 +77,7 @@
       <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-bag"></i> Confirm Sell</button>
       </form>
     </div>
+    <div style="margin-bottom: 150px"></div>
   </div>
 </div>
 

@@ -14,13 +14,19 @@
         <a href="category" class="list-group-item {{Request::segment(1)=='category'?'active':''}}">
             <i class="fa fa-clone"></i> Category</a>
         <hr>
-        <a href="customer" class="list-group-item {{Request::segment(1)=='customer'?'active':''}}">
-            <i class="fa fa-user"></i> Customer</a>
+        
+        <a href="sells-history" class="list-group-item {{Request::segment(1)=='sells-history'?'active':''}}">
+            <i class="fa fa-list-alt"></i> Sell History</a>
+        <a href="purchase-history" class="list-group-item {{Request::segment(1)=='purchase-history'?'active':''}}">
+            <i class="fa fa-list-ul"></i> Purchase History</a>
+        <hr>
         <a href="stock" class="list-group-item {{Request::segment(1)=='stock'?'active':''}}">
             <i class="fa fa-cubes"></i> Stock</a>
         <a href="refund" class="list-group-item {{Request::segment(1)=='refund'?'active':''}}">
             <i class="fa fa-share-square-o"></i> Refund/Return</a>
         <hr>
+        <a href="customer" class="list-group-item {{Request::segment(1)=='customer'?'active':''}}">
+            <i class="fa fa-user"></i> Customer</a>
         <a href="user" class="list-group-item {{Request::segment(1)=='user'?'active':''}}">
             <i class="fa fa-users"></i> Users</a>
         <a href="settings/update-password" class="list-group-item {{Request::segment(1)=='settings'?'active':''}}">

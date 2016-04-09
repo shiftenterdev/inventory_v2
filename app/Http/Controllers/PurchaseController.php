@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 
-class BuyController extends Controller 
+class PurchaseController extends Controller 
 {
 
 	public function __construct()
@@ -56,7 +56,7 @@ class BuyController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function post_store(Request $request)
 	{
 		//
 	}
@@ -67,9 +67,9 @@ class BuyController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function history()
 	{
-		//
+		return view('admin.buy.history');
 	}
 
 	/**

@@ -58,12 +58,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">ID</label>
                             <div class="col-lg-8">
-                                <select name="customer_id" class="form-control s2">
-                                    <option value="">Select</option>
-                                    @foreach($phones as $p)
-                                        <option value="{{$p->customer_id}}">{{$p->customer_id}}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="customer_id" class="form-control" placeholder="Customer ID">
                             </div>
                         </div>
                     </div>
@@ -81,9 +76,6 @@
                             <div class="col-lg-8">
                                 <select name="customer_phone" class="form-control s2">
                                     <option value="">Select</option>
-                                    @foreach($phones as $p)
-                                        <option value="{{$p->customer_phone}}">{{$p->customer_phone}}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -139,6 +131,21 @@
     var s2 = $('.s2').select2({
         tags: true,
         tokenSeparators: [' ']
+    });
+    s2.on("select2:select", function (e) { 
+        var phone = $(this).val();
+        if(phone != ''){
+            $.get('ajax/customer-by-phone/'+phone).done(function(result){
+            
+            if(result.length==0){
+                // alert('No Result');
+            }else{
+                $('input[name=customer_address]').val(result.customer_address);
+                $('input[name=customer_name]').val(result.customer_name);
+                $('input[name=customer_id]').val(result.customer_id);
+            }
+        });
+        }
     });
     </script>
 @endsection

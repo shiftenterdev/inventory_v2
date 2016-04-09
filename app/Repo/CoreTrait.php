@@ -7,6 +7,8 @@ use App\Models\Customer;
 use App\Models\Image;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Sell;
+
 
 trait CoreTrait
 {
@@ -50,5 +52,17 @@ trait CoreTrait
     {
         $title = Product::where('pro_code',$id)->pluck('pro_title');
         return $title;
+    }
+
+    public static function SellInvoiceId()
+    {
+        $invoice_id = Sell::orderBy('id','desc')->pluck('invoice_id');
+        if(empty($invoice_id)){
+            $invoice_id = 'IS-1000001';
+        }else{
+            $invoice_id = str_replace('IS-', '', $invoice_id);
+            $invoice_id = 'IS-'.($invoice_id +1);
+        }
+        return $invoice_id;
     }
 }

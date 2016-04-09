@@ -59,9 +59,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">ID</label>
                             <div class="col-lg-8">
-                                <select name="customer_id" class="form-control s2">
-                                    <option value="">Select</option>
-                                </select>
+                            <input type="text" name="customer_id" class="form-control" placeholder="Customer ID">
                             </div>
                         </div>
                     </div>
@@ -85,7 +83,6 @@
                     </div>
                 </form>
                 </div>
-                <hr>
                 <legend>
                     Product List
                 </legend>
@@ -145,10 +142,11 @@
             $.get('ajax/customer-by-phone/'+phone).done(function(result){
             
             if(result.length==0){
-                alert('No Result');
+                // alert('No Result');
             }else{
                 $('input[name=customer_address]').val(result.customer_address);
                 $('input[name=customer_name]').val(result.customer_name);
+                $('input[name=customer_id]').val(result.customer_id);
             }
         });
         }
