@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Current Password</label>
 
-                        <div class="col-lg-10">
+                        <div class="col-lg-6">
                             <input class="form-control" placeholder="Current Password" type="password" name="current_password">
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">New Password</label>
 
-                        <div class="col-lg-10">
+                        <div class="col-lg-6">
                             <input class="form-control" placeholder="New Password" type="password" name="new_password">
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Confirm Password</label>
 
-                        <div class="col-lg-10">
+                        <div class="col-lg-6">
                             <input class="form-control" placeholder="Confirm Password" type="password" name="confirm_password">
                         </div>
                     </div>

@@ -159,6 +159,92 @@ select.form-control:focus {
     display: none;
 }
 
+.radio, .checkbox{
+    display: inline-block;
+}
+.radio { 
+    padding:5px; 
+    margin-left:10px; 
+}
+.radio input[type="radio"] { 
+    opacity: 0; 
+    position: absolute; 
+    cursor:pointer;
+}
+.radio input[type="radio"] + label { 
+    color:#555; 
+    line-height:25px; 
+    display:inline-block; 
+    text-indent:-38px; 
+}
+.radio input[type="radio"]:checked + label > mark:before { 
+    content:' '; 
+    background:#0d7fbe; 
+    width:12px; 
+    height:12px; 
+    display:block; 
+    margin:1px; 
+    border-radius:20px;
+}
+.radio input[type="radio"] + label > mark { 
+    display:inline-block; 
+    width:20px; 
+    height:20px; 
+    vertical-align:middle; 
+    border-radius:15px; 
+    border:1px solid #009df5; 
+    background:#fff; 
+    text-indent: 0; 
+}
+/*Radio button*/
+/*Check box*/
+.checkbox { 
+    padding:5px; 
+    margin-left:10px; 
+}
+.checkbox input[type="checkbox"] { 
+    opacity: 0; 
+    position: absolute; 
+}
+.checkbox input[type="checkbox"] + label { 
+    color:#555; 
+    line-height:25px; 
+    display:inline-block; 
+    text-indent:-38px; 
+}
+.checkbox input[type="checkbox"] + label > mark { 
+    position:relative; 
+    display:inline-block; 
+    width:20px; 
+    height:20px; 
+    vertical-align:middle; 
+    border-radius:0px; 
+    border:1px solid #009df5; 
+    background:#fff; 
+    text-indent: 0; 
+}
+.checkbox input[type="checkbox"]:checked + label > mark:before {
+    background: #0d7fbe;
+    content: " ";
+    height: 4px;
+    left: 2px;
+    position: absolute;
+    top: 8px;
+    transform: rotate(45deg);
+    width: 8px;
+}
+.checkbox input[type="checkbox"]:checked + label > mark:after { 
+    background: #0d7fbe;
+    content: " ";
+    height: 11px;
+    left: 9px;
+    position: absolute;
+    top: 3px;
+    transform: rotate(45deg);
+    width: 4px;
+}
+/*Check box*/
+
 
 /*Project CSS*/
 

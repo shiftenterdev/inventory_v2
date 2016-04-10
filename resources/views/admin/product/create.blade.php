@@ -74,15 +74,15 @@
                         <label class="col-lg-2 control-label">Status</label>
                         <div class="col-lg-8">
                             <div class="radio">
-                                <label>
-                                    <input name="pro_status" value="1" checked="" type="radio">
-                                    Active
+                                <input name="pro_status" id="radio1" value="1" checked="" type="radio">
+                                <label for="radio1">
+                                    <mark></mark> Active
                                 </label>
                             </div>
                             <div class="radio">
-                                <label>
-                                    <input name="pro_status" value="2" type="radio">
-                                    Inactive
+                                <input name="pro_status" id="radio2" value="2" type="radio">
+                                <label for="radio2">
+                                    <mark></mark> Inactive
                                 </label>
                             </div>
                         </div>
