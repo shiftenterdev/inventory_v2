@@ -110,10 +110,12 @@ $('.parSubCat').on('change', function() {
 $('#pro_code').on('change', function() {
     var v = $(this).val();
     if (v != '') {
+        load.on();
         $.get('ajax/product-by-code/' + v).done(function(result) {
             $('.ppj').val(result.pro_price);
             $('.pqj').text('Stock Limit: ' + result.pro_stock);
             $('input[name=pro_quantity]').attr('max', result.pro_stock).focus();
+            load.off();
         });
     }
 });
@@ -166,9 +168,12 @@ $('.add-pro-b').on('click', function(e) {
  * remove product form append[session] list
  */
 $('body').on('click','.rSI',function(){
+    load.on();
     var v = $(this).data('key');
     $.get('ajax/remove-sell-product/'+v).done(function(result){
-        $('#productList').load('sell/product-list');
+        $('#productList').load('sell/product-list',function(){
+            load.off();
+        });
     });
 });
 
@@ -176,9 +181,12 @@ $('body').on('click','.rSI',function(){
  * remove product form append[session] list
  */
 $('body').on('click','.rBI',function(){
+    load.on();
     var v = $(this).data('key');
     $.get('ajax/remove-buy-product/'+v).done(function(result){
-        $('#productList').load('purchase/product-list');
+        $('#productList').load('purchase/product-list',function(){
+            load.off();
+        });
     });
 });
 
@@ -197,10 +205,12 @@ $('body').on('click','.rBI',function(){
  * Save customer and go to sell invoice
  */
 $('.cN').on('click','.sell-invoice',function(){
+    load.on();
     var customer = $('#customerForm').serializeArray();
     $.post('ajax/store-sell-customer',customer).done(function(result){
         if(result==1){
             window.location = 'sell/invoice';
+            load.off();
         }
     })
 });
