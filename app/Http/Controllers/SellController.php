@@ -118,9 +118,11 @@ class SellController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function get_view($sell_id)
 	{
-		//
+		$result = Sell::with('customer','products')->where('invoice_id',$sell_id)->first();
+		return view('admin.sell.view')
+			->with(compact('result'));
 	}
 
 	/**

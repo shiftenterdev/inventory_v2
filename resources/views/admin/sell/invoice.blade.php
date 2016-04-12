@@ -54,7 +54,7 @@
           <th class="total">{{$total}}</th>
         </tr>
         <tr>
-          <th colspan="4" class="text-right">Sales Tax</th>
+          <th colspan="4" class="text-right">Sales Tax (%)</th>
           <th><input type="text" class="form-control input-sm s-t" name="sells_discount" placeholder="5.00"></th>
         </tr>
         <tr>

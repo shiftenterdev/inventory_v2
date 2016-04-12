@@ -3,9 +3,9 @@
         <a href="/" class="list-group-item {{Request::segment(1)==''?'active':''}}">
             <i class="fa fa-home"></i> Home</a>
         <a href="sell" class="list-group-item {{Request::segment(1)=='sell'?'active':''}}">
-            <i class="fa fa-shopping-bag"></i> Sell Product</a>
+            <i class="fa fa-shopping-bag"></i> Sell</a>
         <a href="purchase" class="list-group-item {{Request::segment(1)=='purchase'?'active':''}}">
-            <i class="fa fa-shopping-basket"></i> Purchase Product</a>
+            <i class="fa fa-shopping-basket"></i> Purchase</a>
         <hr>
         <a href="product" class="list-group-item {{Request::segment(1)=='product'?'active':''}}">
             <i class="fa fa-cube"></i> Product</a>
@@ -26,7 +26,7 @@
             <i class="fa fa-share-square-o"></i> Refund/Return</a>
         <hr>
         <a href="customer" class="list-group-item {{Request::segment(1)=='customer'?'active':''}}">
-            <i class="fa fa-user"></i> Customer</a>
+            <i class="fa fa-user"></i> Customers</a>
         <a href="user" class="list-group-item {{Request::segment(1)=='user'?'active':''}}">
             <i class="fa fa-users"></i> Users</a>
         <a href="settings/update-password" class="list-group-item {{Request::segment(1)=='settings'?'active':''}}">

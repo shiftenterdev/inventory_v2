@@ -30,7 +30,7 @@
                             <td>{{$s->customer_id}}</td>
                             <td>{{$s->payment_option}}</td>
                             <td>
-                                    <a href="brand/view/{{$s->id}}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                                    <a href="sell/view/{{$s->invoice_id}}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                     @endforeach

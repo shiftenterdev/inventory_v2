@@ -150,6 +150,11 @@ class AjaxController extends Controller
     {
         $input = $request->all();
         unset($input['_token']);
+        $input['customer_id'] = '';
+        $customer = Customer::where('customer_phone',$input['customer_phone'])->first();
+        if(!empty($customer)){
+            $input['customer_id'] = $customer->customer_id;
+        }
         Session::put('sell_customer',$input);
         return 1;
     }
