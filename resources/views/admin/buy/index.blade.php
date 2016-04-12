@@ -1,49 +1,18 @@
 @extends('admin.layout.index') 
 
 @section('content')
-<link rel="stylesheet" href="admin/css/select2.min.css">
-<style>
-    .select2-container--default .select2-selection--single {
-     background-color: transparent; 
-     border: 0; 
-     border-radius: 0; 
-    border-bottom: 1px solid #ddd;
-}
-.select2-container--default .select2-selection--single:hover {
-     background-color: transparent; 
-     border: 0; 
-     border-radius: 0; 
-    border-bottom: 1px solid #ddd;
-}
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: 28px;
-    font-size: 17px;
-}
-.select2-container--default .select2-selection--single .select2-selection__rendered:focus {
-    box-shadow: 0px -2px 0px #673AB7 inset;
-}
-.select2-container--default .select2-search--dropdown .select2-search__field {
-    border: 0px;
-    box-shadow: 0px -2px 0px #673AB7 inset;
-}
-.select2-dropdown{
-    border-radius: 0;
-}
-.select2-container .select2-selection--single{
-    height: 38px;
-}
-</style>
+
 <div class="col-md-9 mB">
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
         <li class="active">Purchase</li>
     </ul>
     <div class="cN">
-        <fieldset>
+        <fieldset style="margin-bottom: 200px">
             <legend>
-                Purchase Product
+                Customer Info
             </legend>
-            <form action="buy/store" class="form-horizontal" method="post" style="margin-bottom: 200px">
+            <form action="javascript:" id="customerForm" class="form-horizontal">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="row">
                     <div class="col-md-6">
@@ -56,9 +25,12 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">ID</label>
-                            <div class="col-lg-8">
-                                <input type="text" name="customer_id" class="form-control" placeholder="Customer ID">
+                            <label class="col-lg-3 control-label">Mobile</label>
+                            <div class="col-lg-6">
+                                <input type="text" name="customer_phone" class="form-control" placeholder="Mobile">
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-primary check-customer" type="button"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </div>
@@ -72,11 +44,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Mobile</label>
+                            <label class="col-lg-3 control-label">Email</label>
                             <div class="col-lg-8">
-                                <select name="customer_phone" class="form-control s2">
-                                    <option value="">Select</option>
-                                </select>
+                                <input type="email" name="customer_email" class="form-control" placeholder="Email">
                             </div>
                         </div>
                     </div>
@@ -125,14 +95,9 @@
 @endsection 
 @section('script') 
     @parent
-    <script src="admin/js/select2.min.js"></script>
     <script>
-    var s2 = $('.s2').select2({
-        tags: true,
-        tokenSeparators: [' ']
-    });
-    s2.on("select2:select", function (e) { 
-        var phone = $(this).val();
+    $(".check-customer").on('click', function (e) { 
+        var phone = $('input[name=customer_phone]').val();
         if(phone != ''){
             load.on();
             $.get('ajax/customer-by-phone/'+phone).done(function(result){
@@ -140,6 +105,9 @@
             if(result.length==0){
                 load.off();
                 // alert('No Result');
+                $('input[name=customer_address]').val('');
+                $('input[name=customer_name]').val('');
+                $('input[name=customer_id]').val('');
             }else{
                 $('input[name=customer_address]').val(result.customer_address);
                 $('input[name=customer_name]').val(result.customer_name);
@@ -147,6 +115,8 @@
                 load.off();
             }
         });
+        }else{
+            alert('Please enter customer phone number.');
         }
     });
     </script>

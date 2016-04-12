@@ -216,6 +216,20 @@ $('.cN').on('click','.sell-invoice',function(){
 });
 
 /**
+ * Save customer and go to sell invoice
+ */
+$('.cN').on('click','.purchase-invoice',function(){
+    load.on();
+    var customer = $('#customerForm').serializeArray();
+    $.post('ajax/store-purchase-customer',customer).done(function(result){
+        if(result==1){
+            window.location = 'purchase/invoice';
+            load.off();
+        }
+    })
+});
+
+/**
  * Print function
  */
 function printDiv(divName) {

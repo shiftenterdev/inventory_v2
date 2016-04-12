@@ -102,8 +102,8 @@ class AjaxController extends Controller
         $input = $request->all();
         $true = false;
         $new = [];
-        if(Session::has('buy_items')) {
-            $current_list = Session::get('buy_items');
+        if(Session::has('purchase_items')) {
+            $current_list = Session::get('purchase_items');
 
             foreach ($current_list as $cl) {
                 if ($cl['pro_code'] == $input['pro_code']) {
@@ -116,9 +116,9 @@ class AjaxController extends Controller
         if($true == false) {
             $input['pro_title'] = CoreTrait::productTitleByCode($input['pro_code']);
             unset($input['_token']);
-            Session::push('buy_items',$input);
+            Session::push('purchase_items',$input);
         }else{
-            Session::put('buy_items',$new);
+            Session::put('purchase_items',$new);
         }
 
         return 1;
@@ -134,9 +134,9 @@ class AjaxController extends Controller
 
     public function get_remove_buy_product($id)
     {
-        $session = Session::get('buy_items');
+        $session = Session::get('purchase_items');
         unset($session[$id]);
-        Session::put('buy_items',$session);
+        Session::put('purchase_items',$session);
         return 1;
     }
 
@@ -156,6 +156,19 @@ class AjaxController extends Controller
             $input['customer_id'] = $customer->customer_id;
         }
         Session::put('sell_customer',$input);
+        return 1;
+    }
+
+    public function post_store_purchase_customer(Request $request)
+    {
+        $input = $request->all();
+        unset($input['_token']);
+        $input['customer_id'] = '';
+        $customer = Customer::where('customer_phone',$input['customer_phone'])->first();
+        if(!empty($customer)){
+            $input['customer_id'] = $customer->customer_id;
+        }
+        Session::put('purchase_customer',$input);
         return 1;
     }
 

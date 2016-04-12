@@ -41,7 +41,7 @@
 				</tfooter>
 			</table>
 			<div class="text-center">
-				<a href="javascript:" class="btn btn-primary"><i class="fa fa-print"></i> Invoice</a>
+				<a href="javascript:" class="btn btn-primary purchase-invoice"><i class="fa fa-print"></i> Invoice</a>
 			</div>
 		@endif
 	</div>

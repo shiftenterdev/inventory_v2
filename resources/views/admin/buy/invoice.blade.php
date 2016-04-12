@@ -25,7 +25,7 @@
     </table>
     <br>
     <h5>Product Details</h5>
-     <form action="sell/store" method="post">
+     <form action="purchase/store" method="post">
      <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <table class="table table-striped table-bordered">
       <thead>
@@ -74,7 +74,7 @@
       </tbody>
     </table>
     <div class="text-center">
-      <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-bag"></i> Confirm Sell</button>
+      <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-bag"></i> Confirm Purchase</button>
       </form>
     </div>
     <div style="margin-bottom: 150px"></div>

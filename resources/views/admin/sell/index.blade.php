@@ -1,38 +1,7 @@
 @extends('admin.layout.index') 
 
 @section('content')
-<link rel="stylesheet" href="admin/css/select2.min.css">
-<style>
-    .select2-container--default .select2-selection--single {
-     background-color: transparent; 
-     border: 0; 
-     border-radius: 0; 
-    border-bottom: 1px solid #ddd;
-}
-.select2-container--default .select2-selection--single:hover {
-     background-color: transparent; 
-     border: 0; 
-     border-radius: 0; 
-    border-bottom: 1px solid #ddd;
-}
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    line-height: 28px;
-    font-size: 17px;
-}
-.select2-container--default .select2-selection--single .select2-selection__rendered:focus {
-    box-shadow: 0px -2px 0px #673AB7 inset;
-}
-.select2-container--default .select2-search--dropdown .select2-search__field {
-    border: 0px;
-    box-shadow: 0px -2px 0px #673AB7 inset;
-}
-.select2-dropdown{
-    border-radius: 0;
-}
-.select2-container .select2-selection--single{
-    height: 38px;
-}
-</style>
+
 <div class="col-md-9 mB">
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
@@ -58,10 +27,11 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Mobile</label>
-                            <div class="col-lg-8">
-                                <select name="customer_phone" class="form-control s2">
-                                    <option value="">Select</option>
-                                </select>
+                            <div class="col-lg-6">
+                                <input type="text" name="customer_phone" class="form-control" placeholder="Mobile">
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-primary check-customer" type="button"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
                     </div>
@@ -131,14 +101,10 @@
 
 @section('script') 
     @parent
-    <script src="admin/js/select2.min.js"></script>
     <script>
-    var s2 = $('.s2').select2({
-        tags: true,
-        tokenSeparators: [' ']
-    });
-    s2.on("select2:select", function (e) { 
-        var phone = $(this).val();
+    
+    $(".check-customer").on('click', function (e) { 
+        var phone = $('input[name=customer_phone]').val();
         if(phone != ''){
             load.on();
             $.get('ajax/customer-by-phone/'+phone).done(function(result){
@@ -153,6 +119,8 @@
                 load.off();
             }
         });
+        }else{
+            alert('Please enter customer phone number.');
         }
     });
     </script>

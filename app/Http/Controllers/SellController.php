@@ -26,7 +26,7 @@ class SellController extends Controller
 	public function get_index()
 	{
 		//Session::forget('sell_items');
-		$products = Product::get(['pro_code']);
+		$products = Product::where('pro_stock','>',0)->get(['pro_code']);
 		if(Session::has('sell_items')){
 			$temp_pro = Session::get('sell_items');
 			$temp_pro = json_decode(json_encode($temp_pro), FALSE);

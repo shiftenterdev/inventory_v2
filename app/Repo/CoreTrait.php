@@ -65,4 +65,16 @@ trait CoreTrait
         }
         return $invoice_id;
     }
+
+    public static function PurchaseInvoiceId()
+    {
+        $invoice_id = Purchase::orderBy('id','desc')->pluck('invoice_id');
+        if(empty($invoice_id)){
+            $invoice_id = 'IP-1000001';
+        }else{
+            $invoice_id = str_replace('IP-', '', $invoice_id);
+            $invoice_id = 'IP-'.($invoice_id +1);
+        }
+        return $invoice_id;
+    }
 }
