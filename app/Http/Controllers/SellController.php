@@ -95,7 +95,7 @@ class SellController extends Controller
 		}
 		Session::forget('sell_customer');
 		Session::forget('sell_items');
-		return redirect('sell')
+		return redirect('sell/view/'.$input['invoice_id'])
 			->with('success','Invoice Saved');
 	}
 
@@ -107,7 +107,7 @@ class SellController extends Controller
 	 */
 	public function history()
 	{
-		$sells = Sell::all();
+		$sells = Sell::with('customer')->get();
 		return view('admin.sell.history')
 			->with(compact('sells'));
 	}

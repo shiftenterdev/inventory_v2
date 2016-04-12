@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>My Shop</title>
     <base href="/" />
+    <link rel="icon" type="image/png" href="shop.png">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="admin/css/bootstrap.min.css">
     <link rel="stylesheet" href="admin/css/bb.css">

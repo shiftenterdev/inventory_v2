@@ -19,8 +19,10 @@
                     <tr>
                         <th>Invoice ID</th>
                         <th>Customer ID</th>
+                        <th>Customer Name</th>
                         <th>Payment Opt</th>
-                        <th>Action</th>
+                        <th>Date</th>
+                        <th>Invoice</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,9 +30,11 @@
                         <tr>
                             <td>{{$s->invoice_id}}</td>
                             <td>{{$s->customer_id}}</td>
+                            <td>{{$s->customer->customer_name}}</td>
                             <td>{{$s->payment_option}}</td>
+                            <td>{{date('d F, Y',strtotime($s->updated_at))}}</td>
                             <td>
-                                    <a href="sell/view/{{$s->invoice_id}}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                                    <a href="sell/view/{{$s->invoice_id}}" class="btn btn-sm btn-success"><i class="fa fa-file-text"></i></a>
                             </td>
                         </tr>
                     @endforeach

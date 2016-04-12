@@ -8,11 +8,14 @@
             <li><a href="#">Home</a></li>
             <li class="active">Sell Invoice</li>
         </ul>
-        <div class="cN">
+        <div class="cN" id="printDiv">
             <fieldset>
                 <legend>
                     Sell Invoice
-                    <div class="pull-right">Invoice #{{$result->invoice_id}}</div>
+                    <div class="pull-right">
+                        Invoice # {{$result->invoice_id}}
+                        <button class="btn btn-info btn-sm print"><i class="fa fa-print"></i> Print Invoice</button>
+                    </div>
 
                 </legend>
                 <div class="customer-info">

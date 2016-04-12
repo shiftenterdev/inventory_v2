@@ -214,3 +214,21 @@ $('.cN').on('click','.sell-invoice',function(){
         }
     })
 });
+
+/**
+ * Print function
+ */
+function printDiv(divName) {
+    $('button.print,.navbar,.sB,.breadcrumb').hide();
+     // var printContents = document.getElementById(divName).innerHTML;
+     // $('button.print').show();
+     // var originalContents = document.body.innerHTML;
+     // document.body.innerHTML = printContents;
+     window.print();
+     $('button.print,.navbar,.sB,.breadcrumb').show();
+     // document.body.innerHTML = originalContents;
+}
+
+$('body .print').on('click',function(){
+    printDiv('printDiv');
+});
