@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Admin::Login</title>
+    <title>Myshop</title>
     <base href="/" />
+    <link rel="icon" type="image/png" href="shop.png">
     <link rel="stylesheet" href="admin/css/bootstrap.min.css">
     <link rel="stylesheet" href="admin/css/bb.css">
 </head>
@@ -17,27 +18,27 @@
                 <div class="panel panel-default lP">
                     <div class="panel-heading">
                         <div class="panel-title">
-                            Admin Login
+                            Admininstrator
                         </div>
                     </div>
                     <div class="panel-body">
                         <form action="auth" class="form-horizontal" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
-                                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Email">
+                                <label for="inputEmail" class="col-lg-3 control-label">Email</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Email" autofocus="on" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-                                <div class="col-lg-10">
-                                    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
+                                <label for="inputPassword" class="col-lg-3 control-label">Password</label>
+                                <div class="col-lg-8">
+                                    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-primary">Admin Login</button>
+                                <div class="col-lg-9 col-lg-offset-3">
+                                    <button type="submit" class="btn btn-primary">Login</button>
                                 </div>
                             </div>
                         </form>
