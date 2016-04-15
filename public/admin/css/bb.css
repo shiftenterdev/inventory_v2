@@ -249,7 +249,7 @@ select.form-control:focus {
 /*Project CSS*/
 
 .card {
-    height: 250px;
+    height: 180px;
     /*background-color: #fff;*/
     margin-bottom: 10px;
     position: relative;
@@ -270,7 +270,7 @@ select.form-control:focus {
 }
 
 .card img {
-    max-height: 200px;
+    max-height: 100%;
     max-width: 100%
 }
 
@@ -325,8 +325,8 @@ ribbon start
 }
 
 .corner-ribbon.top-right {
-    top: 25px;
-    right: -50px;
+    top: 15px;
+    right: -70px;
     left: auto;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);

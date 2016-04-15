@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repo\CoreTrait;
 use App\Models\Product;
+use App\Models\Sell;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller {
@@ -19,8 +20,9 @@ class AdminController extends Controller {
     	foreach($products as $p){
     		$p->image = CoreTrait::imageById($p->pro_image_id);
     	}
+        $sells = Sell::with('products')->limit(3)->get();
         return view('admin.home')
-        	->with(compact('products'));
+        	->with(compact('products','sells'));
     }
 
 }
