@@ -23,6 +23,7 @@ class PurchaseController extends Controller
 	 */
 	public function get_index()
 	{
+		// Session::forget('purchase_items');
 		$phones= Customer::get(['customer_phone','customer_id']);
 		$products = Product::get(['pro_code']);
 		if(Session::has('purchase_items')){

@@ -58,7 +58,7 @@
                 <hr>
                 <div id="productInput">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-offset-2 col-md-5">
                             <div class="form-group">
                                 <label class="col-lg-5 control-label">Product Code</label>
                                 <div class="col-lg-6">
@@ -71,16 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="pro_price" class="ppj spo">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Quantity</label>
-                                <div class="col-lg-8">
-                                    <input class="form-control spo" placeholder="Quantity" type="number" name="pro_quantity" min="1">
-                                    <span class="help-block pqj"></span>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="col-md-2">
                             <div class="form-group">
                                 <button class="btn btn-info add-pro-b" type="button"><i class="fa fa-plus"></i> Add</button>

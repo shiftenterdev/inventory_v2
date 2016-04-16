@@ -26,9 +26,9 @@
 						<td>{{$p->pro_title}}</td>
 						<td>{{money_format('%!i',$p->pro_price)}}</td>
 						<td>
-							<button class="btn btn-warning btn-sm btn-sub"> <i class="fa fa-minus"></i> </button>
-							<input type="text" class="input-sm num pq" data-code="{{$p->pro_code}}" style="width:40px;text-align: center" value="{{$p->pro_quantity}}">
-							<button class="btn btn-success btn-sm btn-add"> <i class="fa fa-plus"></i> </button>
+							<button class="btn btn-warning btn-sm btn-sub-s"> <i class="fa fa-minus"></i> </button>
+							<input type="text" class="input-sm num pq-s" data-code="{{$p->pro_code}}" style="width:40px;text-align: center" value="{{$p->pro_quantity}}">
+							<button class="btn btn-success btn-sm btn-add-s"> <i class="fa fa-plus"></i> </button>
 						</td>
 						<td>{{money_format('%!i',($p->pro_quantity * $p->pro_price))}}</td>
 						<td><button type="button" class="btn btn-sm btn-danger confirm rSI" data-key="{{$k}}"><i class="fa fa-times"></i></button></td>

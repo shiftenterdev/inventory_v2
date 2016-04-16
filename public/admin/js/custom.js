@@ -163,14 +163,11 @@ $('.add-pro-b').on('click', function(e) {
     load.on();
     var product = {
         pro_code : $('select[name=pro_code]').val(),
-        pro_price : $('input[name=pro_price]').val(),
-        pro_quantity : $('input[name=pro_quantity]').val(),
         _token : $('meta[name="csrf-token"]').attr('content')
     };
 
     $.post('ajax/buy-list',product).done(function(result){
         $('.spo').val('');
-        $('.pqj').text('');
         $('#productList').load('purchase/product-list',function(){
             load.off();
         });
@@ -261,9 +258,9 @@ $('body .print').on('click',function(){
 });
 
 /**
- * Quantity add / sub
+ * Quantity add / sub for sale
  */
-$('#productList').on('click','.btn-add',function(){
+$('#productList').on('click','.btn-add-s',function(){
     var place = $(this).prev();
     var c = place.val();
     place.val(parseInt(c)+1);
@@ -271,7 +268,7 @@ $('#productList').on('click','.btn-add',function(){
     productUpdate(place.val(),place.data('code'));
 });
 
-$('#productList').on('click','.btn-sub',function(){
+$('#productList').on('click','.btn-sub-s',function(){
     var place = $(this).next();
     var c = place.val();
     if(c=='1'){
@@ -282,7 +279,34 @@ $('#productList').on('click','.btn-sub',function(){
     productUpdate(place.val(),place.data('code'));
 });
 
-$('#productList').on('blur','.pq',function(){
+$('#productList').on('blur','.pq-s',function(){
+    load.on();
+    productUpdate($(this).val(),$(this).data('code'));
+});
+
+/**
+ * Quantity add / sub for purchase
+ */
+$('#productList').on('click','.btn-add-p',function(){
+    var place = $(this).prev();
+    var c = place.val();
+    place.val(parseInt(c)+1);
+    load.on();
+    productUpdate(place.val(),place.data('code'));
+});
+
+$('#productList').on('click','.btn-sub-p',function(){
+    var place = $(this).next();
+    var c = place.val();
+    if(c=='1'){
+        return;
+    }
+    place.val(parseInt(c)-1);
+    load.on();
+    productUpdate(place.val(),place.data('code'));
+});
+
+$('#productList').on('blur','.pq-p',function(){
     load.on();
     productUpdate($(this).val(),$(this).data('code'));
 });
