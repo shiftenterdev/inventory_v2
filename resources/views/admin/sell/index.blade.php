@@ -63,7 +63,7 @@
                 <hr>
                 <div id="productInput">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-offset-2 col-md-5">
                             <div class="form-group">
                                 <label class="col-lg-5 control-label">Product Code</label>
                                 <div class="col-lg-6">

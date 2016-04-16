@@ -7,6 +7,10 @@ var load = {
     }
 }
 
+$('.num').on('input', function(){
+    $(this).val($(this).val().replace(/[^0-9]/g, ''));
+});
+
 $('.uI').on('click', function() {
     uBt = $(this);
     $('#aIL').load('ajax/images', function() {
@@ -276,4 +280,9 @@ $('#productList').on('click','.btn-sub',function(){
     place.val(parseInt(c)-1);
     load.on();
     productUpdate(place.val(),place.data('code'));
+});
+
+$('#productList').on('blur','.pq',function(){
+    load.on();
+    productUpdate($(this).val(),$(this).data('code'));
 });

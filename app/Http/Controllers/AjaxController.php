@@ -81,7 +81,7 @@ class AjaxController extends Controller
             foreach ($current_list as $cl) {
                 if ($cl['pro_code'] == $input['pro_code']) {
                     $true = true;
-                    $cl['pro_quantity'] = $input['pro_quantity'];
+                    $cl['pro_quantity']++;
                 }
                 $new[] = $cl;
             }
