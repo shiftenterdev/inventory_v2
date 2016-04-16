@@ -64,11 +64,11 @@ class AjaxController extends Controller
         return $products;
     }
 
-    public function get_product_by_code($id)
+    /*public function get_product_by_code($id)
     {
         $products = Product::where('pro_code',$id)->first();
         return $products;
-    }
+    }*/
 
     public function post_sell_list(Request $request)
     {
@@ -88,12 +88,31 @@ class AjaxController extends Controller
         }
         if($true == false) {
             $input['pro_title'] = CoreTrait::productTitleByCode($input['pro_code']);
+            $input['pro_price'] = CoreTrait::productPriceByCode($input['pro_code']);
+            $input['pro_quantity'] = 1;
             unset($input['_token']);
             Session::push('sell_items',$input);
         }else{
             Session::put('sell_items',$new);
         }
 
+        return 1;
+    }
+
+    public function get_sell_pro_update($q,$code)
+    {
+        $new = [];
+         if(Session::has('sell_items')) {
+            $current_list = Session::get('sell_items');
+
+            foreach ($current_list as $cl) {
+                if ($cl['pro_code'] == $code) {
+                    $cl['pro_quantity'] = $q;
+                }
+                $new[] = $cl;
+            }
+        }
+        Session::put('sell_items',$new);
         return 1;
     }
 

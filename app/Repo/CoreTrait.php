@@ -54,6 +54,12 @@ trait CoreTrait
         return $title;
     }
 
+    public static function productPriceByCode($id)
+    {
+        $price = Product::where('pro_code',$id)->pluck('pro_price');
+        return $price;
+    }
+
     public static function SellInvoiceId()
     {
         $invoice_id = Sell::orderBy('id','desc')->pluck('invoice_id');

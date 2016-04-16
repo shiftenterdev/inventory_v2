@@ -25,9 +25,13 @@
 						<td>{{$p->pro_code}}</td>
 						<td>{{$p->pro_title}}</td>
 						<td>{{money_format('%!i',$p->pro_price)}}</td>
-						<td>{{$p->pro_quantity}}</td>
+						<td>
+							<button class="btn btn-warning btn-sm btn-sub"> <i class="fa fa-minus"></i> </button>
+							<input type="text" class="input-sm" data-code="{{$p->pro_code}}" style="width:40px;text-align: center" value="{{$p->pro_quantity}}">
+							<button class="btn btn-success btn-sm btn-add"> <i class="fa fa-plus"></i> </button>
+						</td>
 						<td>{{money_format('%!i',($p->pro_quantity * $p->pro_price))}}</td>
-						<td><button type="button" class="btn btn-xs btn-danger confirm rSI" data-key="{{$k}}"><i class="fa fa-times"></i></button></td>
+						<td><button type="button" class="btn btn-sm btn-danger confirm rSI" data-key="{{$k}}"><i class="fa fa-times"></i></button></td>
 					</tr>
 					<?php $total +=  $p->pro_quantity * $p->pro_price?>
 				@endforeach

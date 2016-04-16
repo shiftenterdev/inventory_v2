@@ -107,7 +107,7 @@ $('.parSubCat').on('change', function() {
 /**
  * Product info by product code
  */
-$('#pro_code').on('change', function() {
+/*$('#pro_code').on('change', function() {
     var v = $(this).val();
     if (v != '') {
         load.on();
@@ -118,7 +118,7 @@ $('#pro_code').on('change', function() {
             load.off();
         });
     }
-});
+});*/
 
 /**
  * Add product for sell
@@ -128,19 +128,28 @@ $('.add-pro-s').on('click', function(e) {
     load.on();
     var product = {
         pro_code : $('select[name=pro_code]').val(),
-        pro_price : $('input[name=pro_price]').val(),
-        pro_quantity : $('input[name=pro_quantity]').val(),
         _token : $('meta[name="csrf-token"]').attr('content')
     };
 
     $.post('ajax/sell-list',product).done(function(result){
         $('.spo').val('');
-        $('.pqj').text('');
         $('#productList').load('sell/product-list',function(){
             load.off();
         });
     });
 });
+
+/**
+ * Increase decrease product update
+ */
+
+var productUpdate = function(q,code){
+    $.get('ajax/sell-pro-update/'+q+'/'+code).done(function(){
+        $('#productList').load('sell/product-list',function(){
+            load.off();
+        });
+    });
+}
 
 /**
  * Add product for buy
@@ -245,4 +254,26 @@ function printDiv(divName) {
 
 $('body .print').on('click',function(){
     printDiv('printDiv');
+});
+
+/**
+ * Quantity add / sub
+ */
+$('#productList').on('click','.btn-add',function(){
+    var place = $(this).prev();
+    var c = place.val();
+    place.val(parseInt(c)+1);
+    load.on();
+    productUpdate(place.val(),place.data('code'));
+});
+
+$('#productList').on('click','.btn-sub',function(){
+    var place = $(this).next();
+    var c = place.val();
+    if(c=='1'){
+        return;
+    }
+    place.val(parseInt(c)-1);
+    load.on();
+    productUpdate(place.val(),place.data('code'));
 });
