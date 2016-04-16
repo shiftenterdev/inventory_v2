@@ -20,7 +20,14 @@ class AdminController extends Controller {
     	foreach($products as $p){
     		$p->image = CoreTrait::imageById($p->pro_image_id);
     	}
-        $sells = Sell::with('products')->limit(3)->get();
+        $sells = Sell::with('products','customer')->limit(4)->orderBy('id','desc')->get();
+        foreach ($sells as $key => $s) {
+            $amount = 0;
+            foreach($s->products as $p){
+                $amount += floatval($p->pro_quantity)*floatval($p->pro_price);
+            }
+            $s->amount = $amount;
+        }
         return view('admin.home')
         	->with(compact('products','sells'));
     }

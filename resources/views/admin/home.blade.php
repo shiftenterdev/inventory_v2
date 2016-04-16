@@ -27,29 +27,27 @@
         </div>
       @endforeach
         </div>
-        <div class="col-md-6">
-        <h5>Sell Highlight</h5>
-          <table class="table">
+        <div class="col-md-12">
+        <legend>Recent Sells</legend>
+          <table class="table table-bordered">
             <tr>
               <th>Invoice ID</th>
+              <th>Customer</th>
+              <th>Customer ID</th>
               <th>Product Qty</th>
+              <th>Total Price</th>
+              <th>View Invoice</th>
             </tr>
             @foreach($sells as $s)
             <tr>
               <td>{{$s->invoice_id}}</td>
+              <td>{{$s->customer->customer_name}}</td>
+              <td>{{$s->customer->customer_id}}</td>
               <td>{{count($s->products)}}</td>
+              <td>{{$s->amount}}</td>
+              <td><a href="sell/view/{{$s->invoice_id}}" class="btn btn-xs btn-primary"><i class="fa fa-file"></i></a></td>
             </tr>
             @endforeach
-          </table>
-        </div>
-        <div class="col-md-6">
-        <h5>Purchase Highlight</h5>
-          <table class="table">
-            <tr>
-              <th>Invoice ID</th>
-              <th>Product Qty</th>
-            </tr>
-
           </table>
         </div>
     </div>
