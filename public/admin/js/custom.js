@@ -5,7 +5,7 @@ var load = {
     off: function(){
         $('.waiting').hide();
     }
-}
+};
 
 $('.num').on('input', function(){
     $(this).val($(this).val().replace(/[^0-9]/g, ''));
@@ -24,10 +24,12 @@ $('.uui').on('click', function() {
 });
 
 $('body').on('click', '#aIL .dImg', function() {
-    var id = $(this).data('id');
-    $.get('ajax/delete-image/' + id).done(function() {
-        $('#aIL').load('ajax/images');
-    });
+    if(confirm('Are you sure ?')){
+        var id = $(this).data('id');
+        $.get('ajax/delete-image/' + id).done(function() {
+            $('#aIL').load('ajax/images');
+        });
+    }
 });
 
 $('body').on('click', '#aIL .gImg', function() {
