@@ -1,22 +1,22 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use App\Models\Category;
-use App\Models\Image;
 use App\Models\Customer;
+use App\Models\Image;
 use App\Models\Product;
-use App\Repo\CoreTrait;
+use App\Repo\Repository\AjaxRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class AjaxController extends Controller
 {
 
-    public function __construct()
+    private $ajaxRepository;
+
+    public function __construct(AjaxRepository $ajaxRepository)
     {
         $this->middleware('auth');
+        $this->ajaxRepository = $ajaxRepository;
     }
 
     public function get_images()
@@ -40,9 +40,7 @@ class AjaxController extends Controller
 
     public function get_delete_image($id)
     {
-        $image = Image::where('id',$id)->pluck('img_title');
-        unlink(public_path('uploads/'.$image));
-        Image::destroy($id);
+        $this->ajaxRepository->deleteImage($id);
         return 1;
     }
 
@@ -73,108 +71,38 @@ class AjaxController extends Controller
     public function post_sell_list(Request $request)
     {
         $input = $request->all();
-        $true = false;
-        $new = [];
-        if(Session::has('sell_items')) {
-            $current_list = Session::get('sell_items');
-
-            foreach ($current_list as $cl) {
-                if ($cl['pro_code'] == $input['pro_code']) {
-                    $true = true;
-                    $cl['pro_quantity']++;
-                }
-                $new[] = $cl;
-            }
-        }
-        if($true == false) {
-            $input['pro_title'] = CoreTrait::productTitleByCode($input['pro_code']);
-            $input['pro_price'] = CoreTrait::productPriceByCode($input['pro_code']);
-            $input['pro_quantity'] = 1;
-            unset($input['_token']);
-            Session::push('sell_items',$input);
-        }else{
-            Session::put('sell_items',$new);
-        }
-
+        $this->ajaxRepository->productList($input,'sell_items');
         return 1;
     }
 
     public function get_sell_pro_update($q,$code)
     {
-        $new = [];
-         if(Session::has('sell_items')) {
-            $current_list = Session::get('sell_items');
-
-            foreach ($current_list as $cl) {
-                if ($cl['pro_code'] == $code) {
-                    $cl['pro_quantity'] = $q;
-                }
-                $new[] = $cl;
-            }
-        }
-        Session::put('sell_items',$new);
+        $this->ajaxRepository->productUpdate($code,$q,'sell_items');
         return 1;
     }
 
     public function post_buy_list(Request $request)
     {
         $input = $request->all();
-        $true = false;
-        $new = [];
-        if(Session::has('purchase_items')) {
-            $current_list = Session::get('purchase_items');
-
-            foreach ($current_list as $cl) {
-                if ($cl['pro_code'] == $input['pro_code']) {
-                    $true = true;
-                    $cl['pro_quantity']++;
-                }
-                $new[] = $cl;
-            }
-        }
-        if($true == false) {
-            $input['pro_title'] = CoreTrait::productTitleByCode($input['pro_code']);
-            $input['pro_price'] = CoreTrait::productPriceByCode($input['pro_code']);
-            $input['pro_quantity'] = 1;
-            unset($input['_token']);
-            Session::push('purchase_items',$input);
-        }else{
-            Session::put('purchase_items',$new);
-        }
-
+        $this->ajaxRepository->productList($input,'purchase_items');
         return 1;
     }
 
     public function get_purchase_pro_update($q,$code)
     {
-        $new = [];
-         if(Session::has('purchase_items')) {
-            $current_list = Session::get('purchase_items');
-
-            foreach ($current_list as $cl) {
-                if ($cl['pro_code'] == $code) {
-                    $cl['pro_quantity'] = $q;
-                }
-                $new[] = $cl;
-            }
-        }
-        Session::put('purchase_items',$new);
+        $this->ajaxRepository->productUpdate($code,$q,'purchase_items');
         return 1;
     }
 
     public function get_remove_sell_product($id)
     {
-        $session = Session::get('sell_items');
-        unset($session[$id]);
-        Session::put('sell_items',$session);
+        $this->ajaxRepository->removeProduct('sell_items',$id);
         return 1;
     }
 
     public function get_remove_buy_product($id)
     {
-        $session = Session::get('purchase_items');
-        unset($session[$id]);
-        Session::put('purchase_items',$session);
+        $this->ajaxRepository->removeProduct('purchase_items',$id);
         return 1;
     }
 
@@ -187,26 +115,14 @@ class AjaxController extends Controller
     public function post_store_sell_customer(Request $request)
     {
         $input = $request->all();
-        unset($input['_token']);
-        $input['customer_id'] = '';
-        $customer = Customer::where('customer_phone',$input['customer_phone'])->first();
-        if(!empty($customer)){
-            $input['customer_id'] = $customer->customer_id;
-        }
-        Session::put('sell_customer',$input);
+        $this->ajaxRepository->storeCustomer($input,'sell_customer');
         return 1;
     }
 
     public function post_store_purchase_customer(Request $request)
     {
         $input = $request->all();
-        unset($input['_token']);
-        $input['customer_id'] = '';
-        $customer = Customer::where('customer_phone',$input['customer_phone'])->first();
-        if(!empty($customer)){
-            $input['customer_id'] = $customer->customer_id;
-        }
-        Session::put('purchase_customer',$input);
+        $this->ajaxRepository->storeCustomer($input,'purchase_customer');
         return 1;
     }
 

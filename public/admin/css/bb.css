@@ -401,3 +401,25 @@ ribbon end
 .t-imp {
     background-color: #ddd;
 }
+
+.img-div{
+    position:relative;
+    height: 120px;
+    border: 1px solid #ededed;
+    margin-bottom: 7px;
+}
+.img-div:hover{
+    border: 1px solid deepskyblue;
+    box-shadow: 0 0 5px #ddd;
+    cursor: pointer;
+}
+.img-div img{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom:0;
+    max-width:100%;
+    max-height: 100%;
+}

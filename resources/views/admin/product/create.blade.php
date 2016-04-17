@@ -93,7 +93,7 @@
 
 
                         <div class="col-lg-7">
-                            <img src="preview.jpeg" alt="" style="height:120px;max-width: 120px;margin-right: 20px" class="img-thumbnail prvImg">
+                            <img src="preview.png" alt="" style="height:120px;max-width: 120px;margin-right: 20px" class="img-thumbnail prvImg">
                             <input type="hidden" name="pro_image_id" id="imgIdVal">
                             <button class="btn btn-info uI" type="button">Upload</button>
                         </div>
