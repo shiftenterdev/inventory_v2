@@ -74,7 +74,9 @@ class AjaxRepository
     public function deleteImage($id)
     {
         $image = Image::where('id',$id)->pluck('img_title');
-        unlink(public_path('uploads/'.$image));
+        if(file_exists(public_path('uploads/'.$image))){
+            unlink(public_path('uploads/'.$image));
+        }
         Image::destroy($id);
     }
 }

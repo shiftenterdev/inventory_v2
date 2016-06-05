@@ -12,9 +12,11 @@ $('.num').on('input', function(){
 });
 
 $('.uI').on('click', function() {
+    load.on();
     uBt = $(this);
     $('#aIL').load('ajax/images', function() {
         $('#imgModal').modal('show');
+        load.off();
     });
 
 });
@@ -25,9 +27,12 @@ $('.uui').on('click', function() {
 
 $('body').on('click', '#aIL .dImg', function() {
     if(confirm('Are you sure ?')){
+        load.on();
         var id = $(this).data('id');
         $.get('ajax/delete-image/' + id).done(function() {
-            $('#aIL').load('ajax/images');
+            $('#aIL').load('ajax/images',function(){
+                load.off();
+            });
         });
     }
 });
@@ -49,7 +54,6 @@ $('.img-upload').on('change', function() {
         alert('File size cannot greater than 500KB');
         return false;
     }
-
     var myFormData = new FormData();
     myFormData.append('image', $(this).prop("files")[0]);
     myFormData.append('_token', CSRF_TOKEN);

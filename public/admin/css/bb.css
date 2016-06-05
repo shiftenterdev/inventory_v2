@@ -1,3 +1,6 @@
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus{
+    outline:0;
+}
 .cN {
     /*background-color: #f9f9f9;*/
     border-radius: 3px;
@@ -154,7 +157,7 @@ select.form-control:focus {
     color: white;
     font-size: 45px;
     border-radius: 2px;
-    z-index: 10;
+    z-index: 1200;
     box-shadow: 0 0 5px #000;
     display: none;
 }
@@ -183,7 +186,7 @@ select.form-control:focus {
     width:12px; 
     height:12px; 
     display:block; 
-    margin:0; 
+    margin:3px; 
     border-radius:20px;
 }
 .radio input[type="radio"] + label > mark { 
@@ -195,6 +198,8 @@ select.form-control:focus {
     border:1px solid #009df5; 
     background:#fff; 
     text-indent: 0; 
+    position:relative;
+    padding:0;
 }
 /*Radio button*/
 /*Check box*/
@@ -435,6 +440,10 @@ ribbon end
     font-weight: 600;
 }
 
-a.list-group-item,.sH{
-    outline:0;
+.navbar-brand.sH,.sidebar a.list-group-item,.btn {
+    outline: 0px;
+}
+#imgModal .modal-body{
+    max-height:396px;
+    overflow-y:scroll;
 }
