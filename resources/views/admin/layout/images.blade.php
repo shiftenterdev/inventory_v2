@@ -3,7 +3,7 @@
         <div class="col-md-3">
             <div class="img-div">
                 <a href="javascript:" data-id="{{$i->id}}" class="dImg">
-                    <i class="fa fa-times-circle text-danger"></i>
+                    Delete
                 </a>
                 <img src="/uploads/{{$i->img_title}}" class="gImg" data-id="{{$i->id}}">
             </div>
