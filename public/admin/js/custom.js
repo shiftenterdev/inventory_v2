@@ -133,20 +133,22 @@ $('.parSubCat').on('change', function() {
 /**
  * Add product for sell
  */
-$('.add-pro-s').on('click', function(e) {
-    e.preventDefault();
-    load.on();
-    var product = {
-        pro_code : $('select[name=pro_code]').val(),
-        _token : $('meta[name="csrf-token"]').attr('content')
-    };
+$('#pro_code').on('change', function() {
+    // e.preventDefault();
+    if($(this).val()!=''){
+        load.on();
+        var product = {
+            pro_code : $(this).val(),
+            _token : $('meta[name="csrf-token"]').attr('content')
+        };
 
-    $.post('ajax/sell-list',product).done(function(result){
-        $('.spo').val('');
-        $('#productList').load('sell/product-list',function(){
-            load.off();
+        $.post('ajax/sell-list',product).done(function(result){
+            $('.spo').val('');
+            $('#productList').load('sell/product-list',function(){
+                load.off();
+            });
         });
-    });
+    }
 });
 
 /**

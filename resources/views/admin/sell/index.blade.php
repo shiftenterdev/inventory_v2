@@ -1,4 +1,4 @@
-@extends('admin.layout.index') 
+@extends('admin.layout.index')
 
 @section('content')
 
@@ -12,7 +12,7 @@
             <legend>
                 Customer Info
             </legend>
-                
+
                 <div class="row">
                 <form action="javascript:" id="customerForm" class="form-horizontal">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </form>
                 </div>
                 <legend>
@@ -76,12 +76,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <button class="btn btn-info add-pro-s"><i class="fa fa-plus"></i> Add</button>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
         </fieldset>
@@ -89,16 +84,16 @@
 </div>
 @endsection
 
-@section('script') 
+@section('script')
     @parent
     <script>
-    
-    $(".check-customer").on('click', function (e) { 
+
+    $(".check-customer").on('click', function (e) {
         var phone = $('input[name=customer_phone]').val();
         if(phone != ''){
             load.on();
             $.get('ajax/customer-by-phone/'+phone).done(function(result){
-            
+
             if(result.length==0){
                 load.off();
                 // alert('No Result');
