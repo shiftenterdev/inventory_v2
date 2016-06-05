@@ -20,7 +20,7 @@
                         <label class="col-lg-2 control-label">Title</label>
 
                         <div class="col-lg-6">
-                            <input class="form-control" placeholder="Title" type="text" name="brand_title" value="{{$brand->brand_title}}">
+                            <input class="form-control" placeholder="Title" type="text" name="brand_title" value="{{$brand->brand_title}}" required>
                         </div>
                     </div>
 

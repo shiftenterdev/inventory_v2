@@ -20,7 +20,7 @@
                         <label class="col-lg-2 control-label">Title</label>
 
                         <div class="col-lg-6">
-                            <input class="form-control" placeholder="Title" type="text" name="brand_title">
+                            <input class="form-control" placeholder="Title" type="text" name="brand_title" required>
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@
 
 
                         <div class="col-lg-7">
-                            <img src="preview.jpeg" alt="" style="height:120px;max-width: 120px;margin-right: 20px" class="img-thumbnail prvImg">
+                            <img src="preview.png" alt="" style="height:120px;max-width: 120px;margin-right: 20px" class="img-thumbnail prvImg">
                             <input type="hidden" name="brand_logo_id" id="imgIdVal">
                             <button class="btn btn-info uI" type="button">Upload</button>
                         </div>
