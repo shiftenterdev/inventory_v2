@@ -17,16 +17,16 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Sl.</th>
                         <th>Title</th>
                         <th>Parent</th>
                         <th width="10%">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($categories as $c)
+                    @foreach($categories as $k=>$c)
                         <tr>
-                            <td>{{$c->id}}</td>
+                            <td>{{$k+1}}</td>
                             <td>{{$c->cat_title}}</td>
                             <td>{{$c->parent}}</td>
                             <td>

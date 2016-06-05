@@ -11,29 +11,31 @@
         <div class="cN">
             <fieldset>
                 <legend>
-                    Brand List
-                    <a href="brand/create" class="btn btn-sm btn-primary nB pull-right">
-                        <i class="fa fa-plus"></i> New Brand</a>
+                    Discount List
+                    <a href="discount/create" class="btn btn-sm btn-primary nB pull-right">
+                        <i class="fa fa-plus"></i> New Discount</a>
                 </legend>
                 <table class="table">
                     <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Logo</th>
-                        <th>Title</th>
+                        <th>Product</th>
+                        <th>Type</th>
+                        <th>Amount</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($brands as $k => $b)
+                    @foreach($discount as $k => $b)
                         <tr>
                             <td>{{$k+1}}</td>
-                            <td><img src="/uploads/{{$b->logo}}" alt="" class="t-img"></td>
-                            <td>{{$b->brand_title}}</td>
+                            <td>{{$b->product->pro_title}}</td>
+                            <td>{{$b->type=='1'?'Percentage':'Amount'}}</td>
+                            <td>{{$b->amount}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="brand/edit/{{$b->id}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
-                                    <a href="brand/delete/{{$b->id}}" class="btn btn-sm btn-danger confirm"><i class="fa fa-trash"></i></a>
+                                    <a href="discount/edit/{{$b->id}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+                                    <a href="discount/delete/{{$b->id}}" class="btn btn-sm btn-danger confirm"><i class="fa fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>

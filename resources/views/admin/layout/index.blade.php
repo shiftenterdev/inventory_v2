@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="admin/css/bootstrap.min.css">
     <link rel="stylesheet" href="admin/css/bb.css">
     <link rel="stylesheet" href="admin/css/font-awesome.min.css">
+    <link rel="stylesheet" href="admin/css/ionicons.min.css">
 </head>
 
 <body>
@@ -19,8 +20,9 @@
     @include('admin.layout.header')
 
     @include('admin.layout.toast')
-
+    @if(!Request::is('/'))
     @include('admin.layout.sidebar')
+    @endif
 
     @yield('content')
 

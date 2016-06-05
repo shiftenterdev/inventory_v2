@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand sH" href="javascript:"><i class="fa fa-bars"></i></a>
-            <a class="navbar-brand" href="#"> My Shop</a>
+            <a class="navbar-brand" href="/"> Stocart</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
             <ul class="nav navbar-nav">

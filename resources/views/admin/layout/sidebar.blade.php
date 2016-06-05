@@ -1,20 +1,22 @@
 <div class="col-md-2 sB">
     <div class="list-group sidebar">
-        <a href="/" class="list-group-item {{Request::segment(1)==''?'active':''}}">
-            <i class="fa fa-home"></i> Home</a>
+
         <a href="sell" class="list-group-item {{Request::segment(1)=='sell'?'active':''}}">
             <i class="fa fa-shopping-bag"></i> Sell</a>
         <a href="purchase" class="list-group-item {{Request::segment(1)=='purchase'?'active':''}}">
             <i class="fa fa-shopping-basket"></i> Purchase</a>
         <hr>
-        <a href="product" class="list-group-item {{Request::segment(1)=='product'?'active':''}}">
-            <i class="fa fa-cube"></i> Product</a>
+
         <a href="brand" class="list-group-item {{Request::segment(1)=='brand'?'active':''}}">
             <i class="fa fa-contao"></i> Brand</a>
         <a href="category" class="list-group-item {{Request::segment(1)=='category'?'active':''}}">
             <i class="fa fa-clone"></i> Category</a>
+        <a href="product" class="list-group-item {{Request::segment(1)=='product'?'active':''}}">
+            <i class="fa fa-cube"></i> Product</a>
+        <a href="discount" class="list-group-item {{Request::segment(1)=='discount'?'active':''}}">
+            <i class="fa fa-crop"></i> Discount</a>
         <hr>
-        
+
         <a href="sells-history" class="list-group-item {{Request::segment(1)=='sells-history'?'active':''}}">
             <i class="fa fa-list-alt"></i> Sell History</a>
         <a href="purchase-history" class="list-group-item {{Request::segment(1)=='purchase-history'?'active':''}}">
