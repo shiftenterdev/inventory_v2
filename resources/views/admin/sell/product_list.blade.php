@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 
-		
+
 			<table class="table table-bordered">
 				<thead>
 				<tr class="t-imp">
@@ -15,7 +15,8 @@
 				</thead>
 				<tbody>
 				<?php setlocale(LC_MONETARY, 'en_IN');?>
-				<?php $total=0; ?>
+				<?php $total = 0;?>
+				@if(!empty($temp_pro))
 				@foreach($temp_pro as $k => $p)
 					<tr>
 						<td>{{$k+1}}</td>
@@ -26,14 +27,13 @@
 						<td>{{$p->pro_title}}</td>
 						<td>{{money_format('%!i',$p->pro_price)}}</td>
 						<td>
-							<button class="btn btn-warning btn-xs btn-sub-s"> <i class="fa fa-minus"></i> </button>
 							<input type="text" class="input-sm num pq-s" data-code="{{$p->pro_code}}" style="width:40px;text-align: center" value="{{$p->pro_quantity}}">
-							<button class="btn btn-success btn-xs btn-add-s"> <i class="fa fa-plus"></i> </button>
 						</td>
 						<td>{{money_format('%!i',($p->pro_quantity * $p->pro_price))}}</td>
 					</tr>
-					<?php $total +=  $p->pro_quantity * $p->pro_price?>
+					<?php $total += $p->pro_quantity * $p->pro_price?>
 				@endforeach
+				@endif
 					<tr>
 						<td>#</td>
 						<td>
@@ -48,7 +48,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						
+
 					</tr>
 				</tbody>
 				<tfooter>
@@ -62,6 +62,6 @@
 			<div class="text-center">
 				<a href="javascript:" class="btn btn-primary sell-invoice"><i class="fa fa-print"></i> Invoice</a>
 			</div>
-		
+
 	</div>
 </div>

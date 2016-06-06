@@ -155,31 +155,27 @@ $('#productList').on('change','#pro_code', function() {
  * Increase decrease product update
  */
 
-var productUpdate = function(q,code){
-    $.get('ajax/sell-pro-update/'+q+'/'+code).done(function(){
-        $('#productList').load('sell/product-list',function(){
-            load.off();
-        });
-    });
-}
+
 
 /**
  * Add product for buy
  */
-$('.add-pro-b').on('click', function(e) {
+$('body').on('change','.bpo', function(e) {
     e.preventDefault();
-    load.on();
-    var product = {
-        pro_code : $('select[name=pro_code]').val(),
-        _token : $('meta[name="csrf-token"]').attr('content')
-    };
+    if($(this).val()!==''){
+        load.on();
+        var product = {
+            pro_code : $('select[name=pro_code]').val(),
+            _token : $('meta[name="csrf-token"]').attr('content')
+        };
 
-    $.post('ajax/buy-list',product).done(function(result){
-        $('.spo').val('');
-        $('#productList').load('purchase/product-list',function(){
-            load.off();
+        $.post('ajax/buy-list',product).done(function(result){
+            $('.spo').val('');
+            $('#productList').load('purchase/product-list',function(){
+                load.off();
+            });
         });
-    });
+    }
 });
 
 /**
@@ -268,53 +264,45 @@ $('body .print').on('click',function(){
 /**
  * Quantity add / sub for sale
  */
-$('#productList').on('click','.btn-add-s',function(){
-    var place = $(this).prev();
-    var c = place.val();
-    place.val(parseInt(c)+1);
-    load.on();
-    productUpdate(place.val(),place.data('code'));
-});
 
-$('#productList').on('click','.btn-sub-s',function(){
-    var place = $(this).next();
-    var c = place.val();
-    if(c=='1'){
-        return;
+$("body").on('click','.pq-s',function () {
+   $(this).select();
+});
+$('#productList').on('change','.pq-s',function(){
+    load.on();
+    if($(this).val()<1){
+        $(this).val(1);
     }
-    place.val(parseInt(c)-1);
-    load.on();
-    productUpdate(place.val(),place.data('code'));
+    sProductUpdate($(this).val(),$(this).data('code'));
 });
 
-$('#productList').on('blur','.pq-s',function(){
-    load.on();
-    productUpdate($(this).val(),$(this).data('code'));
-});
+var sProductUpdate = function(q,code){
+    $.get('ajax/sell-pro-update/'+q+'/'+code).done(function(){
+        $('#productList').load('sell/product-list',function(){
+            load.off();
+        });
+    });
+}
 
 /**
  * Quantity add / sub for purchase
  */
-$('#productList').on('click','.btn-add-p',function(){
-    var place = $(this).prev();
-    var c = place.val();
-    place.val(parseInt(c)+1);
-    load.on();
-    productUpdate(place.val(),place.data('code'));
+$("body").on('click','.pq-p',function () {
+   $(this).select();
 });
 
-$('#productList').on('click','.btn-sub-p',function(){
-    var place = $(this).next();
-    var c = place.val();
-    if(c=='1'){
-        return;
+$('#productList').on('change','.pq-p',function(){
+    load.on();
+    if($(this).val()<1){
+        $(this).val(1);
     }
-    place.val(parseInt(c)-1);
-    load.on();
-    productUpdate(place.val(),place.data('code'));
+    pProductUpdate($(this).val(),$(this).data('code'));
 });
 
-$('#productList').on('blur','.pq-p',function(){
-    load.on();
-    productUpdate($(this).val(),$(this).data('code'));
-});
+var pProductUpdate = function(q,code){
+    $.get('ajax/purchase-pro-update/'+q+'/'+code).done(function(){
+        $('#productList').load('purchase/product-list',function(){
+            load.off();
+        });
+    });
+}
