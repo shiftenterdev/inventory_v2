@@ -133,9 +133,9 @@ $('.parSubCat').on('change', function() {
 /**
  * Add product for sell
  */
-$('#pro_code').on('change', function() {
+$('#productList').on('change','#pro_code', function() {
     // e.preventDefault();
-    if($(this).val()!=''){
+    if($(this).val()!==''){
         load.on();
         var product = {
             pro_code : $(this).val(),

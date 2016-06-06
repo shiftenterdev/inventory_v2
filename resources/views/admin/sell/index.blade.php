@@ -60,25 +60,7 @@
                 <div id="productList">
                     @include('admin.sell.product_list')
                 </div>
-                <hr>
-                <div id="productInput">
-                    <div class="row">
-                        <div class="col-md-offset-2 col-md-5">
-                            <div class="form-group">
-                                <label class="col-lg-5 control-label">Product Code</label>
-                                <div class="col-lg-6">
-                                    <select name="pro_code" id="pro_code" class="form-control spo">
-                                        <option value="">Select</option>
-                                        @foreach($products as $p)
-                                            <option value="{{$p->pro_code}}">{{$p->pro_code}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                
         </fieldset>
     </div>
 </div>

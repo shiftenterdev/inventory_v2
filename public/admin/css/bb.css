@@ -506,3 +506,10 @@ ribbon end
     font-weight: 600;
     text-align: center;
 }
+a.rSI{
+    color:#e51c23;
+    float:right;
+}
+table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding:5px;   
+}
