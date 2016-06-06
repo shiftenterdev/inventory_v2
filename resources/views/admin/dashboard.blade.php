@@ -31,6 +31,9 @@
       <a href="sell"><i class="ion-ios-cart-outline"></i><span>Sell</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">
+      <a href="payment"><i class="ion-cash"></i><span>Payment</span></a>
+    </div>
+    <div class="col-md-2 ball" style="background: {{colors()}}">
       <a href="sells-history"><i class="ion-ios-paper-outline"></i><span>History</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">

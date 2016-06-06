@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('sell', 'SellController');
     Route::controller('purchase', 'PurchaseController');
     Route::controller('refund', 'RefundController');
+    Route::controller('payment', 'PaymentController');
 });
 
 /**

@@ -5,6 +5,8 @@
             <i class="fa fa-shopping-bag"></i> Sell</a>
         <a href="purchase" class="list-group-item {{Request::segment(1)=='purchase'?'active':''}}">
             <i class="fa fa-shopping-basket"></i> Purchase</a>
+        <a href="payment" class="list-group-item {{Request::segment(1)=='purchase'?'active':''}}">
+            <i class="fa fa-money"></i> Payment</a>
         <hr>
 
         <a href="brand" class="list-group-item {{Request::segment(1)=='brand'?'active':''}}">
