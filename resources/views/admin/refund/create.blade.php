@@ -63,14 +63,19 @@
                         <div class="col-lg-8">
                             <div class="radio">
                                 <label>
-                                    <input name="refund_type" value="1" checked="checked" type="radio">
-                                    Refund
+                                    <input name="refund_type" value="1" checked="checked" type="radio" id="radio1">
+                                    <label for="radio1">
+                                        <mark></mark> Refund
+                                    </label>
+                                    
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input name="refund_type" value="2" type="radio">
-                                    Return
+                                    <input name="refund_type" value="2" type="radio" id="radio2">
+                                    <label for="radio2">
+                                        <mark></mark> Return
+                                    </label>
                                 </label>
                             </div>
                         </div>

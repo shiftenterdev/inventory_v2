@@ -15,27 +15,7 @@
                 </legend>
                 <form action="stock/store" class="form-horizontal" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Category</label>
-
-                        <div class="col-lg-8">
-                            <select class="form-control parCat">
-                                <option value="">Select Category</option>
-                                @foreach($categories as $c)
-                                    <option value="{{$c->id}}">{{$c->cat_title}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Sub Category</label>
-
-                        <div class="col-lg-8">
-                            <select class="form-control parSubCat">
-                                <option value="">Sub Category</option>
-                            </select>
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Product</label>
 
@@ -49,7 +29,7 @@
                         <label class="col-lg-2 control-label">Quantity</label>
 
                         <div class="col-lg-8">
-                            <input type="number" name="pro_stock" class="form-control" placeholder="Quantity">
+                            <input type="text" name="pro_stock" class="form-control num" placeholder="Quantity">
                         </div>
                     </div>
                     <div class="form-group">

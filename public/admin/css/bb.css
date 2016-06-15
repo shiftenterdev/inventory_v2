@@ -1,3 +1,10 @@
+@font-face {
+    font-family: Lato;
+    src: url(/fonts/lato.ttf);
+}
+body{
+    font-family: 'Lato';
+}
 .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus{
     outline:0;
 }

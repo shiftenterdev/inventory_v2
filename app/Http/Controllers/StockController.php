@@ -21,7 +21,7 @@ class StockController extends Controller
 	 */
 	public function get_index()
 	{
-		$categories = Category::where('cat_parent_id','-1')->get();
+		$products = Product::get();
 		return view('admin.stock.index')
 			->with(compact('categories'));
 	}
