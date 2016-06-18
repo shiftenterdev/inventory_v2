@@ -17,10 +17,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('purchase', 'PurchaseController');
     Route::controller('refund', 'RefundController');
     Route::controller('payment', 'PaymentController');
-    
+
 });
 
-/**
+/*
  * Custom Route
  */
 Route::get('sells-history', 'SellController@history');

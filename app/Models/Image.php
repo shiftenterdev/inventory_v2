@@ -1,10 +1,11 @@
-<?php namespace App\Models;
+<?php
+
+namespace app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model {
-
-	protected $table = 'images';
+class Image extends Model
+{
+    protected $table = 'images';
     protected $guarded = [];
-
 }

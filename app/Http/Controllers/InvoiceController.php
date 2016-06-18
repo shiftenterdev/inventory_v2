@@ -1,15 +1,13 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use App\Http\Requests;
+namespace app\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
-
-class InvoiceController extends Controller {
-
+class InvoiceController extends Controller
+{
     public function __construct()
     {
         $this->middleware('auth');
     }
-
 }

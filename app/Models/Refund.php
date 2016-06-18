@@ -1,10 +1,11 @@
-<?php namespace App\Models;
+<?php
+
+namespace app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Refund extends Model {
-
-	protected $table = 'refunds';
-	protected $guarded = [];
-
+class Refund extends Model
+{
+    protected $table = 'refunds';
+    protected $guarded = [];
 }

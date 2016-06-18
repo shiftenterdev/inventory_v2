@@ -1,9 +1,9 @@
-<?php namespace App\Models;
+<?php
+
+namespace app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model {
-
-	
-
+class Payment extends Model
+{
 }

@@ -1,91 +1,96 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use App\Http\Requests;
+namespace app\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Models\Refund;
 use App\Models\Customer;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
-class RefundController extends Controller {
+class RefundController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function get_index()
+    {
+        $products = Refund::all();
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function get_index()
-	{
-		$products = Refund::all();
-		return view('admin.refund.index')
-			->with(compact('products'));
-	}
+        return view('admin.refund.index')
+            ->with(compact('products'));
+    }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function get_create()
-	{
-		$customer = Customer::get(['customer_id','customer_name']);
-		$products = Product::get(['pro_code','pro_title']);
-		return view('admin.refund.create')
-			->with(compact('customer','products'));
-	}
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function get_create()
+    {
+        $customer = Customer::get(['customer_id', 'customer_name']);
+        $products = Product::get(['pro_code', 'pro_title']);
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function post_store()
-	{
-		//
-	}
+        return view('admin.refund.create')
+            ->with(compact('customer', 'products'));
+    }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function post_store()
+    {
+        //
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function update($id)
+    {
+        //
+    }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

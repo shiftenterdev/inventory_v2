@@ -1,10 +1,11 @@
-<?php namespace App\Models;
+<?php
+
+namespace app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Purchase extends Model {
-
-	protected $table = 'purchases';
-	protected $guarded = [];
-
+class Purchase extends Model
+{
+    protected $table = 'purchases';
+    protected $guarded = [];
 }

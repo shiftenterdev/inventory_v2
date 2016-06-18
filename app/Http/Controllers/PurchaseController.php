@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
@@ -9,7 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class PurchaseController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -30,6 +31,7 @@ class PurchaseController extends Controller
         } else {
             $temp_pro = 0;
         }
+
         return view('admin.buy.index')
             ->with(compact('products', 'temp_pro', 'phones'));
     }
@@ -48,6 +50,7 @@ class PurchaseController extends Controller
         } else {
             $temp_pro = [];
         }
+
         return view('admin.buy.product_list')
             ->with(compact('products', 'temp_pro'));
     }
@@ -63,6 +66,7 @@ class PurchaseController extends Controller
         $customer = json_decode(json_encode($customer), false);
         $products = Session::get('purchase_items');
         $products = json_decode(json_encode($products), false);
+
         return view('admin.buy.invoice')
             ->with(compact('customer', 'products'));
     }
@@ -70,7 +74,8 @@ class PurchaseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function history()
@@ -81,7 +86,8 @@ class PurchaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function post_store(Request $request)
@@ -104,14 +110,16 @@ class PurchaseController extends Controller
         }
         Session::forget('purchase_customer');
         Session::forget('purchase_items');
-        return redirect('buy/view/' . $input['invoice_id'])
+
+        return redirect('buy/view/'.$input['invoice_id'])
             ->with('success', 'Invoice Saved');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function update($id)
@@ -122,12 +130,12 @@ class PurchaseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function destroy($id)
     {
         //
     }
-
 }

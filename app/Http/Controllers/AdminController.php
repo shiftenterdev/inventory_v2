@@ -1,11 +1,12 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Repo\Repository\MainRepository;
 
 class AdminController extends Controller
 {
-
     private $mainRepository;
 
     public function __construct(MainRepository $mainRepository)
@@ -18,6 +19,7 @@ class AdminController extends Controller
     {
         $products = $this->mainRepository->getProductWithImage();
         $sells = $this->mainRepository->getTopSells();
+
         return view('admin.home')
             ->with(compact('products', 'sells'));
     }
@@ -26,5 +28,4 @@ class AdminController extends Controller
     {
         return view('admin.dashboard');
     }
-
 }

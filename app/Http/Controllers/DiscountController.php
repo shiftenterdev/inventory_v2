@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Discount;
@@ -7,7 +9,6 @@ use Illuminate\Http\Request;
 
 class DiscountController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +17,7 @@ class DiscountController extends Controller
     public function get_index()
     {
         $discount = Discount::get();
+
         return view('admin.discount.index')
             ->with(compact('discount'));
     }
@@ -28,6 +30,7 @@ class DiscountController extends Controller
     public function get_create()
     {
         $products = Product::get(['id', 'pro_title', 'pro_code']);
+
         return view('admin.discount.create', ['products' => $products]);
     }
 
@@ -40,13 +43,15 @@ class DiscountController extends Controller
     {
         // dd($request->all());
         Discount::create($request->except('_token'));
+
         return redirect('discount');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function show($id)
@@ -57,7 +62,8 @@ class DiscountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -68,7 +74,8 @@ class DiscountController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function update($id)
@@ -79,12 +86,12 @@ class DiscountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function destroy($id)
     {
         //
     }
-
 }

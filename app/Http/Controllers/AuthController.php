@@ -1,25 +1,24 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use App\Http\Requests;
+namespace app\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
-class AuthController extends Controller 
+class AuthController extends Controller
 {
-
-	public function get_index()
+    public function get_index()
     {
         return view('auth.login');
     }
 
     public function post_index(Request $request)
     {
-    	$credential = [
+        $credential = [
             'user_email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
         ];
 //        dd($credential);
 
@@ -34,7 +33,7 @@ class AuthController extends Controller
     {
         Session::flush();
         Auth::logout();
+
         return redirect('/');
     }
-
 }

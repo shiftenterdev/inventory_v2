@@ -1,10 +1,11 @@
-<?php namespace App\Models;
+<?php
+
+namespace app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model {
-
-	protected $table = 'roles';
-	protected $guarded = [];
-
+class Role extends Model
+{
+    protected $table = 'roles';
+    protected $guarded = [];
 }

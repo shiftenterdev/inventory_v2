@@ -52,7 +52,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <?php $tax = $total/100*$result->sells_discount ?>
+                                <?php $tax = $total / 100 * $result->sells_discount ?>
                                 <td colspan="4" class="text-right">Tax ({{$result->sells_discount}}%)</td>
                                 <td>{{$tax}}</td>
                             </tr>
