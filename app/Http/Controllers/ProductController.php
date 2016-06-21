@@ -3,27 +3,28 @@
 namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Repo\CoreTrait;
-use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductDetails;
+use App\Repo\CoreTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    private $product;
+    private $product_details;
+
+    public function __construct(Product $product, ProductDetails $product_details)
     {
-        $this->middleware('auth');
+        $this->product = $product;
+        $this->product_details = $product_details;
     }
 
     public function get_index()
     {
-        $products = Product::all();
-        foreach ($products as $p) {
-            $p->category = CoreTrait::catById($p->pro_cat_id);
-            $p->sub_category = CoreTrait::catById($p->pro_subcat_id);
-        }
-
+        $products = Product::with('_details')->get();
         return view('admin.product.index')
             ->with(compact('products'));
     }
@@ -39,12 +40,26 @@ class ProductController extends Controller
 
     public function post_store(Request $request)
     {
-        $input = $request->all();
-        $input['pro_code'] = CoreTrait::productCode();
-        unset($input['_token']);
-        Product::create($input);
+        // $input = $request->except('_token');
+        DB::beginTransaction();
 
-        return redirect('/product');
+        $input['product_code'] = CoreTrait::productCode();
+        $input['product_title'] = $request->product_title;
+        $input['product_description'] = $request->product_description;
+        $input['product_status'] = $request->product_status;
+        $input['product_price'] = $request->product_price;
+        $input['product_image_id'] = $request->product_image_id;
+        $return = $this->product->create($input);
+
+        $details['brand_id'] = $request->brand_id;
+        $details['category_id'] = $request->category_id;
+        $details['sub_category_id'] = $request->sub_category_id;
+        $details['product_id'] = $return->id;
+        $this->product_details->create($details);
+
+        DB::commit();
+
+        return redirect('product');
     }
 
     public function get_edit($id)

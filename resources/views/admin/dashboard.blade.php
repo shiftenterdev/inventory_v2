@@ -7,7 +7,7 @@
     <div class="homcon">
   <div class="row">
     <div class="col-md-2 ball" style="background: {{colors()}}">
-      <div class="n">13</div>
+      <div class="n">139</div>
       <a href="product"><i class="fa fa-cube"></i><span>Product</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">

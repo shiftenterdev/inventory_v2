@@ -16,7 +16,8 @@ class DiscountController extends Controller
      */
     public function get_index()
     {
-        $discount = Discount::get();
+        $discount = Product::with('_discount')->get();
+        dd($discount);
 
         return view('admin.discount.index')
             ->with(compact('discount'));
@@ -29,7 +30,7 @@ class DiscountController extends Controller
      */
     public function get_create()
     {
-        $products = Product::get(['id', 'pro_title', 'pro_code']);
+        $products = Product::get(['id', 'product_title', 'product_code']);
 
         return view('admin.discount.create', ['products' => $products]);
     }
@@ -92,6 +93,8 @@ class DiscountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Discount::destroy($id);
+
+        return redirect('discount');
     }
 }

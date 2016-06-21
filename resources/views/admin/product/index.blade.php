@@ -22,7 +22,6 @@
                         <th>Category</th>
                         <th>Sub-Category</th>
                         <th>Price</th>
-                        <th>Stock</th>
                         <th>Status</th>
                         <th width="10%">Action</th>
                     </tr>
@@ -30,13 +29,12 @@
                     <tbody>
                     @foreach($products as $p)
                         <tr>
-                            <td>{{$p->pro_code}}</td>
-                            <td>{{$p->pro_title}}</td>
-                            <td>{{$p->category}}</td>
-                            <td>{{$p->sub_category}}</td>
-                            <td>{{$p->pro_price}}</td>
-                            <td>{{$p->pro_stock}}</td>
-                            <td>{{$p->pro_status==1?'Active':'Inactive'}}</td>
+                            <td>{{$p->product_code}}</td>
+                            <td>{{$p->product_title}}</td>
+                            <td>{{$p->_details->_category->cat_title}}</td>
+                            <td>{{$p->_details->_sub_category->cat_title}}</td>
+                            <td>{{$p->product_price}}</td>
+                            <td>{{$p->product_status==1?'Active':'Inactive'}}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="product/edit/{{$p->id}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>

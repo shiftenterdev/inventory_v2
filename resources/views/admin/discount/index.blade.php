@@ -6,7 +6,7 @@
     <div class="col-md-9 mB">
         <ul class="breadcrumb">
             <li><a href="#">Home</a></li>
-            <li class="active">Brand</li>
+            <li class="active">Product Discount</li>
         </ul>
         <div class="cN">
             <fieldset>
@@ -29,9 +29,9 @@
                     @foreach($discount as $k => $b)
                         <tr>
                             <td>{{$k+1}}</td>
-                            <td>{{$b->product->pro_title}}</td>
-                            <td>{{$b->type=='1'?'Percentage':'Amount'}}</td>
-                            <td>{{$b->amount}}</td>
+                            <td>{{$b}}</td>
+                            <td>{{$b->product_discount_type=='1'?'Percentage':'Flat'}}</td>
+                            <td>{{$b->product_discount}}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="discount/edit/{{$b->id}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>

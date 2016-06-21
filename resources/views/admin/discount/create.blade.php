@@ -11,7 +11,7 @@
         <div class="cN">
             <fieldset>
                 <legend>
-                    Add Category
+                    Add Discount
                 </legend>
                 <form action="discount/store" class="form-horizontal" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -23,7 +23,7 @@
                             <select name="product_id" class="form-control">
                                 <option value="">Select</option>
                                 @foreach($products as $p)
-                                    <option value="{{$p->id}}">{{$p->pro_title}}  [{{$p->pro_code}}]</option>
+                                    <option value="{{$p->id}}">{{$p->product_title}}  [{{$p->product_code}}]</option>
                                 @endforeach
                             </select>
                         </div>
@@ -34,13 +34,13 @@
 
                         <div class="col-lg-6">
                             <div class="radio">
-                                <input name="type" id="radio1" value="1" checked="" type="radio">
+                                <input name="product_discount_type" id="radio1" value="1" checked="" type="radio">
                                 <label for="radio1">
                                     <mark></mark> Parcentage
                                 </label>
                             </div>
                             <div class="radio">
-                                <input name="type" id="radio2" value="2" type="radio">
+                                <input name="product_discount_type" id="radio2" value="2" type="radio">
                                 <label for="radio2">
                                     <mark></mark> Amount
                                 </label>
@@ -52,7 +52,7 @@
                         <label class="col-lg-2 control-label">Amount</label>
 
                         <div class="col-lg-6">
-                            <input class="form-control" placeholder="Amount" type="text" name="amount">
+                            <input class="form-control num" placeholder="Amount" type="text" name="product_discount">
                         </div>
                     </div>
 

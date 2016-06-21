@@ -4,6 +4,7 @@
 }
 body{
     font-family: 'Lato';
+    letter-spacing: 0;
 }
 .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus{
     outline:0;
@@ -502,16 +503,17 @@ ribbon end
 .n{
     position: absolute;
     background: red;
-    width: 25px;
+    min-width: 25px;
     height: 25px;
-    border-radius: 50%;
+    border-radius: 25px;
     color: #fff;
     top: 0;
     right: 0;
     margin-top: -7px;
     margin-right: -7px;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
+    padding: 0 3px;
 }
 a.rSI,a.rBI{
     color:#e51c23;
