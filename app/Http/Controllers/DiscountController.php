@@ -35,7 +35,7 @@ class DiscountController extends Controller
      */
     public function get_create()
     {
-        $products = Product::get(['id', 'product_title', 'product_code']);
+        $products = Product::get(['id', 'pro_title', 'pro_code']);
 
         return view('admin.discount.create', ['products' => $products]);
     }

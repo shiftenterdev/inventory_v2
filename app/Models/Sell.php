@@ -9,13 +9,13 @@ class Sell extends Model
     protected $table = 'sells';
     protected $guarded = [];
 
-    public function _customer()
+    public function customer()
     {
-        return $this->hasOne('App\Models\Customer', 'customer_id', 'customer_id');
+        return $this->hasOne(Customer::class, 'customer_id', 'customer_id');
     }
 
-    public function _products()
+    public function products()
     {
-        return $this->hasMany('App\Models\InvoiceProduct', 'invoice_id', 'invoice_id');
+        return $this->hasMany(InvoiceProduct::class, 'invoice_id', 'invoice_id');
     }
 }

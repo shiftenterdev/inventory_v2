@@ -3,33 +3,31 @@
 
 @section('content')
 
-    <div class="col-md-9 mB">
-        <ul class="breadcrumb">
-            <li><a href="/">Home</a></li>
-            <li><a href="purchase">Purchase</a></li>
-            <li class="active">History</li>
-        </ul>
-        <div class="cN">
-            <fieldset>
-                <legend>
-                    Purchase History
-                </legend>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Invoice ID</th>
-                        <th>Customer ID</th>
-                        <th>Payment Opt</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    
-                    </tbody>
-                </table>
-            </fieldset>
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="purchase">Purchase</a></li>
+        <li class="active">History</li>
+    </ul>
+    <div class="cN">
+        <fieldset>
+            <legend>
+                Purchase History
+            </legend>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Customer ID</th>
+                    <th>Payment Opt</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
 
-        </div>
+                </tbody>
+            </table>
+        </fieldset>
+
     </div>
 
 @endsection

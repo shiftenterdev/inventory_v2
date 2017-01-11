@@ -1,7 +1,26 @@
-@extends('admin.layout.index')
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <title>My Shop</title>
+    <base href="/" />
+    <link rel="icon" type="image/png" href="shop.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="stylesheet" href="admin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="admin/css/bb.css">
+    <link rel="stylesheet" href="admin/css/font-awesome.min.css">
+    <link rel="stylesheet" href="admin/css/ionicons.min.css">
+</head>
 
-@section('content')
+<body>
+
+    <div class="waiting"><i class="fa fa-spinner fa-pulse"></i></div>
+
+    @include('admin.layout.header')
+
+    @include('admin.layout.toast')
+    
 <div class="container">
   <div class="col-md-8 col-md-offset-2">
     <div class="homcon">
@@ -57,4 +76,14 @@
 </div>
   </div>
 </div>
-@endsection
+@section('script')
+        <script src="admin/js/jquery.min.js"></script>
+        <script src="admin/js/bootstrap.min.js"></script>
+        <script src="admin/js/bb.js"></script>
+    @show
+
+</body>
+
+</html>
+
+

@@ -104,9 +104,6 @@ body{
     box-shadow: 0px 0px 1px rgba(128, 128, 128, 0.28);
 }
 
-.cN a {
-    color: #3F51B5;
-}
 
 .mB a {
     color: #ffffff;
@@ -471,9 +468,6 @@ ribbon end
     margin: 0 25px 40px; 
     /*box-shadow: 0 0 5px #000;*/
 }
-.homcon .row .ball:hover{
-    box-shadow: 0 0 5px #000;
-}
 .homcon .row .ball i{
     font-size: 50px;
     line-height: 50px;
@@ -495,10 +489,10 @@ ribbon end
     margin:auto;
 } 
 .t-img{
-    border-radius: 50%;
-    border:2px solid #ddd;
-    width: 50px;
-    height: 50px;
+    border-radius: 0;
+    border:2px solid #efefef;
+    width: 40px;
+    height: auto;
 }
 .n{
     position: absolute;
@@ -521,4 +515,17 @@ a.rSI,a.rBI{
 }
 table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
     padding:5px;   
+}
+.select2-container--default .select2-selection--single{
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    border-radius:0;
+    font-size: 16px;
+    height: 34px;
+}
+.select2-container .select2-selection--single .select2-selection__rendered{
+    padding-left: 0;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 34px;
 }

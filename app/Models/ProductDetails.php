@@ -8,12 +8,12 @@ class ProductDetails extends Model
 {
     protected $guarded = [];
 
-    public function _category()
+    public function category()
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
 
-    public function _sub_category()
+    public function sub_category()
     {
         return $this->hasOne(Category::class, 'id', 'sub_category_id');
     }

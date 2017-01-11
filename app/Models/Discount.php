@@ -9,7 +9,7 @@ class Discount extends Model
     protected $table = 'product_discount';
     protected $guarded = [];
 
-    public function _product()
+    public function product()
     {
         return $this->hasOne(Product::class, 'id', 'product_id');
     }

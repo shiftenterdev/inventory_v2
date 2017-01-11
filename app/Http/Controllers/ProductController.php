@@ -24,7 +24,7 @@ class ProductController extends Controller
 
     public function get_index()
     {
-        $products = Product::with('_details')->get();
+        $products = Product::with('details')->get();
 
         return view('admin.product.index')
             ->with(compact('products'));
@@ -32,7 +32,15 @@ class ProductController extends Controller
 
     public function get_create()
     {
-        $categories = Category::where('cat_parent_id', '-1')->get();
+        $categories = Category::with('parent')->get();
+        foreach ($categories as $c) {
+            if ($c->parent) {
+                $c->full_category = $c->parent->cat_title.' > '.$c->cat_title;
+            }else{
+                $c->full_category = $c->cat_title;
+            }
+        }
+
         $brands = Brand::get(['id', 'brand_title']);
 
         return view('admin.product.create')
@@ -44,19 +52,16 @@ class ProductController extends Controller
         // $input = $request->except('_token');
         DB::beginTransaction();
 
-        $input['product_code'] = CoreTrait::productCode();
-        $input['product_title'] = $request->product_title;
-        $input['product_description'] = $request->product_description;
-        $input['product_status'] = $request->product_status;
-        $input['product_price'] = $request->product_price;
-        $input['product_image_id'] = $request->product_image_id;
-        $return = $this->product->create($input);
-
-        $details['brand_id'] = $request->brand_id;
-        $details['category_id'] = $request->category_id;
-        $details['sub_category_id'] = $request->sub_category_id;
-        $details['product_id'] = $return->id;
-        $this->product_details->create($details);
+        $product = new Product();
+        $product->pro_code = $request->pro_code;
+        $product->pro_title = $request->pro_title;
+        $product->brand_id = $request->brand_id;
+        $product->pro_description = $request->pro_description;
+        $product->pro_status = $request->pro_status;
+        $product->category_id = $request->category_id;
+        $product->pro_price = $request->pro_price;
+        $product->pro_image_id = $request->pro_image_id;
+        $product->save();
 
         DB::commit();
 

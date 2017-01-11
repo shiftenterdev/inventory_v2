@@ -15,12 +15,12 @@ class CategoryController extends Controller
 
     public function get_index()
     {
-        $categories = Category::all();
+        $categories = Category::with('parent')->get();
         foreach ($categories as $c) {
-            if ($c->cat_parent_id == '-1') {
-                $c->parent = '-';
-            } else {
-                $c->parent = Category::where('id', $c->cat_parent_id)->pluck('cat_title');
+            if ($c->parent) {
+                $c->full_category = $c->parent->cat_title.' > '.$c->cat_title;
+            }else{
+                $c->full_category = $c->cat_title;
             }
         }
 

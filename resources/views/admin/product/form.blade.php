@@ -1,5 +1,6 @@
 <form class="form-horizontal" method="post" action="product/create">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
     <div class="form-group">
         <label class="col-lg-2 control-label">Title</label>
 
@@ -24,6 +25,7 @@
 
     <div class="form-group">
         <label class="col-lg-2 control-label">Status</label>
+
         <div class="col-lg-10">
             <div class="radio">
                 <label>

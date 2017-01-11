@@ -1,3 +1,4 @@
+$('.select').select2();
 var load = {
     on:function(){
         $('.waiting').show();

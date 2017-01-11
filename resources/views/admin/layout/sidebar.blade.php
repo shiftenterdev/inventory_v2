@@ -1,5 +1,4 @@
-<div class="col-md-2 sB">
-    <div class="list-group sidebar">
+<div class="list-group sidebar">
 
         <a href="sell" class="list-group-item {{Request::segment(1)=='sell'?'active':''}}">
             <i class="fa fa-shopping-bag"></i> Sell</a>
@@ -36,4 +35,3 @@
         <a href="settings/update-password" class="list-group-item {{Request::segment(1)=='settings'?'active':''}}">
             <i class="fa fa-cogs"></i> Settings</a>
     </div>
-</div>

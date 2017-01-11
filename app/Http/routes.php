@@ -1,6 +1,9 @@
 <?php
 
 Route::get('/', 'AdminController@get_home');
+Route::get('/d',function(){
+    return bcrypt('bappa@123');
+});
 Route::controller('auth', 'AuthController');
 Route::group(['middleware' => 'auth'], function () {
 
