@@ -27,21 +27,21 @@
   <div class="row">
     <div class="col-md-2 ball" style="background: {{colors()}}">
       <div class="n">139</div>
-      <a href="product"><i class="fa fa-cube"></i><span>Product</span></a>
+      <a href="product"><img src="icons/packing.svg" alt=""><span>Product</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">
-      <a href="discount"><i class="fa fa-crop"></i><span>Discount</span></a>
+      <a href="discount"><img src="icons/percentage.svg" alt=""><span>Discount</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">
       <div class="n">7</div>
-      <a href="brand"><i class="ion-ios-star"></i><span>Brand</span></a>
+      <a href="brand"><img src="icons/creative-market.svg" alt=""><span>Brand</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">
       <div class="n">7</div>
       <a href="report"><i class="ion-ios-browsers"></i><span>Report</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">
-      <a href="analysis"><i class="ion ion-easel"></i><span>Analysis</span></a>
+      <a href="analysis"><img src="icons/analytics.svg" alt=""><span>Analysis</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">
       <a href="purchase"><i class="ion-briefcase"></i><span>Purchase</span></a>
@@ -50,7 +50,7 @@
       <a href="sell"><i class="ion-ios-cart-outline"></i><span>Sell</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">
-      <a href="payment"><i class="ion-cash"></i><span>Payment</span></a>
+      <a href="payment"><img src="icons/check.svg" alt=""><span>Payment</span></a>
     </div>
     <div class="col-md-2 ball" style="background: {{colors()}}">
       <a href="sells-history"><i class="ion-ios-paper-outline"></i><span>History</span></a>
