@@ -2,7 +2,6 @@
 
 
 @section('content')
-    <div class="col-md-9 mB">
         <ul class="breadcrumb">
             <li><a href="#">Home</a></li>
             <li class="active">Product</li>
@@ -13,77 +12,63 @@
             <table>
                 <tr>
                     <td>Name</td>
-                    <td> : <strong>{{$customer->customer_name}}</strong></td>
+                    <td> : <strong>{{$invoice->customer->customer_name}}</strong></td>
                 </tr>
                 <tr>
                     <td>Address</td>
-                    <td> : <strong>{{$customer->customer_address}}</strong></td>
+                    <td> : <strong>{{$invoice->customer->customer_address}}</strong></td>
                 </tr>
                 <tr>
                     <td>Phone</td>
-                    <td> : <strong>{{$customer->customer_phone}}</strong></td>
+                    <td> : <strong>{{$invoice->customer->customer_phone}}</strong></td>
                 </tr>
             </table>
             <br>
             <h5>Product Details</h5>
 
-            <form action="sell/store" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <table class="table table-striped table-bordered">
-                    <thead>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>SL</th>
+                    <th>Product Info</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th width="20%">Total Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php $total = 0; ?>
+                @foreach($invoice->details as $k => $p)
                     <tr>
-                        <th>SL</th>
-                        <th>Product Info</th>
-                        <th>Quantity</th>
-                        <th>Unit Price</th>
-                        <th width="20%">Total Price</th>
+                        <td>{{$k+1}}</td>
+                        <td>{{$p->product->pro_title}}</td>
+                        <td class="text-center">{{$p->quantity}}</td>
+                        <td class="text-right">{{money($p->product->pro_price)}}</td>
+                        <td class="text-right">{{money($p->product->pro_price * $p->quantity)}}</td>
+                        <?php $total += $p->product->pro_price * $p->quantity ?>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <?php $total = 0; ?>
-                    @foreach($products as $k => $p)
-                        <tr>
-                            <td>{{$k+1}}</td>
-                            <td>{{$p->pro_title}}</td>
-                            <td>{{$p->pro_quantity}}</td>
-                            <td>{{$p->pro_price}}</td>
-                            <td>{{$p->pro_price * $p->pro_quantity}}</td>
-                            <?php $total += $p->pro_price * $p->pro_quantity ?>
-                        </tr>
-                    @endforeach
-                    <tr>
-                        <th colspan="4" class="text-right">Net Total</th>
-                        <th class="total">{{$total}}</th>
-                    </tr>
-                    <tr>
-                        <th colspan="4" class="text-right">Sales Tax (%)</th>
-                        <th><input type="text" class="form-control input-sm s-t" name="sells_discount"
-                                   placeholder="5.00"></th>
-                    </tr>
-                    <tr>
-                        <th colspan="4" class="text-right ">Payment Option</th>
-                        <th>
-                            <select name="payment_option" class="form-control input-sm" required>
-                                <option value="">Payment Option</option>
-                                <option value="CARD">CARD</option>
-                                <option value="CASH">CASH</option>
-                            </select>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="4" class="text-right">Gross Total</th>
-                        <th class="g-t">{{$total}}</th>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="text-center">
-                    <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-bag"></i> Confirm Sell
-                    </button>
-            </form>
+                @endforeach
+                <tr>
+                    <td colspan="4" class="text-right">Net Total</td>
+                    <td class="total text-right">{{money($total)}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-right">Delivery Charge</td>
+                    <td class="total text-right">{{$invoice->delivery_charge}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-right">Tax</td>
+                    <td class="total text-right">{{$invoice->tax}}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" class="text-right">Gross Total</td>
+                    <td class="g-t text-right">{{money($total + $invoice->delivery_charge + $invoice->tax/100*$total)}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div style="margin-bottom: 150px"></div>
-    </div>
-    </div>
 
 @endsection
 

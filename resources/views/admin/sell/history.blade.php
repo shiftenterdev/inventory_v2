@@ -33,7 +33,7 @@
                         <td>{{$s->payment_option}}</td>
                         <td>{{date('d F, Y',strtotime($s->updated_at))}}</td>
                         <td>
-                            <a href="sell/view/{{$s->invoice_id}}" class="btn btn-sm btn-success"><i
+                            <a href="sell/show/{{$s->invoice_no}}" class="btn btn-sm btn-success"><i
                                         class="fa fa-file-text"></i></a>
                         </td>
                     </tr>

@@ -41,6 +41,15 @@ class SellController extends Controller
 
     }
 
+    public function get_show($invoice_no)
+    {
+        $invoice = Invoice::with('details.product','customer')
+            ->where('invoice_no',$invoice_no)
+            ->first();
+//        dd($invoice);
+        return view('admin.sell.invoice',compact('invoice'));
+    }
+
     public function get_new($invoice_no)
     {
 

@@ -8,4 +8,9 @@ class InvoiceProduct extends Model
 {
     protected $table = 'invoice_product';
     protected $guarded = [];
+
+    public function product()
+    {
+        return $this->hasOne(Product::class,'id','product_id');
+    }
 }
