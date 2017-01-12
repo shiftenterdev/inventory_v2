@@ -13,12 +13,13 @@
                 <a href="product/create" class="btn btn-sm btn-primary nB pull-right"><i class="fa fa-plus"></i> New
                     Product</a>
             </legend>
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Code</th>
                     <th>Title</th>
                     <th>Category</th>
+                    <th>Brand</th>
                     <th>Price</th>
                     <th>Status</th>
                     <th width="10%">Action</th>
@@ -27,11 +28,12 @@
                 <tbody>
                 @foreach($products as $p)
                     <tr>
-                        <td>{{$p->product_code}}</td>
-                        <td>{{$p->product_title}}</td>
-                        <td>{{$p->details->category->cat_title}}</td>
-                        <td>{{$p->product_price}}</td>
-                        <td>{{$p->product_status==1?'Active':'Inactive'}}</td>
+                        <td>{{$p->pro_code}}</td>
+                        <td>{{$p->pro_title}}</td>
+                        <td>{{$p->category->cat_title}}</td>
+                        <td>{{$p->brand->brand_title}}</td>
+                        <td>{{$p->pro_price}}</td>
+                        <td>{{$p->pro_status==1?'Active':'Inactive'}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="product/edit/{{$p->id}}" class="btn btn-sm btn-warning"><i

@@ -1,4 +1,4 @@
-$('.select').select2();
+$('.select').selectize();
 var load = {
     on:function(){
         $('.waiting').show();
@@ -134,23 +134,7 @@ $('.parSubCat').on('change', function() {
 /**
  * Add product for sell
  */
-$('#productList').on('change','#pro_code', function() {
-    // e.preventDefault();
-    if($(this).val()!==''){
-        load.on();
-        var product = {
-            pro_code : $(this).val(),
-            _token : $('meta[name="csrf-token"]').attr('content')
-        };
 
-        $.post('ajax/sell-list',product).done(function(result){
-            $('.spo').val('');
-            $('#productList').load('sell/product-list',function(){
-                load.off();
-            });
-        });
-    }
-});
 
 /**
  * Increase decrease product update
@@ -182,15 +166,6 @@ $('body').on('change','.bpo', function(e) {
 /**
  * remove product form append[session] list
  */
-$('body').on('click','.rSI',function(){
-    load.on();
-    var v = $(this).data('key');
-    $.get('ajax/remove-sell-product/'+v).done(function(result){
-        $('#productList').load('sell/product-list',function(){
-            load.off();
-        });
-    });
-});
 
 /**
  * remove product form append[session] list
@@ -269,21 +244,6 @@ $('body .print').on('click',function(){
 $("body").on('click','.pq-s',function () {
    $(this).select();
 });
-$('#productList').on('change','.pq-s',function(){
-    load.on();
-    if($(this).val()<1){
-        $(this).val(1);
-    }
-    sProductUpdate($(this).val(),$(this).data('code'));
-});
-
-var sProductUpdate = function(q,code){
-    $.get('ajax/sell-pro-update/'+q+'/'+code).done(function(){
-        $('#productList').load('sell/product-list',function(){
-            load.off();
-        });
-    });
-}
 
 /**
  * Quantity add / sub for purchase

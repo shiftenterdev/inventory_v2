@@ -93,7 +93,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group hidden">
                     <label class="col-lg-2 control-label">Image</label>
 
 

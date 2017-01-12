@@ -94,5 +94,79 @@
                 alert('Please enter customer phone number.');
             }
         });
+
+        $('#productList').on('change','#pro_code', function() {
+            // e.preventDefault();
+            if($(this).val()!==''){
+                load.on();
+                var product = {
+                    pro_code : $(this).val(),
+                    _token : $('meta[name="csrf-token"]').attr('content')
+                };
+
+                $.post('sell/add-product',product).done(function(result){
+                    $('.spo').val('');
+                    $('#productList').load('sell/product-list',function(){
+                        $('.select').selectize();
+                        load.off();
+                    });
+                });
+            }
+        });
+
+        $('#productList').on('click','.rSI',function(){
+            load.on();
+            var v = $(this).data('code');
+            $.get('sell/remove-product/'+v).done(function(result){
+                $('#productList').load('sell/product-list',function(){
+                    $('.select').selectize();
+                    load.off();
+                });
+            });
+        });
+
+        $('#productList').on('change','.pq-s',function(){
+            load.on();
+            var v = $(this).data('code');
+            var q = $(this).val();
+            $.get('sell/update-product/'+v+'/'+q).done(function(result){
+                $('#productList').load('sell/product-list',function(){
+                    $('.select').selectize();
+                    load.off();
+                });
+            });
+        });
+
+        $('#productList').on('change','.pd-s',function(){
+            load.on();
+            var v = $(this).data('code');
+            var q = $(this).val();
+            $.get('sell/discount-product/'+v+'/'+q).done(function(result){
+                $('#productList').load('sell/product-list',function(){
+                    $('.select').selectize();
+                    load.off();
+                });
+            });
+        });
+        $('#productList').on('change','.tax',function(){
+            load.on();
+            var q = $(this).val();
+            $.get('sell/add-tax/'+q).done(function(result){
+                $('#productList').load('sell/product-list',function(){
+                    $('.select').selectize();
+                    load.off();
+                });
+            });
+        });
+        $('#productList').on('change','.dc',function(){
+            load.on();
+            var q = $(this).val();
+            $.get('sell/add-charge/'+q).done(function(result){
+                $('#productList').load('sell/product-list',function(){
+                    $('.select').selectize();
+                    load.off();
+                });
+            });
+        });
     </script>
 @endsection

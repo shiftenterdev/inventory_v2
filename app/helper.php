@@ -6,3 +6,13 @@ function colors()
 
     return $color[rand(0, 10)];
 }
+
+function money($amount)
+{
+    return number_format($amount,2);
+}
+
+function title($text)
+{
+    return ucwords($text);
+}

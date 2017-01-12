@@ -4,58 +4,66 @@
             <thead>
             <tr class="t-imp">
                 <th>Sl</th>
-                <th>Product Code</th>
-                <th>Title</th>
+                <th>Product</th>
                 <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th width="5%">Quantity</th>
+                <th width="8%">Discount</th>
+                <th width="10%">Total</th>
             </tr>
             </thead>
             <tbody>
-            <?php setlocale(LC_MONETARY, 'en_IN');?>
             <?php $total = 0;?>
             @if(!empty($temp_pro))
                 @foreach($temp_pro as $k => $p)
                     <tr>
                         <td>{{$k+1}}</td>
                         <td>
-                            {{$p->pro_code}}
-                            <a href="javascript:" class="text-danger confirm rSI" data-key="{{$k}}"><i
-                                        class="fa fa-times"></i></a>
+                            {{title($p->product->pro_title)}} [{{$p->product->pro_code}}]
+                            <small>
+                                <a href="javascript:" class="confirm rSI red" data-code="{{$p->product->pro_code}}">
+                                    <i class="fa fa-times"></i> Remove</a>
+                            </small>
                         </td>
-                        <td>{{$p->pro_title}}</td>
-                        <td>{{money_format('%!i',$p->pro_price)}}</td>
+                        <td>{{money($p->product->pro_price)}}</td>
                         <td>
-                            <input type="text" class="input-sm num pq-s" data-code="{{$p->pro_code}}"
-                                   style="width:40px;text-align: center" value="{{$p->pro_quantity}}">
+                            <input type="text" class="input-sm form-control num pq-s small" data-code="{{$p->product->pro_code}}"
+                                    value="{{$p->quantity}}">
                         </td>
-                        <td>{{money_format('%!i',($p->pro_quantity * $p->pro_price))}}</td>
+                        <td>
+                            <input type="text" class="input-sm form-control num pd-s small" data-code="{{$p->product->pro_code}}"
+                                    value="{{$p->discount}}">
+                        </td>
+                        <td>{{money($p->quantity * ($p->product->pro_price - $p->discount))}}</td>
                     </tr>
-                    <?php $total += $p->pro_quantity * $p->pro_price?>
+                    <?php $total += $p->quantity * ($p->product->pro_price - $p->dicount)?>
                 @endforeach
             @endif
             <tr>
                 <td>#</td>
-                <td>
-                    <select name="pro_code" id="pro_code" class="form-control input-sm spo">
+                <td colspan="5">
+                    <select name="pro_code" id="pro_code" class="form-control input-sm spo select">
                         <option value="">Select</option>
                         @foreach($products as $p)
-                            <option value="{{$p->pro_code}}">{{$p->pro_code}}</option>
+                            <option value="{{$p->pro_code}}">{{$p->pro_title}} [{{$p->pro_code}}]</option>
                         @endforeach
                     </select>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
             </tr>
             </tbody>
             <tfooter>
-                <tr class="t-imp">
+                <tr>
+                    <td colspan="5" class="text-right">Delivery Charge</td>
+                    <td><input type="text" class="small form-control dc" value="{{session('charge')}}"></td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="text-right">TAX(%)</td>
+                    <td><input type="text" class="small form-control tax" value="{{session('tax')}}"></td>
+                </tr>
 
-                    <th colspan="5" class="text-right">Net Total :</th>
-                    <th colspan="1">{{money_format('%!i', $total)}}</th>
+                <tr>
+
+                    <td colspan="5" class="text-right">Net Total :</td>
+                    <td colspan="1">{{money($total)}}</td>
                 </tr>
             </tfooter>
         </table>

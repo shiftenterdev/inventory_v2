@@ -125,25 +125,24 @@ a.nB {
 textarea {
     resize: none;
 }
-
-textarea:focus,
-textarea.form-control:focus,
-input.form-control:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus,
-.form-control[type="text"]:focus,
-.form-control[type="password"]:focus,
-.form-control[type="email"]:focus,
-.form-control[type="tel"]:focus,
-.form-control[contenteditable]:focus {
-    box-shadow: 0px -2px 0px #673AB7 inset;
+.form-control{
+    height: 34px;
+    padding: 6px 10px;
+    border-radius: 2px;
+    box-shadow: none;
+    border:1px solid #ddd;
+}
+.form-control:focus{
+    box-shadow: none;
+    border-color: teal;
 }
 
-select:focus,
-select.form-control:focus {
-    box-shadow: 0px -2px 0px #673AB7 inset;
+.btn{
+    padding: 6px 10px;
+}
+
+.btn-sm{
+    padding: 3px 8px;
 }
 
 .waiting {
@@ -517,15 +516,25 @@ table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .
     padding:5px;   
 }
 .select2-container--default .select2-selection--single{
-    border: 0;
-    border-bottom: 1px solid #ddd;
-    border-radius:0;
-    font-size: 16px;
+    border-radius: 2px;
+    border:1px solid #ddd;
     height: 34px;
 }
 .select2-container .select2-selection--single .select2-selection__rendered{
-    padding-left: 0;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered{
     line-height: 34px;
+}
+
+.small{
+    height: 28px;
+    padding: 2px 6px;
+    text-align: center;
+    display: inline-block;
+}
+.red{
+    color: red;
+}
+.form-horizontal .control-label{
+    padding-top: 9px;
 }

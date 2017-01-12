@@ -8,7 +8,8 @@
     <link rel="icon" type="image/png" href="shop.png">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="admin/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css">
     <link rel="stylesheet" href="admin/css/bb.css">
     <link rel="stylesheet" href="admin/css/font-awesome.min.css">
     <link rel="stylesheet" href="admin/css/ionicons.min.css">
@@ -33,7 +34,7 @@
     @section('script')
         <script src="admin/js/jquery.min.js"></script>
         <script src="admin/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js"></script>
         <script src="admin/js/bb.js"></script>
         <script src="admin/js/custom.js"></script>
     @show

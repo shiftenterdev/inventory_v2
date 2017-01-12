@@ -18,4 +18,9 @@ class Product extends Model
         return $this->hasOne(Category::class,'id','category_id');
     }
 
+    public function brand()
+    {
+        return $this->hasOne(Brand::class,'id','brand_id');
+    }
+
 }

@@ -13,18 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    private $product;
-    private $product_details;
-
-    public function __construct(Product $product, ProductDetails $product_details)
-    {
-        $this->product = $product;
-        $this->product_details = $product_details;
-    }
 
     public function get_index()
     {
-        $products = Product::with('details')->get();
+        $products = Product::with('category','brand')->get();
 
         return view('admin.product.index')
             ->with(compact('products'));
@@ -53,7 +45,7 @@ class ProductController extends Controller
         DB::beginTransaction();
 
         $product = new Product();
-        $product->pro_code = $request->pro_code;
+        $product->pro_code = CoreTrait::productCode();
         $product->pro_title = $request->pro_title;
         $product->brand_id = $request->brand_id;
         $product->pro_description = $request->pro_description;
@@ -83,14 +75,14 @@ class ProductController extends Controller
     public function post_update($id, Request $request)
     {
         $input = $request->except('_token');
-        $this->product->where('id', $id)->update($input);
+        Product::where('id', $id)->update($input);
 
         return redirect('/product');
     }
 
     public function get_delete($id)
     {
-        $this->product->destroy($id);
+        Product::destroy($id);
 
         return redirect('product');
     }

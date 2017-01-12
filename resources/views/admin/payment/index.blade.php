@@ -11,8 +11,12 @@
         <fieldset>
             <legend>
                 Payment History
-                <a href="payment/create" class="btn btn-sm btn-primary nB pull-right">
-                    <i class="fa fa-plus"></i> New Payment</a>
+                <div class="pull-right">
+                    <a href="payment/create" class="btn btn-sm btn-primary nB">
+                        <i class="fa fa-plus"></i> New Payment</a>
+                    <a href="payment/history" class="btn btn-sm btn-warning">History</a>
+                </div>
+
             </legend>
             <table class="table">
                 <thead>

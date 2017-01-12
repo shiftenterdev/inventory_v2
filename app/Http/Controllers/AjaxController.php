@@ -104,12 +104,7 @@ class AjaxController extends Controller
         return 1;
     }
 
-    public function get_remove_sell_product($id)
-    {
-        $this->ajaxRepository->removeProduct('sell_items', $id);
 
-        return 1;
-    }
 
     public function get_remove_buy_product($id)
     {
