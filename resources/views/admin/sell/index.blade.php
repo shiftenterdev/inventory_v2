@@ -11,11 +11,9 @@
             <legend>
                 Customer Info
             </legend>
-            <form action="sell/save-invoice" id="customerForm" class="form-horizontal">
+            <form action="sell/save-invoice" method="post" id="customerForm" class="form-horizontal">
                 <div class="row">
-
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                    {{csrf_field()}}
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Name</label>

@@ -27,7 +27,7 @@
                 <tbody>
                 @foreach($sells as $s)
                     <tr>
-                        <td>{{$s->invoice_id}}</td>
+                        <td>{{$s->invoice_no}}</td>
                         <td>{{$s->customer_id}}</td>
                         <td>{{$s->customer->customer_name}}</td>
                         <td>{{$s->payment_option}}</td>

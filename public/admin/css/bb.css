@@ -457,7 +457,8 @@ ribbon end
     text-align: center;
 }
 .homcon .row .ball{
-    background: #3498db;
+    background: #fff;
+    border: 2px solid red;
     border-radius: 10%;
     height: 100px;
     width:100px;
@@ -471,6 +472,11 @@ ribbon end
 .homcon .row .ball i{
     font-size: 50px;
     line-height: 50px;
+    color:teal;
+}
+.homcon .row .ball img{
+    font-size: 50px;
+    height: 50px;
     color:white;
 }
 .homcon .row .ball span{
@@ -498,7 +504,7 @@ ribbon end
     background: red;
     min-width: 25px;
     height: 25px;
-    border-radius: 25px;
+    border-radius: 5px;
     color: #fff;
     top: 0;
     right: 0;
@@ -507,6 +513,7 @@ ribbon end
     font-weight: 700;
     text-align: center;
     padding: 0 3px;
+    line-height: 25px;
 }
 a.rSI,a.rBI{
     color:#e51c23;

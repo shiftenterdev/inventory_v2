@@ -25,52 +25,52 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="homcon">
   <div class="row">
-    <div class="col-md-2 ball" style="background: {{colors()}}">
+    <div class="col-md-2 ball">
       <div class="n">139</div>
       <a href="product"><img src="icons/packing.svg" alt=""><span>Product</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
+    <div class="col-md-2 ball">
       <a href="discount"><img src="icons/percentage.svg" alt=""><span>Discount</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
+    <div class="col-md-2 ball">
       <div class="n">7</div>
       <a href="brand"><img src="icons/creative-market.svg" alt=""><span>Brand</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
+    <div class="col-md-2 ball">
       <div class="n">7</div>
-      <a href="report"><i class="ion-ios-browsers"></i><span>Report</span></a>
+      <a href="report"><img src="icons/line-chart.svg" alt=""><span>Report</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
+    <div class="col-md-2 ball">
       <a href="analysis"><img src="icons/analytics.svg" alt=""><span>Analysis</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
-      <a href="purchase"><i class="ion-briefcase"></i><span>Purchase</span></a>
+    <div class="col-md-2 ball">
+      <a href="purchase"><img src="icons/buy.svg" alt=""><span>Purchase</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
-      <a href="sell"><i class="ion-ios-cart-outline"></i><span>Sell</span></a>
+    <div class="col-md-2 ball">
+      <a href="sell"><img src="icons/sell.svg" alt=""><span>Sell</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
+    <div class="col-md-2 ball">
       <a href="payment"><img src="icons/check.svg" alt=""><span>Payment</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
-      <a href="sells-history"><i class="ion-ios-paper-outline"></i><span>History</span></a>
+    <div class="col-md-2 ball">
+      <a href="sells-history"><img src="icons/order.svg" alt=""><span>History</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
+    <div class="col-md-2 ball">
       <div class="n">23</div>
-      <a href="stock"><i class="fa fa-cubes"></i><span>Stock</span></a>
+      <a href="stock"><img src="icons/warehouse.svg" alt=""><span>Stock</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
-      <a href="refund"><i class="ion-ios-redo"></i><span>Refund</span></a>
+    <div class="col-md-2 ball">
+      <a href="refund"><img src="icons/money-refund.svg" alt=""><span>Refund</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
+    <div class="col-md-2 ball">
       <a href="customer"><i class="ion-android-people"></i><span>Customer</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
-      <a href="settings"><i class="fa fa-cogs"></i><span>Setting</span></a>
+    <div class="col-md-2 ball">
+      <a href="settings"><img src="icons/settings.svg" alt=""><span>Setting</span></a>
     </div>
-    <div class="col-md-2 ball" style="background: {{colors()}}">
+    <div class="col-md-2 ball">
       <div class="n">23</div>
-      <a href="user"><i class="fa fa-users"></i><span>User</span></a>
+      <a href="user"><img src="icons/users.svg" alt=""><span>User</span></a>
     </div>
   </div>
 </div>

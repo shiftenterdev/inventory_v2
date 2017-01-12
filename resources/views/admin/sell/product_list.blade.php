@@ -41,7 +41,7 @@
             <tr>
                 <td>#</td>
                 <td colspan="5">
-                    <select name="pro_code" id="pro_code" class="form-control input-sm spo select">
+                    <select id="pro_code" class="form-control input-sm spo select">
                         <option value="">Select</option>
                         @foreach($products as $p)
                             <option value="{{$p->pro_code}}">{{$p->pro_title}} [{{$p->pro_code}}]</option>
