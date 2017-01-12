@@ -32,7 +32,7 @@
                         <td>{{$p->pro_title}}</td>
                         <td>{{$p->category->cat_title}}</td>
                         <td>{{$p->brand->brand_title}}</td>
-                        <td>{{$p->pro_price}}</td>
+                        <td>{{money($p->pro_price)}}</td>
                         <td>{{$p->pro_status==1?'Active':'Inactive'}}</td>
                         <td>
                             <div class="btn-group">

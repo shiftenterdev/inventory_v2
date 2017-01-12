@@ -24,16 +24,16 @@
                                     <i class="fa fa-times"></i> Remove</a>
                             </small>
                         </td>
-                        <td>{{money($p->product->pro_price)}}</td>
+                        <td class="text-right">{{money($p->product->pro_price)}}</td>
                         <td>
-                            <input type="text" class="input-sm form-control num pq-s small" data-code="{{$p->product->pro_code}}"
+                            <input type="text" class="input-sm form-control num pq-s small select-text" data-code="{{$p->product->pro_code}}"
                                     value="{{$p->quantity}}">
                         </td>
                         <td>
-                            <input type="text" class="input-sm form-control num pd-s small" data-code="{{$p->product->pro_code}}"
+                            <input type="text" class="input-sm form-control num pd-s small select-text" data-code="{{$p->product->pro_code}}"
                                     value="{{$p->discount}}">
                         </td>
-                        <td>{{money($p->quantity * ($p->product->pro_price - $p->discount))}}</td>
+                        <td class="text-right">{{money($p->quantity * ($p->product->pro_price - $p->discount))}}</td>
                     </tr>
                     <?php $total += $p->quantity * ($p->product->pro_price - $p->dicount)?>
                 @endforeach
@@ -53,22 +53,23 @@
             <tfooter>
                 <tr>
                     <td colspan="5" class="text-right">Delivery Charge</td>
-                    <td><input type="text" class="small form-control dc" value="{{session('charge')}}"></td>
+                    <td><input type="text" class="small form-control dc select-text" value="{{$invoice->delivery_charge}}"></td>
                 </tr>
                 <tr>
                     <td colspan="5" class="text-right">TAX(%)</td>
-                    <td><input type="text" class="small form-control tax" value="{{session('tax')}}"></td>
+                    <td><input type="text" class="small form-control tax select-text" value="{{$invoice->tax}}"></td>
                 </tr>
 
                 <tr>
 
                     <td colspan="5" class="text-right">Net Total :</td>
-                    <td colspan="1">{{money($total)}}</td>
+                    <td colspan="1" class="text-right">{{money($total+$invoice->delivery_charge+$invoice->tax/100*$total)}}</td>
                 </tr>
             </tfooter>
         </table>
         <div class="text-center">
-            <a href="javascript:" class="btn btn-primary sell-invoice"><i class="fa fa-print"></i> Invoice</a>
+            <button type="submit" class="btn btn-primary">Save Invoice</button>
+            {{--<a href="javascript:" class="btn btn-primary sell-invoice"><i class="fa fa-print"></i> Invoice</a>--}}
         </div>
 
     </div>

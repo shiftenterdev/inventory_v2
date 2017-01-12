@@ -5,6 +5,7 @@ namespace app\Repo;
 use App\Models\Customer;
 use App\Models\Image;
 use App\Models\Category;
+use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Sell;
 
@@ -65,12 +66,14 @@ trait CoreTrait
 
     public static function SellInvoiceId()
     {
-        $invoice_id = Sell::orderBy('id', 'desc')->pluck('invoice_id');
+        $invoice_id = Invoice::where('is_locked',0)
+            ->orderBy('id', 'desc')->pluck('invoice_no');
         if (empty($invoice_id)) {
-            $invoice_id = 'IS-1000001';
-        } else {
-            $invoice_id = str_replace('IS-', '', $invoice_id);
-            $invoice_id = 'IS-'.($invoice_id + 1);
+            $new = Invoice::orderBy('id','desc')->pluck('invoice_no');
+            if(empty($new)){
+                return 600000;
+            }
+            return $new+1;
         }
 
         return $invoice_id;

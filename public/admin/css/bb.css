@@ -126,8 +126,9 @@ textarea {
     resize: none;
 }
 .form-control{
-    height: 34px;
-    padding: 6px 10px;
+    height: 30px;
+    font-size: 12px;
+    padding: 4px 8px;
     border-radius: 2px;
     box-shadow: none;
     border:1px solid #ddd;
@@ -489,7 +490,6 @@ ribbon end
 } 
 .t-img{
     border-radius: 0;
-    border:2px solid #efefef;
     width: 40px;
     height: auto;
 }
@@ -526,6 +526,10 @@ table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .
     line-height: 34px;
 }
 
+.selectize-input{
+    border-radius: 2px;
+}
+
 .small{
     height: 28px;
     padding: 2px 6px;
@@ -536,5 +540,9 @@ table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .
     color: red;
 }
 .form-horizontal .control-label{
-    padding-top: 9px;
+    padding-top: 8px;
+    font-size: 12px;
+}
+.table{
+    font-size: 12px;
 }

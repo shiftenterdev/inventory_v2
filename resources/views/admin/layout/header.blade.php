@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
-                    <button type="submit" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn btn-info"><i class="fa fa-search"></i> Search</button>
                 </form>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

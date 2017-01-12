@@ -19,8 +19,11 @@
                     <label class="col-lg-2 control-label">Product</label>
 
                     <div class="col-lg-8">
-                        <select name="pro_id" class="form-control parProduct">
+                        <select name="pro_id" class="form-control parProduct select">
                             <option value="">Product</option>
+                            @foreach($products as $p)
+                                <option value="{{$p->pro_code}}">{{$p->pro_title}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -36,6 +39,14 @@
 
                     <div class="col-lg-8">
                         <input class="form-control" placeholder="Price" type="text" name="pro_price">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Reference</label>
+
+                    <div class="col-lg-8">
+                        <input class="form-control" placeholder="Reference" type="text" name="reference">
                     </div>
                 </div>
 

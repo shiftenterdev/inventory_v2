@@ -18,7 +18,7 @@
                     <label class="col-lg-2 control-label">Parent</label>
 
                     <div class="col-lg-6">
-                        <select name="cat_parent_id" class="form-control">
+                        <select name="cat_parent_id" class="form-control select">
                             <option value="">Select</option>
                             <option value="-1">No Parent</option>
                             @foreach($categories as $c)

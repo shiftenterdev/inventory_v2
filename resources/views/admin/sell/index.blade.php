@@ -11,9 +11,9 @@
             <legend>
                 Customer Info
             </legend>
+            <form action="sell/save-invoice" id="customerForm" class="form-horizontal">
+                <div class="row">
 
-            <div class="row">
-                <form action="javascript:" id="customerForm" class="form-horizontal">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <div class="col-md-6">
@@ -21,7 +21,7 @@
                             <label class="col-lg-3 control-label">Name</label>
 
                             <div class="col-lg-8">
-                                <input class="form-control" placeholder="Name" type="text" name="customer_name">
+                                <input class="form-control" placeholder="Name" type="text" name="customer_name" required>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                             <label class="col-lg-3 control-label">Mobile</label>
 
                             <div class="col-lg-6">
-                                <input type="text" name="customer_phone" class="form-control" placeholder="Mobile">
+                                <input type="text" name="customer_phone" class="form-control" placeholder="Mobile" required>
                             </div>
                             <div class="col-lg-2">
                                 <button class="btn btn-primary check-customer" type="button"><i
@@ -43,7 +43,7 @@
                             <label class="col-lg-3 control-label">Address</label>
 
                             <div class="col-lg-8">
-                                <input class="form-control" placeholder="Address" type="text" name="customer_address">
+                                <input class="form-control" placeholder="Address" type="text" name="customer_address" required>
                             </div>
                         </div>
                     </div>
@@ -57,14 +57,15 @@
                         </div>
                     </div>
 
-                </form>
-            </div>
-            <legend>
-                Product List
-            </legend>
-            <div id="productList">
-                @include('admin.sell.product_list')
-            </div>
+                </div>
+                <legend>
+                    Product List
+                </legend>
+                <div id="productList">
+                    @include('admin.sell.product_list')
+                </div>
+            </form>
+
 
         </fieldset>
     </div>
@@ -95,18 +96,18 @@
             }
         });
 
-        $('#productList').on('change','#pro_code', function() {
+        $('#productList').on('change', '#pro_code', function () {
             // e.preventDefault();
-            if($(this).val()!==''){
+            if ($(this).val() !== '') {
                 load.on();
                 var product = {
-                    pro_code : $(this).val(),
-                    _token : $('meta[name="csrf-token"]').attr('content')
+                    pro_code: $(this).val(),
+                    _token: $('meta[name="csrf-token"]').attr('content')
                 };
 
-                $.post('sell/add-product',product).done(function(result){
+                $.post('sell/add-product', product).done(function (result) {
                     $('.spo').val('');
-                    $('#productList').load('sell/product-list',function(){
+                    $('#productList').load('sell/product-list', function () {
                         $('.select').selectize();
                         load.off();
                     });
@@ -114,55 +115,55 @@
             }
         });
 
-        $('#productList').on('click','.rSI',function(){
+        $('#productList').on('click', '.rSI', function () {
             load.on();
             var v = $(this).data('code');
-            $.get('sell/remove-product/'+v).done(function(result){
-                $('#productList').load('sell/product-list',function(){
+            $.get('sell/remove-product/' + v).done(function (result) {
+                $('#productList').load('sell/product-list', function () {
                     $('.select').selectize();
                     load.off();
                 });
             });
         });
 
-        $('#productList').on('change','.pq-s',function(){
+        $('#productList').on('change', '.pq-s', function () {
             load.on();
             var v = $(this).data('code');
             var q = $(this).val();
-            $.get('sell/update-product/'+v+'/'+q).done(function(result){
-                $('#productList').load('sell/product-list',function(){
+            $.get('sell/update-product/' + v + '/' + q).done(function (result) {
+                $('#productList').load('sell/product-list', function () {
                     $('.select').selectize();
                     load.off();
                 });
             });
         });
 
-        $('#productList').on('change','.pd-s',function(){
+        $('#productList').on('change', '.pd-s', function () {
             load.on();
             var v = $(this).data('code');
             var q = $(this).val();
-            $.get('sell/discount-product/'+v+'/'+q).done(function(result){
-                $('#productList').load('sell/product-list',function(){
+            $.get('sell/discount-product/' + v + '/' + q).done(function (result) {
+                $('#productList').load('sell/product-list', function () {
                     $('.select').selectize();
                     load.off();
                 });
             });
         });
-        $('#productList').on('change','.tax',function(){
+        $('#productList').on('change', '.tax', function () {
             load.on();
             var q = $(this).val();
-            $.get('sell/add-tax/'+q).done(function(result){
-                $('#productList').load('sell/product-list',function(){
+            $.get('sell/add-tax/' + q).done(function (result) {
+                $('#productList').load('sell/product-list', function () {
                     $('.select').selectize();
                     load.off();
                 });
             });
         });
-        $('#productList').on('change','.dc',function(){
+        $('#productList').on('change', '.dc', function () {
             load.on();
             var q = $(this).val();
-            $.get('sell/add-charge/'+q).done(function(result){
-                $('#productList').load('sell/product-list',function(){
+            $.get('sell/add-charge/' + q).done(function (result) {
+                $('#productList').load('sell/product-list', function () {
                     $('.select').selectize();
                     load.off();
                 });

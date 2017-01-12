@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('purchase', 'PurchaseController');
     Route::controller('refund', 'RefundController');
     Route::controller('payment', 'PaymentController');
+    Route::controller('role', 'RoleController');
 
 });
 

@@ -14,7 +14,7 @@
                 <a href="customer/create" class="btn btn-sm btn-primary nB pull-right">
                     <i class="fa fa-plus"></i> New Customer</a>
             </legend>
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>ID</th>

@@ -13,7 +13,7 @@
                 <a href="category/create" class="btn btn-sm btn-primary nB pull-right"><i class="fa fa-plus"></i> New
                     Category</a>
             </legend>
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Sl.</th>

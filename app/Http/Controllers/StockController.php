@@ -22,7 +22,7 @@ class StockController extends Controller
         $products = Product::get();
 
         return view('admin.stock.index')
-            ->with(compact('categories'));
+            ->with(compact('products'));
     }
 
     /**

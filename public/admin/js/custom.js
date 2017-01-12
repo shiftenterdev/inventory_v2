@@ -248,7 +248,7 @@ $("body").on('click','.pq-s',function () {
 /**
  * Quantity add / sub for purchase
  */
-$("body").on('click','.pq-p',function () {
+$("body").on('click','.select-text',function () {
    $(this).select();
 });
 

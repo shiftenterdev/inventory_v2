@@ -13,7 +13,7 @@
             <legend>
                 Sells History
             </legend>
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Invoice ID</th>

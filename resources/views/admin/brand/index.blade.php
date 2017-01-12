@@ -13,7 +13,7 @@
                 <a href="brand/create" class="btn btn-sm btn-primary nB pull-right">
                     <i class="fa fa-plus"></i> New Brand</a>
             </legend>
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>SL</th>
@@ -26,7 +26,11 @@
                 @foreach($brands as $k => $b)
                     <tr>
                         <td>{{$k+1}}</td>
-                        <td><img src="/uploads/{{$b->logo}}" alt="" class="t-img"></td>
+                        <td>
+                            @if(!empty($b->logo))
+                            <img src="/uploads/{{$b->logo}}" alt="No Image" class="t-img">
+                                @endif
+                        </td>
                         <td>{{$b->brand_title}}</td>
                         <td>
                             <div class="btn-group">
