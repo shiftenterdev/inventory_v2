@@ -5,78 +5,76 @@
         <li><a href="#">Home</a></li>
         <li class="active">Purchase</li>
     </ul>
-    <div class="cN">
-        <fieldset style="margin-bottom: 200px">
-            <legend>
-                Customer Info
-            </legend>
-            <form action="purchase/save" method="post" id="customerForm" class="form-horizontal">
-                {{csrf_field()}}
+    <fieldset style="margin-bottom: 200px">
+        <legend>
+            Customer Info
+        </legend>
+        <form action="purchase/save" method="post" id="customerForm" class="form-horizontal">
+            {{csrf_field()}}
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Mobile</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Mobile</label>
 
-                            <div class="col-lg-8">
-                                <input type="text" name="customer_phone" class="form-control" placeholder="Mobile">
-                            </div>
-                            <div class="col-lg-1">
-                                <button class="btn btn-primary check-customer" type="button"><i
-                                            class="fa fa-search"></i></button>
-                            </div>
+                        <div class="col-lg-8">
+                            <input type="text" name="customer_phone" class="form-control" placeholder="Mobile">
                         </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Name</label>
-
-                            <div class="col-lg-8">
-                                <input class="form-control" placeholder="Name" type="text" name="customer_name">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Email</label>
-
-                            <div class="col-lg-8">
-                                <input type="email" name="customer_email" class="form-control" placeholder="Email">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Address</label>
-
-                            <div class="col-lg-8">
-                                <input class="form-control" placeholder="Address" type="text" name="customer_address">
-                            </div>
+                        <div class="col-lg-1">
+                            <button class="btn btn-primary check-customer" type="button"><i
+                                        class="fa fa-search"></i></button>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="col-lg-3 control-label">Invoice Date</label>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Name</label>
 
-                        <div class="col-lg-6">
-                            <input type="text" name="invoice_date" class="form-control date" placeholder="Date"
-                                   required>
+                        <div class="col-lg-8">
+                            <input class="form-control" placeholder="Name" type="text" name="customer_name">
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Email</label>
 
-                </div>
-                <legend>Product List</legend>
-                <div id="productList">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @include('admin.common.product_list')
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Save Invoice</button>
-                            </div>
+                        <div class="col-lg-8">
+                            <input type="email" name="customer_email" class="form-control" placeholder="Email">
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Address</label>
+
+                        <div class="col-lg-8">
+                            <input class="form-control" placeholder="Address" type="text" name="customer_address">
                         </div>
                     </div>
                 </div>
-                <hr>
-            </form>
-        </fieldset>
-    </div>
+                <div class="col-md-6">
+                    <label class="col-lg-3 control-label">Invoice Date</label>
+
+                    <div class="col-lg-6">
+                        <input type="text" name="invoice_date" class="form-control date" placeholder="Date"
+                               required>
+                    </div>
+                </div>
+
+
+            </div>
+            <legend>Product List</legend>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="productList">
+                        @include('admin.common.product_list')
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Save Invoice</button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </form>
+    </fieldset>
 @endsection
 @section('script')
     @parent

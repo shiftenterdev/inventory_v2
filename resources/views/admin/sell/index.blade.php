@@ -6,7 +6,7 @@
         <li><a href="#">Home</a></li>
         <li class="active">Sell</li>
     </ul>
-    <fieldset>
+    <fieldset style="margin-bottom: 200px">
         <legend>
             Customer Info
         </legend>
@@ -62,14 +62,14 @@
             <legend>
                 Product List
             </legend>
-            <div id="productList">
-                <div class="row">
-                    <div class="col-md-12">
-                        @include('admin.common.product_list')
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Save Invoice</button>
-                        </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="productList">
+                        @include('admin.common.product_list')
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Save Invoice</button>
                     </div>
                 </div>
             </div>

@@ -200,6 +200,7 @@ class SellController extends Controller
 
         $invoice = Invoice::find(session('invoice_id'));
         $invoice->customer_id = $customer->id;
+        $invoice->invoice_date = $request->invoice_date;
         $invoice->is_locked = 1;
         $invoice->type = 'sell';
         $invoice->save();

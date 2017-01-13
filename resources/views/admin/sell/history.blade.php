@@ -20,7 +20,8 @@
                     <th>Customer Mobile</th>
                     <th>Customer Name</th>
                     <th>Payment Opt</th>
-                    <th>Date</th>
+                    <th>Invoice Date</th>
+                    <th>Create Date</th>
                     <th>Invoice</th>
                 </tr>
                 </thead>
@@ -31,7 +32,8 @@
                         <td>{{$s->customer->customer_phone}}</td>
                         <td>{{$s->customer->customer_name}}</td>
                         <td>{{$s->payment_option}}</td>
-                        <td>{{date('d F, Y',strtotime($s->updated_at))}}</td>
+                        <td>{{app_date($s->invoice_date)}}</td>
+                        <td>{{app_date($s->updated_at)}}</td>
                         <td>
                             <a href="sell/show/{{$s->invoice_no}}" class="btn btn-sm btn-success"><i
                                         class="fa fa-file-text"></i></a>

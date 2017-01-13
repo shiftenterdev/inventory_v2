@@ -166,4 +166,40 @@ class PurchaseController extends Controller
         $invoice->delivery_charge = $charge;
         $invoice->save();
     }
+
+    public function post_save_invoice(Request $request)
+    {
+        $invoice_id = session('invoice_id');
+        $temp = TempProduct::where('invoice_id',$invoice_id)->get();
+
+        foreach($temp as $t){
+            $invoice_product = new InvoiceProduct();
+            $invoice_product->invoice_id = session('invoice_id');
+            $invoice_product->product_id = $t->product_id;
+            $invoice_product->quantity = $t->quantity;
+            $invoice_product->discount = $t->discount;
+            $invoice_product->save();
+        }
+
+        $customer = Customer::where('customer_phone',$request->customer_phone)->first();
+        if(empty($customer)){
+            $customer = new Customer();
+            $customer->customer_phone = $request->customer_phone;
+        }
+        $customer->customer_email = $request->customer_email;
+        $customer->customer_address = $request->customer_address;
+        $customer->customer_name = $request->customer_name;
+        $customer->save();
+
+        $invoice = Invoice::find(session('invoice_id'));
+        $invoice->customer_id = $customer->id;
+        $invoice->invoice_date = $request->invoice_date;
+        $invoice->is_locked = 1;
+        $invoice->type = 'purchase';
+        $invoice->save();
+
+        TempProduct::where('invoice_id',$invoice_id)->delete();
+        return redirect('purchase-history');
+
+    }
 }

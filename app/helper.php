@@ -7,6 +7,14 @@ function colors()
     return $color[rand(0, 10)];
 }
 
+function app_date($date='')
+{
+    if(empty($date)){
+        return '';
+    }
+    return date('d-m-Y',strtotime($date));
+}
+
 function money($amount)
 {
     return number_format($amount,2);
