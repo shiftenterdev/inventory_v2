@@ -43,20 +43,35 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="col-lg-2 control-label">Role</label>
+
+                    <div class="col-lg-8">
+                        <select name="role_id" class="form-control select" required>
+                            <option value="">Select Role</option>
+                            @foreach($roles as $r)
+                                <option value="{{$r->id}}" {{$user->role_id == $r->id ?'selected':''}}>{{$r->role}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-lg-2 control-label">Status</label>
 
                     <div class="col-lg-8">
                         <div class="radio">
-                            <label>
-                                <input name="user_status" value="1"
-                                       type="radio" {{$user->user_status=='1'?'checked':''}}>
+                            <input name="user_status" value="1" id="radio1"
+                                   type="radio" {{$user->user_status=='1'?'checked':''}}>
+                            <label for="radio1">
+                                <mark></mark>
                                 Active
                             </label>
                         </div>
                         <div class="radio">
-                            <label>
-                                <input name="user_status" value="2"
-                                       type="radio" {{$user->user_status=='2'?'checked':''}}>
+                            <input name="user_status" value="2" id="radio2"
+                                   type="radio" {{$user->user_status=='2'?'checked':''}}>
+                            <label for="radio2">
+                                <mark></mark>
                                 Inactive
                             </label>
                         </div>

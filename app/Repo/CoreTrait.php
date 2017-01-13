@@ -85,7 +85,9 @@ trait CoreTrait
         $invoice_id = Invoice::where('is_locked',0)
             ->orderBy('id', 'desc')->where('type','purchase')->pluck('invoice_no');
         if (empty($invoice_id)) {
-            $new = Invoice::orderBy('id','desc')->pluck('invoice_no');
+            $new = Invoice::orderBy('id','desc')
+                ->where('type','purchase')
+                ->pluck('invoice_no');
             if(empty($new)){
                 return 800000;
             }

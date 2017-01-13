@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function get_index()
     {
-        $users = User::all();
+        $users = User::with('role')->get();
 
         return view('admin.user.index')
             ->with(compact('users'));
@@ -42,9 +42,10 @@ class UserController extends Controller
     public function get_edit($id)
     {
         $user = User::find($id);
+        $roles = Role::get();
 
         return view('admin.user.edit')
-        ->with(compact('user'));
+        ->with(compact('user','roles'));
     }
 
     public function post_update($id, Request $request)

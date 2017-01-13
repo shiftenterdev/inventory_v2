@@ -62,15 +62,15 @@
 
                     <div class="col-lg-6">
                         <div class="radio">
-                            <input name="method" id="radio1" value="1" checked="" type="radio">
-                            <label for="radio1">
+                            <input name="method" id="radio3" value="1" checked="" type="radio">
+                            <label for="radio3">
                                 <mark></mark>
                                 Cheque
                             </label>
                         </div>
                         <div class="radio">
-                            <input name="method" id="radio2" value="2" type="radio">
-                            <label for="radio2">
+                            <input name="method" id="radio4" value="2" type="radio">
+                            <label for="radio4">
                                 <mark></mark>
                                 Cash
                             </label>
@@ -81,7 +81,7 @@
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Date</label>
                     <div class="col-lg-6">
-                        <input type="date" placeholder="Date" name="date" class="form-control">
+                        <input type="text" placeholder="Date" name="date" class="form-control date">
                     </div>
 
                 </div>

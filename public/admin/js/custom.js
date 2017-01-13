@@ -1,4 +1,10 @@
 $('.select').selectize();
+$('.date').datetimepicker({
+    timepicker:false,
+    format:'Y-m-d',
+    scrollMonth: false,
+    scrollInput: false
+});
 var load = {
     on:function(){
         $('.waiting').show();

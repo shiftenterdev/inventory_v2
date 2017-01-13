@@ -6,78 +6,77 @@
         <li><a href="#">Home</a></li>
         <li class="active">Sell</li>
     </ul>
-    <div class="cN">
-        <fieldset style="margin-bottom: 200px">
+    <fieldset>
+        <legend>
+            Customer Info
+        </legend>
+        <form action="sell/save-invoice" method="post" id="customerForm" class="form-horizontal">
+            <div class="row">
+                {{csrf_field()}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Mobile</label>
+
+                        <div class="col-lg-8">
+                            <input type="text" name="customer_phone" class="form-control" placeholder="Mobile"
+                                   required>
+                        </div>
+                        <div class="col-lg-1">
+                            <button class="btn btn-primary check-customer" type="button"><i
+                                        class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Name</label>
+
+                        <div class="col-lg-8">
+                            <input class="form-control" placeholder="Name" type="text" name="customer_name"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Address</label>
+
+                        <div class="col-lg-8">
+                            <input class="form-control" placeholder="Address" type="text" name="customer_address"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Email</label>
+
+                        <div class="col-lg-8">
+                            <input class="form-control" placeholder="Email" type="text" name="customer_email">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="col-lg-3 control-label">Invoice Date</label>
+
+                    <div class="col-lg-6">
+                        <input type="text" name="invoice_date" class="form-control date" placeholder="Date"
+                               required>
+                    </div>
+                </div>
+            </div>
             <legend>
-                Customer Info
+                Product List
             </legend>
-            <form action="sell/save-invoice" method="post" id="customerForm" class="form-horizontal">
+            <div id="productList">
                 <div class="row">
-                    {{csrf_field()}}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Name</label>
-
-                            <div class="col-lg-8">
-                                <input class="form-control" placeholder="Name" type="text" name="customer_name"
-                                       required>
-                            </div>
+                    <div class="col-md-12">
+                        @include('admin.common.product_list')
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Save Invoice</button>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Mobile</label>
 
-                            <div class="col-lg-6">
-                                <input type="text" name="customer_phone" class="form-control" placeholder="Mobile"
-                                       required>
-                            </div>
-                            <div class="col-lg-2">
-                                <button class="btn btn-primary check-customer" type="button"><i
-                                            class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Address</label>
-
-                            <div class="col-lg-8">
-                                <input class="form-control" placeholder="Address" type="text" name="customer_address"
-                                       required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Email</label>
-
-                            <div class="col-lg-8">
-                                <input class="form-control" placeholder="Email" type="text" name="customer_email">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <legend>
-                    Product List
-                </legend>
-                <div id="productList">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @include('admin.common.product_list')
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Save Invoice</button>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
+        </form>
 
 
-        </fieldset>
-    </div>
+    </fieldset>
 @endsection
 
 @section('script')

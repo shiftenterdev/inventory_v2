@@ -61,7 +61,7 @@ class SellController extends Controller
         $temp_pro = TempProduct::where('type', 'sell')->get();
         $products = Product::get(['pro_code', 'pro_title']);
         $invoice = Invoice::find(session('invoice_id'));
-        return view('admin.sell.product_list')
+        return view('admin.common.product_list')
             ->with(compact('products', 'temp_pro', 'invoice'));
     }
 

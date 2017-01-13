@@ -21,6 +21,7 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Mobile</th>
+                    <th>Role</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -33,6 +34,7 @@
                         <td>{{$u->user_email}}</td>
                         <td>{{$u->user_mobile}}</td>
                         <td>{{$u->user_status==1?'Active':'Inactive'}}</td>
+                        <td>{{ucfirst($u->role->role)}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="user/edit/{{$u->id}}" class="btn btn-sm btn-warning"><i
