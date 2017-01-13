@@ -4,6 +4,7 @@ namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -21,5 +22,13 @@ class RoleController extends Controller
     public function get_create()
     {
         return view('admin.role.create');
+    }
+
+    public function post_store(Request $request)
+    {
+        $role = new Role();
+        $role->role = $request->role;
+        $role->save();
+        return redirect('role');
     }
 }

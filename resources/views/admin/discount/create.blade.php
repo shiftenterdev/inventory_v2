@@ -19,7 +19,7 @@
                     <label class="col-lg-2 control-label">Product</label>
 
                     <div class="col-lg-6">
-                        <select name="product_id" class="form-control">
+                        <select name="product_id" class="form-control select">
                             <option value="">Select</option>
                             @foreach($products as $p)
                                 <option value="{{$p->id}}">{{$p->pro_title}} [{{$p->pro_code}}]</option>

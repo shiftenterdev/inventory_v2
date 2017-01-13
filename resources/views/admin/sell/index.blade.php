@@ -19,7 +19,8 @@
                             <label class="col-lg-3 control-label">Name</label>
 
                             <div class="col-lg-8">
-                                <input class="form-control" placeholder="Name" type="text" name="customer_name" required>
+                                <input class="form-control" placeholder="Name" type="text" name="customer_name"
+                                       required>
                             </div>
                         </div>
                     </div>
@@ -28,7 +29,8 @@
                             <label class="col-lg-3 control-label">Mobile</label>
 
                             <div class="col-lg-6">
-                                <input type="text" name="customer_phone" class="form-control" placeholder="Mobile" required>
+                                <input type="text" name="customer_phone" class="form-control" placeholder="Mobile"
+                                       required>
                             </div>
                             <div class="col-lg-2">
                                 <button class="btn btn-primary check-customer" type="button"><i
@@ -41,7 +43,8 @@
                             <label class="col-lg-3 control-label">Address</label>
 
                             <div class="col-lg-8">
-                                <input class="form-control" placeholder="Address" type="text" name="customer_address" required>
+                                <input class="form-control" placeholder="Address" type="text" name="customer_address"
+                                       required>
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,15 @@
                     Product List
                 </legend>
                 <div id="productList">
-                    @include('admin.sell.product_list')
+                    <div class="row">
+                        <div class="col-md-12">
+                            @include('admin.common.product_list')
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Save Invoice</button>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </form>
 

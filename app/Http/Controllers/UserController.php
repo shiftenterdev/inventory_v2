@@ -3,6 +3,7 @@
 namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class UserController extends Controller
 
     public function get_create()
     {
-        return view('admin.user.create');
+        $roles = Role::get();
+        return view('admin.user.create',compact('roles'));
     }
 
     public function post_store(Request $request)

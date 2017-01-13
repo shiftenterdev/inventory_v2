@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\Category;
 use App\Models\Invoice;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Sell;
 
 trait CoreTrait
@@ -67,7 +68,7 @@ trait CoreTrait
     public static function SellInvoiceId()
     {
         $invoice_id = Invoice::where('is_locked',0)
-            ->orderBy('id', 'desc')->pluck('invoice_no');
+            ->orderBy('id', 'desc')->where('type','sell')->pluck('invoice_no');
         if (empty($invoice_id)) {
             $new = Invoice::orderBy('id','desc')->pluck('invoice_no');
             if(empty($new)){
@@ -81,12 +82,14 @@ trait CoreTrait
 
     public static function PurchaseInvoiceId()
     {
-        $invoice_id = Purchase::orderBy('id', 'desc')->pluck('invoice_id');
+        $invoice_id = Invoice::where('is_locked',0)
+            ->orderBy('id', 'desc')->where('type','purchase')->pluck('invoice_no');
         if (empty($invoice_id)) {
-            $invoice_id = 'IP-1000001';
-        } else {
-            $invoice_id = str_replace('IP-', '', $invoice_id);
-            $invoice_id = 'IP-'.($invoice_id + 1);
+            $new = Invoice::orderBy('id','desc')->pluck('invoice_no');
+            if(empty($new)){
+                return 800000;
+            }
+            return $new+1;
         }
 
         return $invoice_id;

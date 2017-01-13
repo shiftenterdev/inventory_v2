@@ -10,19 +10,10 @@
             <legend>
                 Customer Info
             </legend>
-            <form action="javascript:" id="customerForm" class="form-horizontal">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <form action="purchase/save" method="post" id="customerForm" class="form-horizontal">
+                {{csrf_field()}}
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Name</label>
-
-                            <div class="col-lg-8">
-                                <input class="form-control" placeholder="Name" type="text" name="customer_name">
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Mobile</label>
@@ -36,6 +27,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Name</label>
+
+                            <div class="col-lg-8">
+                                <input class="form-control" placeholder="Name" type="text" name="customer_name">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Address</label>
@@ -57,7 +58,15 @@
                 </div>
                 <legend>Product List</legend>
                 <div id="productList">
-                    @include('admin.buy.product_list')
+                    <div class="row">
+                        <div class="col-md-12">
+                            @include('admin.common.product_list')
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Save Invoice</button>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <hr>
             </form>

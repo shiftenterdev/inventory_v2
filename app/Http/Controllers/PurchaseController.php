@@ -4,7 +4,9 @@ namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Invoice;
 use App\Models\Product;
+use App\Models\TempProduct;
 use App\Repo\CoreTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -15,25 +17,45 @@ class PurchaseController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+
     public function get_index()
     {
-        // Session::forget('purchase_items');
-        $phones = Customer::get(['customer_phone', 'customer_id']);
-        $products = Product::get(['pro_code']);
-        if (Session::has('purchase_items')) {
-            $temp_pro = Session::get('purchase_items');
-            $temp_pro = json_decode(json_encode($temp_pro), false);
-        } else {
-            $temp_pro = 0;
-        }
+        $invoice_no = CoreTrait::PurchaseInvoiceId();
+        return redirect('purchase/new/' . $invoice_no);
 
+        // Session::forget('purchase_items');
+//        $phones = Customer::get(['customer_phone', 'customer_id']);
+//        $products = Product::get(['pro_code']);
+//        if (Session::has('purchase_items')) {
+//            $temp_pro = Session::get('purchase_items');
+//            $temp_pro = json_decode(json_encode($temp_pro), false);
+//        } else {
+//            $temp_pro = 0;
+//        }
+//
+//        return view('admin.buy.index')
+//            ->with(compact('products', 'temp_pro', 'phones'));
+    }
+
+    public function get_new($invoice_no)
+    {
+
+        $invoice = Invoice::where('invoice_no', $invoice_no)->first();
+        if (empty($invoice)) {
+            $invoice = new Invoice();
+            $invoice->invoice_no = $invoice_no;
+            $invoice->delivery_charge = 0;
+            $invoice->tax = 0;
+            $invoice->type = 'purchase';
+            $invoice->is_locked = 0;
+            $invoice->save();
+        }
+        session(['invoice_id' => $invoice->id]);
+        $products = Product::get(['pro_code', 'pro_title']);
+        $temp_pro = TempProduct::with('product')->where('type', 'sell')->get();
+        $invoice = Invoice::find(session('invoice_id'));
         return view('admin.buy.index')
-            ->with(compact('products', 'temp_pro', 'phones'));
+            ->with(compact('products', 'temp_pro','invoice'));
     }
 
     /**

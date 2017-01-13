@@ -20,25 +20,10 @@ class SellController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function get_index()
     {
         $invoice_no = CoreTrait::SellInvoiceId();
         return redirect('sell/new/' . $invoice_no);
-        //Session::forget('sell_items');
-
-//        if (Session::has('sell_items')) {
-//            $temp_pro = Session::get('sell_items');
-//            $temp_pro = json_decode(json_encode($temp_pro), false);
-//        } else {
-//            $temp_pro = 0;
-//        }
-
-
     }
 
     public function get_show($invoice_no)
@@ -46,7 +31,6 @@ class SellController extends Controller
         $invoice = Invoice::with('details.product','customer')
             ->where('invoice_no',$invoice_no)
             ->first();
-//        dd($invoice);
         return view('admin.sell.invoice',compact('invoice'));
     }
 
@@ -71,11 +55,7 @@ class SellController extends Controller
             ->with(compact('products', 'temp_pro','invoice'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+
     public function get_product_list()
     {
         $temp_pro = TempProduct::where('type', 'sell')->get();
@@ -85,11 +65,6 @@ class SellController extends Controller
             ->with(compact('products', 'temp_pro', 'invoice'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
     public function get_invoice()
     {
         $customer = Session::get('sell_customer');
@@ -100,13 +75,6 @@ class SellController extends Controller
             ->with(compact('customer', 'products'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
     public function post_store(Request $request)
     {
         $input = $request->all();
@@ -132,51 +100,23 @@ class SellController extends Controller
             ->with('success', 'Invoice Saved');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
+
     public function history()
     {
         $sells = Invoice::where('type','sell')
             ->where('is_locked',1)
-            ->with('customer','products')->get();
-
-
-
+            ->with('customer','details')->get();
         return view('admin.sell.history')
             ->with(compact('sells'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
     public function get_view($sell_id)
     {
         $result = Sell::with('customer', 'products')->where('invoice_id', $sell_id)->first();
-
         return view('admin.sell.view')
             ->with(compact('result'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function post_add_product(Request $request)
     {
@@ -236,8 +176,6 @@ class SellController extends Controller
 
     public function post_save_invoice(Request $request)
     {
-//        dd($request->all());
-
         $invoice_id = session('invoice_id');
         $temp = TempProduct::where('invoice_id',$invoice_id)->get();
 

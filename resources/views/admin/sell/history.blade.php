@@ -17,7 +17,7 @@
                 <thead>
                 <tr>
                     <th>Invoice ID</th>
-                    <th>Customer ID</th>
+                    <th>Customer Mobile</th>
                     <th>Customer Name</th>
                     <th>Payment Opt</th>
                     <th>Date</th>
@@ -28,7 +28,7 @@
                 @foreach($sells as $s)
                     <tr>
                         <td>{{$s->invoice_no}}</td>
-                        <td>{{$s->customer_id}}</td>
+                        <td>{{$s->customer->customer_phone}}</td>
                         <td>{{$s->customer->customer_name}}</td>
                         <td>{{$s->payment_option}}</td>
                         <td>{{date('d F, Y',strtotime($s->updated_at))}}</td>

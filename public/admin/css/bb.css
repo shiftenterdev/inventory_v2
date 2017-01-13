@@ -553,3 +553,6 @@ table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .
 .table{
     font-size: 12px;
 }
+.navbar-form{
+    margin-top: 13.5px;
+}
