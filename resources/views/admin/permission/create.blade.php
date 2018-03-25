@@ -5,22 +5,23 @@
 
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
-        <li class="active">Role</li>
+        <li class="active">Permission</li>
     </ul>
     <div class="cN">
         <fieldset>
             <legend>
                 Add Role
             </legend>
-            <form action="role/store" class="form-horizontal" method="post">
+            <form action="permission/store" class="form-horizontal" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
+
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Role</label>
+                    <label class="col-lg-2 control-label">Permission</label>
 
                     <div class="col-lg-6">
-                        <input class="form-control" placeholder="Role" type="text" name="title">
+                        <input class="form-control" placeholder="Permission" type="text" name="title">
                     </div>
                 </div>
                 <div class="form-group">
@@ -28,23 +29,6 @@
 
                     <div class="col-lg-6">
                         <input class="form-control" placeholder="Slug" type="text" name="slug">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Permissions</label>
-
-                    <div class="col-lg-6">
-                        @foreach($permissions as $k=> $p)
-                            <div class="checkbox">
-                                <input name="permission_id[]" id="radio{{$k}}" value="{{$p->id}}" type="checkbox">
-                                <label for="radio{{$k}}">
-                                    <mark></mark>
-                                    {{$p->title}}
-                                </label>
-                            </div>
-                            <br>
-                        @endforeach
                     </div>
                 </div>
 

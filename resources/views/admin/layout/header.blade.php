@@ -23,7 +23,7 @@
                 </form>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <i class="fa fa-user-md"></i> {{ucfirst(Auth::user()->username)}}
+                        <i class="fa fa-user-md"></i> {{Auth::user()->name}}
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="user">Users</a></li>

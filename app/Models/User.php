@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = ['name','email','mobile','status'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -33,8 +33,30 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
-    public function role()
+    public function roles()
     {
-        return $this->hasOne(Role::class, 'id', 'role_id');
+        return $this->belongsToMany(Role::class,'user_role');
+    }
+
+    public function hasRole($slug)
+    {
+        foreach ($this->roles as $r){
+            if($r->slug == $slug){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasPermission($slug)
+    {
+        foreach ($this->roles as $r){
+            foreach ($r->permissions as $p) {
+                if ($p->slug == $slug) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

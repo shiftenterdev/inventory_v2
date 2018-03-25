@@ -11,35 +11,40 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('access:user');
     }
 
-    public function get_index()
+    public function index()
     {
-        $users = User::with('role')->get();
+        $users = User::with('roles')->get();
 
         return view('admin.user.index')
             ->with(compact('users'));
     }
 
-    public function get_create()
+    public function create()
     {
         $roles = Role::get();
         return view('admin.user.create',compact('roles'));
     }
 
-    public function post_store(Request $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
-        $input['password'] = bcrypt('demo');
-        unset($input['_token']);
-        User::create($input);
+        $user = new User();
+        $user->password = bcrypt($request->password);
+        $user->name = $request->name;
+        $user->mobile = $request->mobile;
+        $user->email = $request->email;
+        $user->status = $request->status;
+        $user->save();
+
+        $user->roles()->sync([$request->role_id]);
 
         return redirect('/user')
             ->with('success', 'User Created Successfully');
     }
 
-    public function get_edit($id)
+    public function edit($id)
     {
         $user = User::find($id);
         $roles = Role::get();
@@ -48,17 +53,23 @@ class UserController extends Controller
         ->with(compact('user','roles'));
     }
 
-    public function post_update($id, Request $request)
+    public function update($id, Request $request)
     {
-        $input = $request->all();
-        unset($input['_token']);
-        User::where('id', $id)->update($input);
+        $user = User::find($id);
+        $user->password = bcrypt($request->password);
+        $user->name = $request->name;
+        $user->mobile = $request->mobile;
+        $user->email = $request->email;
+        $user->status = $request->status;
+        $user->save();
+
+        $user->roles()->sync([$request->role_id]);
 
         return redirect('/user')
             ->with('success', 'User Updated');
     }
 
-    public function get_delete($id)
+    public function delete($id)
     {
         User::destroy($id);
 

@@ -86,7 +86,7 @@ $('.cN').on('click','.confirm', function() {
     return confirm('Are you sure ?');
 });
 
-$('.nD').delay(3000).slideUp();
+$('.nD').delay(4000).slideUp();
 
 $('.parCat').on('change', function() {
     var v = $(this).val();

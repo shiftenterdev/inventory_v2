@@ -19,7 +19,7 @@
                     <label class="col-lg-2 control-label">Username</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Username" type="text" name="username">
+                        <input class="form-control" placeholder="Username" type="text" name="name">
                     </div>
                 </div>
 
@@ -27,7 +27,7 @@
                     <label class="col-lg-2 control-label">Email</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Email" type="email" name="user_email">
+                        <input class="form-control" placeholder="Email" type="email" name="email">
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@
                     <label class="col-lg-2 control-label">Mobile</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Mobile" type="text" name="user_mobile">
+                        <input class="form-control" placeholder="Mobile" type="text" name="mobile">
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                         <select name="role_id" class="form-control select" required>
                             <option value="">Select Role</option>
                             @foreach($roles as $r)
-                                <option value="{{$r->id}}">{{$r->role}}</option>
+                                <option value="{{$r->id}}">{{$r->title}}</option>
                                 @endforeach
                         </select>
                     </div>
@@ -57,14 +57,14 @@
 
                     <div class="col-lg-8">
                         <div class="radio">
-                            <input name="user_status" id="radio1" value="1" checked="" type="radio">
+                            <input name="status" id="radio1" value="1" checked="" type="radio">
                             <label for="radio1">
                                 <mark></mark>
                                 Active
                             </label>
                         </div>
                         <div class="radio">
-                            <input name="user_status" id="radio2" value="2" type="radio">
+                            <input name="status" id="radio2" value="2" type="radio">
                             <label for="radio2">
                                 <mark></mark>
                                 Inactive

@@ -19,8 +19,8 @@
                     <label class="col-lg-2 control-label">Username</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Username" type="text" name="username"
-                               value="{{$user->username}}">
+                        <input class="form-control" placeholder="Username" type="text" name="name"
+                               value="{{$user->name}}">
                     </div>
                 </div>
 
@@ -28,8 +28,8 @@
                     <label class="col-lg-2 control-label">Email</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Email" type="email" name="user_email"
-                               value="{{$user->user_email}}">
+                        <input class="form-control" placeholder="Email" type="email" name="email"
+                               value="{{$user->email}}">
                     </div>
                 </div>
 
@@ -37,8 +37,8 @@
                     <label class="col-lg-2 control-label">Mobile</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Mobile" type="text" name="user_mobile"
-                               value="{{$user->user_mobile}}">
+                        <input class="form-control" placeholder="Mobile" type="text" name="mobile"
+                               value="{{$user->mobile}}">
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@
                         <select name="role_id" class="form-control select" required>
                             <option value="">Select Role</option>
                             @foreach($roles as $r)
-                                <option value="{{$r->id}}" {{$user->role_id == $r->id ?'selected':''}}>{{$r->role}}</option>
+                                <option value="{{$r->id}}" {{$user->roles[0]->id == $r->id ?'selected':''}}>{{$r->title}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -60,16 +60,16 @@
 
                     <div class="col-lg-8">
                         <div class="radio">
-                            <input name="user_status" value="1" id="radio1"
-                                   type="radio" {{$user->user_status=='1'?'checked':''}}>
+                            <input name="status" value="1" id="radio1"
+                                   type="radio" {{$user->status=='1'?'checked':''}}>
                             <label for="radio1">
                                 <mark></mark>
                                 Active
                             </label>
                         </div>
                         <div class="radio">
-                            <input name="user_status" value="2" id="radio2"
-                                   type="radio" {{$user->user_status=='2'?'checked':''}}>
+                            <input name="status" value="2" id="radio2"
+                                   type="radio" {{$user->status=='2'?'checked':''}}>
                             <label for="radio2">
                                 <mark></mark>
                                 Inactive

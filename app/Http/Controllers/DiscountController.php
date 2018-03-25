@@ -13,6 +13,7 @@ class DiscountController extends Controller
 
     public function __construct(Discount $discount)
     {
+        $this->middleware('access:discount');
         $this->discount = $discount;
     }
     /**

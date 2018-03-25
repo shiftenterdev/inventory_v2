@@ -18,7 +18,8 @@
                 <thead>
                 <tr>
                     <th>SL</th>
-                    <th>Role</th>
+                    <th>Title</th>
+                    <th>Slug</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -26,7 +27,8 @@
                 @foreach($roles as $k => $b)
                     <tr>
                         <td>{{$k+1}}</td>
-                        <td>{{ucfirst($b->role)}}</td>
+                        <td>{{$b->title}}</td>
+                        <td>{{$b->slug}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="role/edit/{{$b->id}}" class="btn btn-sm btn-warning"><i

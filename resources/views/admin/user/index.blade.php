@@ -21,8 +21,8 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Mobile</th>
-                    <th>Role</th>
                     <th>Status</th>
+                    <th>Role</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -30,11 +30,11 @@
                 @foreach($users as $u)
                     <tr>
                         <td>{{$u->id}}</td>
-                        <td>{{$u->username}}</td>
-                        <td>{{$u->user_email}}</td>
-                        <td>{{$u->user_mobile}}</td>
-                        <td>{{$u->user_status==1?'Active':'Inactive'}}</td>
-                        <td>{{ucfirst($u->role->role)}}</td>
+                        <td>{{$u->name}}</td>
+                        <td>{{$u->email}}</td>
+                        <td>{{$u->mobile}}</td>
+                        <td>{{$u->status==1?'Active':'Inactive'}}</td>
+                        <td>{{$u->roles[0]->title or ''}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="user/edit/{{$u->id}}" class="btn btn-sm btn-warning"><i

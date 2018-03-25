@@ -18,24 +18,24 @@
                     <label class="col-lg-2 control-label">Name</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Name" type="text" name="customer_name"
-                               value="{{$customer->customer_name}}">
+                        <input class="form-control" placeholder="Name" type="text" name="name"
+                               value="{{$customer->name}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Address</label>
 
                     <div class="col-lg-8">
-                        <textarea name="customer_address" class="form-control"
-                                  placeholder="Address">{{$customer->customer_address}}</textarea>
+                        <textarea name="address" class="form-control"
+                                  placeholder="Address">{{$customer->address}}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Phone</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Phone" type="text" name="customer_phone"
-                               value="{{$customer->customer_phone}}">
+                        <input class="form-control" placeholder="Phone" type="text" name="mobile"
+                               value="{{$customer->mobile}}">
                     </div>
                 </div>
 
@@ -43,8 +43,8 @@
                     <label class="col-lg-2 control-label">Email</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Email" type="email" name="customer_email"
-                               value="{{$customer->customer_email}}">
+                        <input class="form-control" placeholder="Email" type="email" name="email"
+                               value="{{$customer->email}}">
                     </div>
                 </div>
 

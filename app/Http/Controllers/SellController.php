@@ -17,7 +17,7 @@ class SellController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('access:sell');
     }
 
     public function get_index()

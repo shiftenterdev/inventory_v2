@@ -17,11 +17,10 @@ class AuthController extends Controller
     public function post_index(Request $request)
     {
         $credential = [
-            'user_email' => $request->email,
+            'email'    => $request->email,
             'password' => $request->password,
+//            'status'   => 1
         ];
-//        dd($credential);
-
         if (Auth::attempt($credential)) {
             return redirect('/');
         } else {

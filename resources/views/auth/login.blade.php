@@ -22,6 +22,10 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                        <div class="alert alert-info">
+                            user: <ins>admin@demo.com</ins> <br>
+                            pass: <ins>demo123</ins>
+                        </div>
                         <form action="auth" class="form-horizontal" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">

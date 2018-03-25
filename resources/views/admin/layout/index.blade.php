@@ -22,12 +22,14 @@
 
     @include('admin.layout.header')
     @include('admin.layout.toast')
-    <div class="row">
-        <div class="col-md-2">
-            @include('admin.layout.sidebar')
-        </div>
-        <div class="col-md-10">
-            @yield('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                @include('admin.layout.sidebar')
+            </div>
+            <div class="col-md-10">
+                @yield('content')
+            </div>
         </div>
     </div>
     @include('admin.layout.img_modal')
