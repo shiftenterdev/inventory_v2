@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "maatwebsite/excel": "^2.1",
         "barryvdh/laravel-dompdf": "^0.7.0",
-        "unisharp/laravel-filemanager": "~1.8"
+        "unisharp/laravel-filemanager": "~1.8",
+        "paulvl/backup": "3.0.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

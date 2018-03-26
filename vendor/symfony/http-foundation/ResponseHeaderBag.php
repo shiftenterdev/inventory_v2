@@ -24,26 +24,10 @@ class ResponseHeaderBag extends HeaderBag
     const DISPOSITION_ATTACHMENT = 'attachment';
     const DISPOSITION_INLINE = 'inline';
 
-    /**
-     * @var array
-     */
     protected $computedCacheControl = array();
-
-    /**
-     * @var array
-     */
     protected $cookies = array();
-
-    /**
-     * @var array
-     */
     protected $headerNames = array();
 
-    /**
-     * Constructor.
-     *
-     * @param array $headers An array of HTTP headers
-     */
     public function __construct(array $headers = array())
     {
         parent::__construct($headers);
@@ -142,11 +126,6 @@ class ResponseHeaderBag extends HeaderBag
         return array_key_exists($key, $this->computedCacheControl) ? $this->computedCacheControl[$key] : null;
     }
 
-    /**
-     * Sets a cookie.
-     *
-     * @param Cookie $cookie
-     */
     public function setCookie(Cookie $cookie)
     {
         $this->cookies[$cookie->getDomain()][$cookie->getPath()][$cookie->getName()] = $cookie;
@@ -230,7 +209,7 @@ class ResponseHeaderBag extends HeaderBag
      *                                 is semantically equivalent to $filename. If the filename is already ASCII,
      *                                 it can be omitted, or just copied from $filename
      *
-     * @return string A string suitable for use as a Content-Disposition field-value.
+     * @return string A string suitable for use as a Content-Disposition field-value
      *
      * @throws \InvalidArgumentException
      *
