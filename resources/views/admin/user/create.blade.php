@@ -72,11 +72,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Password</label>
+
+                    <div class="col-lg-8">
+                        <input class="form-control" placeholder="Password" type="password" name="password">
+                    </div>
+                </div>
 
 
                 <hr>
                 <div class="form-group">
                     <div class="col-lg-8 col-lg-offset-2">
+                        <button type="button" class="btn btn-default" onclick="history.back()">Back</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>

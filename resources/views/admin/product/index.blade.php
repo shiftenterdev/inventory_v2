@@ -17,6 +17,7 @@
                 <thead>
                 <tr>
                     <th>Code</th>
+                    <th>Thumb</th>
                     <th>Title</th>
                     <th>Category</th>
                     <th>Brand</th>
@@ -28,12 +29,13 @@
                 <tbody>
                 @foreach($products as $p)
                     <tr>
-                        <td>{{$p->pro_code}}</td>
-                        <td>{{$p->pro_title}}</td>
+                        <td>{{$p->code}}</td>
+                        <td><img src="{{$p->image}}" alt="" style="width: 100px"></td>
+                        <td>{{$p->title}}</td>
                         <td>{{$p->category->cat_title}}</td>
                         <td>{{$p->brand->brand_title}}</td>
-                        <td>{{money($p->pro_price)}}</td>
-                        <td>{{$p->pro_status==1?'Active':'Inactive'}}</td>
+                        <td>{{money($p->price)}}</td>
+                        <td>{{$p->status==1?'Active':'Inactive'}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="product/edit/{{$p->id}}" class="btn btn-sm btn-warning"><i

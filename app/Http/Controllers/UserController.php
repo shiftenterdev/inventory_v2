@@ -56,7 +56,6 @@ class UserController extends Controller
     public function update($id, Request $request)
     {
         $user = User::find($id);
-        $user->password = bcrypt($request->password);
         $user->name = $request->name;
         $user->mobile = $request->mobile;
         $user->email = $request->email;

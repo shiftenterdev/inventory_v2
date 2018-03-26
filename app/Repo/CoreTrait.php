@@ -40,7 +40,7 @@ trait CoreTrait
 
     public static function productCode()
     {
-        $product_code = Product::orderBy('id', 'desc')->pluck('pro_code');
+        $product_code = Product::orderBy('id', 'desc')->pluck('code');
         if (empty($product_code)) {
             $product_code = 'P1000001';
         } else {

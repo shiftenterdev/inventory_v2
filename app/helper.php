@@ -24,3 +24,10 @@ function title($text)
 {
     return ucwords($text);
 }
+
+function thumb($url){
+//    $lfm_helper = \Unisharp\Laravelfilemanager\traits\LfmHelpers;
+//    $full_file_path = ; // get this from db
+//    $thumb_url = $lfm_helper->getThumbUrl($full_file_path);
+//    return substr_replace($url, 'thumbs', $pos, 0);
+}

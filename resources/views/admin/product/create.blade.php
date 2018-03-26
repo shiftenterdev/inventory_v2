@@ -43,21 +43,21 @@
                     <label class="col-lg-2 control-label">Title</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Title" type="text" name="pro_title">
+                        <input class="form-control" placeholder="Title" type="text" name="title">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Description</label>
 
                     <div class="col-lg-8">
-                        <textarea name="pro_description" class="form-control" placeholder="Description"></textarea>
+                        <textarea name="description" class="form-control" placeholder="Description"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Price</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Price" type="text" name="pro_price">
+                        <input class="form-control" placeholder="Price" type="text" name="price">
                     </div>
                 </div>
 
@@ -66,14 +66,14 @@
 
                     <div class="col-lg-8">
                         <div class="radio">
-                            <input name="pro_status" id="radio1" value="1" checked="" type="radio">
+                            <input name="status" id="radio1" value="1" checked="" type="radio">
                             <label for="radio1">
                                 <mark></mark>
                                 Active
                             </label>
                         </div>
                         <div class="radio">
-                            <input name="pro_status" id="radio2" value="2" type="radio">
+                            <input name="status" id="radio2" value="2" type="radio">
                             <label for="radio2">
                                 <mark></mark>
                                 Inactive
@@ -82,17 +82,23 @@
                     </div>
                 </div>
 
-                <div class="form-group hidden">
+                <div class="form-group">
                     <label class="col-lg-2 control-label">Image</label>
 
 
-                    <div class="col-lg-7">
-                        <img src="preview.png" alt="" style="height:120px;max-width: 120px;margin-right: 20px"
-                             class="img-thumbnail prvImg">
-                        <input type="hidden" name="product_image_id" id="imgIdVal">
-                        <button class="btn btn-info uI" type="button">Upload</button>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                           <span class="input-group-btn">
+                             <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                               <i class="fa fa-picture-o"></i> Choose
+                             </a>
+                           </span>
+                            <input id="thumbnail" class="form-control" type="text" name="image">
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;">
                     </div>
                 </div>
+
                 <hr>
                 <div class="form-group">
                     <div class="col-lg-8 col-lg-offset-2">
@@ -104,4 +110,13 @@
 
     </div>
 @endsection
+
+@section('script')
+    @parent
+    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+    <script>
+        var prefix = "{{config('lfm.url_prefix')}}";
+        $('#lfm').filemanager('image', {prefix: prefix});
+    </script>
+@stop
 

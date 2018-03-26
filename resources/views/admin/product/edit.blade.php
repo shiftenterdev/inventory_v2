@@ -18,20 +18,11 @@
                     <label class="col-lg-2 control-label">Category</label>
 
                     <div class="col-lg-8">
-                        <select name="pro_cat_id" class="form-control parCat" required>
+                        <select name="category_id" class="form-control parCat" required>
                             <option value="">Select Category</option>
                             @foreach($categories as $c)
-                                <option value="{{$c->id}}" {{$c->id==$product->pro_cat_id?'selected':''}}>{{$c->cat_title}}</option>
+                                <option value="{{$c->id}}" {{$c->id==$product->category_id?'selected':''}}>{{$c->cat_title}}</option>
                             @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Sub Category</label>
-
-                    <div class="col-lg-8">
-                        <select name="pro_subcat_id" class="form-control parSubCat">
-                            <option value="{{$sub_cat->id}}">{{$sub_cat->cat_title}}</option>
                         </select>
                     </div>
                 </div>
@@ -51,24 +42,24 @@
                     <label class="col-lg-2 control-label">Title</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Title" type="text" name="pro_title"
-                               value="{{$product->pro_title}}">
+                        <input class="form-control" placeholder="Title" type="text" name="title"
+                               value="{{$product->title}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Description</label>
 
                     <div class="col-lg-8">
-                        <textarea name="pro_description" class="form-control"
-                                  placeholder="Description">{{$product->pro_description}}</textarea>
+                        <textarea name="description" class="form-control"
+                                  placeholder="Description">{{$product->description}}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Price</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Price" type="text" name="pro_price"
-                               value="{{$product->pro_price}}">
+                        <input class="form-control" placeholder="Price" type="text" name="price"
+                               value="{{$product->price}}">
                     </div>
                 </div>
 
@@ -76,37 +67,39 @@
                     <label class="col-lg-2 control-label">Status</label>
 
                     <div class="col-lg-8">
-                        <div class="radio">
-                            <label>
-                                <input name="pro_status" value="1"
-                                       {{$product->pro_status=='1'?'checked':''}} type="radio">
-                                Active
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input name="pro_status" value="2"
-                                       {{$product->pro_status=='2'?'checked':''}} type="radio">
-                                Inactive
-                            </label>
+                        <div class="col-lg-8">
+                            <div class="radio">
+                                <input name="status" id="radio1" value="1" checked="" type="radio" {{$product->status==1?'checked':''}}>
+                                <label for="radio1">
+                                    <mark></mark>
+                                    Active
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <input name="status" id="radio2" value="2" type="radio" {{$product->status==2?'checked':''}}>
+                                <label for="radio2">
+                                    <mark></mark>
+                                    Inactive
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group hidden">
+                <div class="form-group">
                     <label class="col-lg-2 control-label">Image</label>
 
 
-                    <div class="col-lg-7">
-                        @if(isset($image))
-                            <img src="/uploads/{{$image}}" alt=""
-                                 style="height:120px;max-width: 120px;margin-right: 20px" class="img-thumbnail prvImg">
-                        @else
-                            <img src="preview.jpeg" alt="" style="height:120px;max-width: 120px;margin-right: 20px"
-                                 class="img-thumbnail prvImg">
-                        @endif
-                        <input type="hidden" name="pro_image_id" id="imgIdVal" value="{{$product->pro_image_id}}">
-                        <button class="btn btn-info uI" type="button">Upload</button>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                           <span class="input-group-btn">
+                             <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                               <i class="fa fa-picture-o"></i> Choose
+                             </a>
+                           </span>
+                            <input id="thumbnail" class="form-control" type="text" name="image" value="{{$product->image}}">
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;" src="{{$product->image}}">
                     </div>
                 </div>
                 <hr>
@@ -120,4 +113,12 @@
 
     </div>
 @endsection
+@section('script')
+    @parent
+    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+    <script>
+        var prefix = "{{config('lfm.url_prefix')}}";
+        $('#lfm').filemanager('image', {prefix: prefix});
+    </script>
+@stop
 
