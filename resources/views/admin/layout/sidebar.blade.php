@@ -17,6 +17,9 @@
     <a href="discount" class="list-group-item {{Request::segment(1)=='discount'?'active':''}}">
         <i class="fa fa-crop"></i> Discount</a>
     <hr>
+    <a href="report" class="list-group-item {{Request::segment(1)=='report'?'active':''}}">
+        <i class="fa fa-bar-chart"></i> Report</a>
+    <hr>
 
     <a href="sells-history" class="list-group-item {{Request::segment(1)=='sells-history'?'active':''}}">
         <i class="fa fa-list-alt"></i> Sell History</a>

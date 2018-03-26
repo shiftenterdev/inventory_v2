@@ -36,7 +36,6 @@ class SellController extends Controller
 
     public function get_new($invoice_no)
     {
-
         $invoice = Invoice::where('invoice_no', $invoice_no)->first();
         if (empty($invoice)) {
             $invoice = new Invoice();
@@ -48,7 +47,7 @@ class SellController extends Controller
             $invoice->save();
         }
         session(['invoice_id' => $invoice->id]);
-        $products = Product::get(['pro_code', 'pro_title']);
+        $products = Product::get(['code', 'title']);
         $temp_pro = TempProduct::with('product')->where('type', 'sell')->get();
         $invoice = Invoice::find(session('invoice_id'));
         return view('admin.sell.index')
@@ -59,7 +58,7 @@ class SellController extends Controller
     public function get_product_list()
     {
         $temp_pro = TempProduct::where('type', 'sell')->get();
-        $products = Product::get(['pro_code', 'pro_title']);
+        $products = Product::get(['code', 'title']);
         $invoice = Invoice::find(session('invoice_id'));
         return view('admin.common.product_list')
             ->with(compact('products', 'temp_pro', 'invoice'));
@@ -120,15 +119,14 @@ class SellController extends Controller
 
     public function post_add_product(Request $request)
     {
-        $product = Product::where('pro_code', $request->pro_code)->first();
         $temp = TempProduct::where('type', 'sell')
             ->where('invoice_id',session('invoice_id'))
-            ->where('product_id', $product->id)->first();
+            ->where('product_code', $request->code)->first();
         if (!empty($temp)) {
             $temp->quantity = $temp->quantity + 1;
         } else {
             $temp = new TempProduct();
-            $temp->product_id = $product->id;
+            $temp->product_code= $request->code;
             $temp->invoice_id = session('invoice_id');
             $temp->quantity = 1;
             $temp->discount = 0;
@@ -140,13 +138,13 @@ class SellController extends Controller
 
     public function get_remove_product($pro_code)
     {
-        $product_id = Product::where('pro_code', $pro_code)->pluck('id');
+        $product_id = Product::where('code', $pro_code)->pluck('id');
         TempProduct::where('product_id', $product_id)->where('type', 'sell')->delete();
     }
 
     public function get_update_product($pro_code, $quantity)
     {
-        $product_id = Product::where('pro_code', $pro_code)->pluck('id');
+        $product_id = Product::where('code', $pro_code)->pluck('id');
         $temp = TempProduct::where('product_id', $product_id)->where('type', 'sell')->first();
         $temp->quantity = $quantity;
         $temp->save();
@@ -154,7 +152,7 @@ class SellController extends Controller
 
     public function get_discount_product($pro_code, $discount)
     {
-        $product_id = Product::where('pro_code', $pro_code)->pluck('id');
+        $product_id = Product::where('code', $pro_code)->pluck('id');
         $temp = TempProduct::where('product_id', $product_id)->where('type', 'sell')->first();
         $temp->discount = $discount;
         $temp->save();

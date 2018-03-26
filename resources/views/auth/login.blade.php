@@ -3,26 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Myshop</title>
+    <title>Stocart</title>
     <base href="/" />
-    <link rel="icon" type="image/png" href="shop.png">
+    <link rel="icon" type="image/png" href="/warehouse.png">
     <link rel="stylesheet" href="admin/css/bootstrap.min.css">
     <link rel="stylesheet" href="admin/css/bb.css">
 </head>
 
-<body>
+<body style="background: #fff">
 
     <div class="container">
         <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-                <div class="panel panel-default lP">
+            <div class="col-md-offset-3 col-md-6 lP">
+                <div class="text-center">
+                    <img src="/warehouse.png" style="width: 100px;margin-bottom: 0px" alt="">
+                </div>
+                <div class="panel panel-info ">
+
                     <div class="panel-heading">
                         <div class="panel-title">
-                            Admininstrator
+                            Admin Console
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="alert alert-info">
+                        <div class="alert alert-warning">
                             user: <ins>admin@demo.com</ins> <br>
                             pass: <ins>demo123</ins>
                         </div>

@@ -50,13 +50,32 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label class="col-lg-3 control-label">Invoice Date</label>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Invoice No</label>
 
-                    <div class="col-lg-6">
-                        <input type="text" name="invoice_date" class="form-control date" placeholder="Date"
-                               required>
+                        <div class="col-lg-6">
+                            <input type="text" name="invoice_no" class="form-control" placeholder="Invoice No"
+                                   required value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Invoice SL</label>
+
+                        <div class="col-lg-6">
+                            <input type="text" name="invoice_sl" class="form-control" placeholder="Invoice Sl"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Invoice Date</label>
+
+                        <div class="col-lg-6">
+                            <input type="text" name="invoice_date" class="form-control date" placeholder="Date"
+                                   required>
+                        </div>
                     </div>
                 </div>
+
 
 
             </div>
@@ -108,7 +127,7 @@
             if ($(this).val() !== '') {
                 load.on();
                 var product = {
-                    pro_code: $(this).val(),
+                    code: $(this).val(),
                     _token: $('meta[name="csrf-token"]').attr('content')
                 };
 

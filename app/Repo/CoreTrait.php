@@ -53,14 +53,14 @@ trait CoreTrait
 
     public static function productTitleByCode($id)
     {
-        $title = Product::where('pro_code', $id)->pluck('pro_title');
+        $title = Product::where('code', $id)->pluck('title');
 
         return $title;
     }
 
     public static function productPriceByCode($id)
     {
-        $price = Product::where('pro_code', $id)->pluck('pro_price');
+        $price = Product::where('code', $id)->pluck('price');
 
         return $price;
     }

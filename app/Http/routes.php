@@ -1,12 +1,12 @@
 <?php
 
-Route::get('/', 'AdminController@get_home');
+
 //Route::get('/d',function(){
 //    return bcrypt('bappa@123');
 //});
 Route::controller('auth', 'AuthController');
 Route::group(['middleware' => 'auth'], function () {
-
+    Route::get('/', 'AdminController@get_home');
     Route::controller('product', 'ProductController');
     Route::controller('discount', 'DiscountController');
     Route::controller('ajax', 'AjaxController');
@@ -19,6 +19,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('purchase', 'PurchaseController');
     Route::controller('refund', 'RefundController');
     Route::controller('payment', 'PaymentController');
+
+    Route::get('report','ReportController@index');
+//    Route::get('user/create','UserController@create');
+//    Route::post('user/store','UserController@store');
+//    Route::get('user/edit/{id}','UserController@edit');
+//    Route::post('user/update/{id}','UserController@update');
+//    Route::get('user/delete/{id}','UserController@delete');
 
     Route::get('user','UserController@index');
     Route::get('user/create','UserController@create');
