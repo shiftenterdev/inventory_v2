@@ -138,8 +138,7 @@ class SellController extends Controller
 
     public function get_remove_product($pro_code)
     {
-        $product_id = Product::where('code', $pro_code)->pluck('id');
-        TempProduct::where('product_id', $product_id)->where('type', 'sell')->delete();
+        TempProduct::where('product_code', $pro_code)->where('type', 'sell')->delete();
     }
 
     public function get_update_product($pro_code, $quantity)
