@@ -29,8 +29,8 @@ class RefundController extends Controller
      */
     public function get_create()
     {
-        $customer = Customer::get(['customer_id', 'customer_name']);
-        $products = Product::get(['pro_code', 'pro_title']);
+        $customer = Customer::get(['id', 'name']);
+        $products = Product::get(['code', 'title']);
 
         return view('admin.refund.create')
             ->with(compact('customer', 'products'));

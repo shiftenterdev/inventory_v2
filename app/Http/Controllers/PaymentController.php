@@ -9,14 +9,13 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function get_index()
+    public function index()
     {
         $payments = Payment::get();
-
         return view('admin.payment.index', compact('payments'));
     }
 
-    public function get_create()
+    public function create()
     {
         $products = Product::get();
         return view('admin.payment.create',compact('products'));
@@ -24,5 +23,6 @@ class PaymentController extends Controller
 
     public function post_save(Request $request)
     {
+
     }
 }

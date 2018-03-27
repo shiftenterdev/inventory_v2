@@ -21,9 +21,9 @@ class DiscountController extends Controller
      *
      * @return Response
      */
-    public function get_index()
+    public function index()
     {
-        $discount = $this->discount->with('_product')->get();
+        $discount = $this->discount->with('product')->get();
 
         return view('admin.discount.index')
             ->with(compact('discount'));
@@ -34,9 +34,9 @@ class DiscountController extends Controller
      *
      * @return Response
      */
-    public function get_create()
+    public function create()
     {
-        $products = Product::get(['id', 'pro_title', 'pro_code']);
+        $products = Product::get(['id', 'title', 'code']);
 
         return view('admin.discount.create', ['products' => $products]);
     }
@@ -46,10 +46,16 @@ class DiscountController extends Controller
      *
      * @return Response
      */
-    public function post_store(Request $request)
+    public function store(Request $request)
     {
         // dd($request->all());
-        $this->discount->fill($request->except('_token'))->save();
+        $discount = new $this->discount;
+        $discount->discount_type = $request->discount_type;
+        $discount->product_code = $request->product_code;
+        $discount->status = $request->status;
+        $discount->discount = $request->discount;
+        $discount->save();
+//        $this->discount->fill($request->except('_token'))->save();
 
         return redirect('discount');
     }
@@ -63,7 +69,7 @@ class DiscountController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -75,7 +81,9 @@ class DiscountController extends Controller
      */
     public function edit($id)
     {
-        //
+        $discount = $this->discount->find($id);
+        $products = Product::get(['id', 'title', 'code']);
+        return view('admin.discount.edit')->with(compact('discount','products'));
     }
 
     /**
@@ -85,9 +93,15 @@ class DiscountController extends Controller
      *
      * @return Response
      */
-    public function update($id)
+    public function update($id,Request $request)
     {
-        //
+        $discount = $this->discount->find($id);
+        $discount->discount_type = $request->discount_type;
+        $discount->product_code = $request->product_code;
+        $discount->status = $request->status;
+        $discount->discount = $request->discount;
+        $discount->save();
+        return redirect('discount');
     }
 
     /**

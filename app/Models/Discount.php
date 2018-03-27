@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Discount extends Model
 {
-    protected $table = 'product_discount';
+    protected $table = 'discounts';
     protected $guarded = [];
 
     public function product()
     {
-        return $this->hasOne(Product::class, 'id', 'product_id');
+        return $this->hasOne(Product::class, 'code', 'product_code');
     }
 }

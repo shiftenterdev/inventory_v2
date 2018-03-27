@@ -18,7 +18,7 @@ class CustomerController extends Controller
      *
      * @return Response
      */
-    public function get_index()
+    public function index()
     {
         $customers = Customer::all();
 
@@ -31,7 +31,7 @@ class CustomerController extends Controller
      *
      * @return Response
      */
-    public function get_create()
+    public function create()
     {
         return view('admin.customer.create');
     }
@@ -41,7 +41,7 @@ class CustomerController extends Controller
      *
      * @return Response
      */
-    public function post_store(Request $request)
+    public function store(Request $request)
     {
         $input = $request->all();
         $input['customer_id'] = CoreTrait::customerId();
@@ -71,7 +71,7 @@ class CustomerController extends Controller
      *
      * @return Response
      */
-    public function get_edit($id)
+    public function edit($id)
     {
         $customer = Customer::find($id);
         $image = CoreTrait::imageById($customer->customer_logo_id);
@@ -87,7 +87,7 @@ class CustomerController extends Controller
      *
      * @return Response
      */
-    public function post_update($id, Request $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
         unset($input['_token']);
@@ -104,7 +104,7 @@ class CustomerController extends Controller
      *
      * @return Response
      */
-    public function get_delete($id)
+    public function delete($id)
     {
         Customer::destroy($id);
 

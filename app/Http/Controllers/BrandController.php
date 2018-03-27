@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    public function get_index()
+    public function index()
     {
         $brands = Brand::all();
         foreach ($brands as $b) {
@@ -25,7 +25,7 @@ class BrandController extends Controller
      *
      * @return Response
      */
-    public function get_create()
+    public function create()
     {
         return view('admin.brand.create');
     }
@@ -35,10 +35,9 @@ class BrandController extends Controller
      *
      * @return Response
      */
-    public function post_store(Request $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
-        unset($input['_token']);
+        $input = $request->except('_token');
         Brand::create($input);
 
         return redirect('/brand');
@@ -63,7 +62,7 @@ class BrandController extends Controller
      *
      * @return Response
      */
-    public function get_edit($id)
+    public function edit($id)
     {
         $brand = Brand::where('id', $id)->first();
         $image = CoreTrait::imageById($brand->brand_logo_id);
@@ -79,10 +78,9 @@ class BrandController extends Controller
      *
      * @return Response
      */
-    public function post_update($id, Request $request)
+    public function update($id, Request $request)
     {
-        $input = $request->all();
-        unset($input['_token']);
+        $input = $request->except('_token');
         Brand::where('id', $id)->update($input);
 
         return redirect('/brand')
@@ -96,7 +94,7 @@ class BrandController extends Controller
      *
      * @return Response
      */
-    public function get_delete($id)
+    public function delete($id)
     {
         Brand::destroy($id);
 

@@ -13,7 +13,7 @@ class CategoryController extends Controller
         $this->middleware('auth');
     }
 
-    public function get_index()
+    public function index()
     {
         $categories = Category::with('parent')->get();
         foreach ($categories as $c) {
@@ -28,7 +28,7 @@ class CategoryController extends Controller
             ->with(compact('categories'));
     }
 
-    public function get_create()
+    public function create()
     {
         $categories = Category::where('cat_parent_id', '-1')->get();
 
@@ -36,15 +36,15 @@ class CategoryController extends Controller
             ->with(compact('categories'));
     }
 
-    public function post_store(Request $request)
+    public function store(Request $request)
     {
-        Category::create($request->all());
+        Category::create($request->except('_token'));
 
         return redirect('/category')
             ->with('success', 'Category created');
     }
 
-    public function get_edit($id)
+    public function edit($id)
     {
         $categories = Category::where('cat_parent_id', '-1')->get();
         $category = Category::where('id', $id)->first();
@@ -53,17 +53,16 @@ class CategoryController extends Controller
             ->with(compact('category', 'categories'));
     }
 
-    public function post_update($id, Request $request)
+    public function update($id, Request $request)
     {
-        $input = $request->all();
-        unset($input['_token']);
+        $input = $request->except('_token');
         Category::where('id', $id)->update($input);
 
         return redirect('/category')
             ->with('success', 'Category updated');
     }
 
-    public function get_delete($id)
+    public function delete($id)
     {
         $check = Category::where('cat_parent_id', $id)->first();
         if (empty($check)) {

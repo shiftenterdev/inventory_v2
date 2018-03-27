@@ -22,7 +22,7 @@
                         <select name="pro_id" class="form-control parProduct select">
                             <option value="">Product</option>
                             @foreach($products as $p)
-                                <option value="{{$p->pro_code}}">{{$p->pro_title}}</option>
+                                <option value="{{$p->code}}">{{$p->title}}</option>
                             @endforeach
                         </select>
                     </div>

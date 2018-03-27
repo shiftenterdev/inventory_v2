@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     use LfmHelpers;
 
-    public function get_index()
+    public function index()
     {
         $products = Product::with('category','brand')->get();
 
@@ -25,7 +25,7 @@ class ProductController extends Controller
             ->with(compact('products'));
     }
 
-    public function get_create()
+    public function create()
     {
         $categories = Category::with('parent')->get();
         foreach ($categories as $c) {
@@ -42,7 +42,7 @@ class ProductController extends Controller
             ->with(compact('categories', 'brands'));
     }
 
-    public function post_store(Request $request)
+    public function store(Request $request)
     {
         // $input = $request->except('_token');
         $product = new Product();
@@ -59,7 +59,7 @@ class ProductController extends Controller
         return redirect('product');
     }
 
-    public function get_edit($id)
+    public function edit($id)
     {
         $categories = Category::with('parent')->get();
         foreach ($categories as $c) {
@@ -76,7 +76,7 @@ class ProductController extends Controller
             ->with(compact('categories', 'product', 'brands'));
     }
 
-    public function post_update($id, Request $request)
+    public function update($id, Request $request)
     {
         $input = $request->except('_token');
         Product::where('id', $id)->update($input);
@@ -84,7 +84,7 @@ class ProductController extends Controller
         return redirect('/product');
     }
 
-    public function get_delete($id)
+    public function delete($id)
     {
         Product::destroy($id);
 

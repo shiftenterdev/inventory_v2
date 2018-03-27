@@ -31,10 +31,10 @@
                 <tbody>
                 @foreach($payments as $c)
                     <tr>
-                        <td>{{$c->customer_id}}</td>
-                        <td>{{$c->customer_name}}</td>
-                        <td>{{$c->customer_email}}</td>
-                        <td>{{$c->customer_phone}}</td>
+                        <td>{{$c->id}}</td>
+                        <td>{{$c->name}}</td>
+                        <td>{{$c->email}}</td>
+                        <td>{{$c->phone}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="customer/edit/{{$c->id}}" class="btn btn-sm btn-warning"><i

@@ -17,7 +17,7 @@ class StockController extends Controller
      *
      * @return Response
      */
-    public function get_index()
+    public function index()
     {
         $products = Product::get();
 
@@ -40,9 +40,9 @@ class StockController extends Controller
      *
      * @return Response
      */
-    public function post_store(Request $request)
+    public function store(Request $request)
     {
-        $input = $request->all();
+        $input = $request->except('_token');
         $id = $input['pro_id'];
         unset($input['_token'], $input['pro_id']);
         Product::where('id', $id)->update($input);

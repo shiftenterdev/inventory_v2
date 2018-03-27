@@ -28,9 +28,9 @@
                 @foreach($discount as $k => $b)
                     <tr>
                         <td>{{$k+1}}</td>
-                        <td>{{$b->_product->product_title}}</td>
-                        <td>{{$b->product_discount_type=='1'?'Percentage':'Flat'}}</td>
-                        <td>{{$b->product_discount}}</td>
+                        <td>{{$b->product->title}}</td>
+                        <td>{{$b->discount_type=='1'?'Percentage':'Flat'}}</td>
+                        <td>{{$b->discount}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="discount/edit/{{$b->id}}" class="btn btn-sm btn-warning"><i
