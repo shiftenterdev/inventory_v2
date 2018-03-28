@@ -1,20 +1,19 @@
 @extends('admin.layout.index')
 
 @section('content')
-
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
-        <li class="active">Sell</li>
+        <li class="active">Purchase</li>
     </ul>
     <fieldset style="margin-bottom: 200px">
         <legend>
             Customer Info
         </legend>
-        <form action="sell/save-invoice" method="post" id="customerForm" class="form-horizontal">
+        <form action="purchase/save" method="post" id="customerForm" class="form-horizontal">
             @include('admin.common.invoice_head')
-            <legend>
-                Product List
-            </legend>
+
+
+            <legend>Product List</legend>
 
             <div class="row">
                 <div class="col-md-12">
@@ -22,46 +21,42 @@
                         @include('admin.common.product_list')
                     </div>
                     @if(count($invoice->payments)>0)
-                        <div id="payment">
-                            <legend>Payment</legend>
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr class="t-imp">
-                                    <th>SL</th>
-                                    <th>Amount</th>
-                                    <th>Method</th>
-                                    <th>Trx No</th>
-                                    <th>Date</th>
-                                    <th>Option</th>
+                    <div id="payment">
+                        <legend>Payment</legend>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="t-imp">
+                                <th>SL</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Trx No</th>
+                                <th>Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($invoice->payments as $k => $p)
+                                <tr>
+                                    <td>{{$k+1}}</td>
+                                    <td>{{$p->amount}}</td>
+                                    <td>{{$p->method}}</td>
+                                    <td>{{$p->trx_id}}</td>
+                                    <td>{{$p->updated_at}}</td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($invoice->payments as $k => $p)
-                                    <tr>
-                                        <td>{{$k+1}}</td>
-                                        <td>{{$p->amount}}</td>
-                                        <td>{{$p->method}}</td>
-                                        <td>{{$p->trx_id}}</td>
-                                        <td>{{$p->updated_at}}</td>
-                                        <td><a href="payment/delete/{{$p->id}}" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                            </table>
-                        </div>
+                            @endforeach
+                        </table>
+                        </table>
+                    </div>
                     @endif
                     <div class="text-center">
                         <button type="button" class="btn btn-danger openRight"><i class="fa fa-money"></i> Payment
                         </button>
-                        <button type="submit" class="btn btn-primary">Save Invoice</button>
+                        <button type="submit" class="btn btn-info">Save Invoice</button>
                     </div>
                 </div>
             </div>
+            <hr>
         </form>
-
-
     </fieldset>
-
     @extends('admin.layout.right',['title'=>'Order Payment'])
 @section('slot')
     <form action="payment/store" class="form-horizontal" method="post">
@@ -102,8 +97,6 @@
     @parent
     <script>
 
-
-
         $('#productList').on('change', '#pro_code', function () {
             // e.preventDefault();
             if ($(this).val() !== '') {
@@ -113,7 +106,7 @@
                     _token: $('meta[name="csrf-token"]').attr('content')
                 };
 
-                $.post('sell/product/add', product).done(function (result) {
+                $.post('purchase/product/add/', product).done(function (result) {
                     $('.spo').val('');
                     reloadTable();
                 });
@@ -123,7 +116,7 @@
         $('#productList').on('click', '.rSI', function () {
             load.on();
             var v = $(this).data('code');
-            $.get('sell/product/remove/' + v).done(function (result) {
+            $.get('purchase/product/remove/' + v).done(function (result) {
                 reloadTable();
             });
         });
@@ -132,7 +125,7 @@
             load.on();
             var v = $(this).data('code');
             var q = $(this).val();
-            $.get('sell/product/update/' + v + '/' + q).done(function (result) {
+            $.get('purchase/product/update/' + v + '/' + q).done(function (result) {
                 reloadTable();
             });
         });
@@ -141,14 +134,14 @@
             load.on();
             var v = $(this).data('code');
             var q = $(this).val();
-            $.get('sell/product/discount/' + v + '/' + q).done(function (result) {
+            $.get('purchase/product/discount/' + v + '/' + q).done(function (result) {
                 reloadTable();
             });
         });
         $('#productList').on('change', 'input[name=other_discount]', function () {
             load.on();
             var q = $(this).val();
-            $.get('sell/other_discount/' + q).done(function (result) {
+            $.get('purchase/other_discount/' + q).done(function (result) {
                 reloadTable();
             });
         });
@@ -156,23 +149,24 @@
         $('#productList').on('change', 'input[name=tax]', function () {
             load.on();
             var q = $(this).val();
-            $.get('sell/tax/' + q).done(function (result) {
+            $.get('purchase/tax/' + q).done(function (result) {
                 reloadTable();
             });
         });
-        
+
         $('#productList').on('change', 'input[name=delivery_charge]', function () {
             load.on();
             var q = $(this).val();
-            $.get('sell/charge/' + q).done(function (result) {
+            $.get('purchase/charge/' + q).done(function (result) {
                 reloadTable();
             });
         });
+
         var reloadTable = function () {
-            $('#productList').load('sell/products', function () {
+            $('#productList').load('purchase/products', function () {
                 $('.select').selectize();
                 load.off();
             });
-        }
+        };
     </script>
 @endsection

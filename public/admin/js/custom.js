@@ -272,4 +272,11 @@ var pProductUpdate = function(q,code){
             load.off();
         });
     });
-}
+};
+$('.openRight').on('click', function () {
+    console.log('clicked');
+    $('.r-slide').addClass('slideInRight').removeClass('slideOutRight').show();
+});
+$('.r-slide .cls').on('click', function () {
+    $('.r-slide').addClass('slideOutRight').addClass('slideInRight');
+});

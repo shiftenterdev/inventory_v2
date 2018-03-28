@@ -12,30 +12,31 @@
     <tbody>
     <?php $total = 0;?>
     @if(!empty($temp_pro))
-        @foreach($temp_pro as $k => $p)
+        @foreach($temp_pro as $k => $t)
             <tr>
                 <td>{{$k+1}}</td>
                 <td>
-                    {{title($p->product->title)}} [{{$p->product->code}}]
+                    {{title($t->product->title)}} [{{$t->product->code}}]
                     <small>
-                        <a href="javascript:" class="confirm rSI red" data-code="{{$p->product->code}}">
+                        <a href="javascript:" class="confirm rSI red" data-code="{{$t->product->code}}">
                             <i class="fa fa-times"></i> Remove</a>
                     </small>
                 </td>
-                <td class="text-right">{{money($p->product->price)}}</td>
+                <td class="text-right">{{money($t->product->price)}}</td>
                 <td>
-                    <input type="text" class="input-sm form-control num pq-s small select-text" data-code="{{$p->product->code}}"
-                           value="{{$p->quantity}}">
+                    <input type="text" class="input-sm form-control num pq-s small select-text" data-code="{{$t->product->code}}"
+                           value="{{$t->quantity}}">
                 </td>
                 <td>
-                    <input type="text" class="input-sm form-control num pd-s small select-text" data-code="{{$p->product->code}}"
-                           value="{{$p->discount}}">
+                    <input type="text" class="input-sm form-control num pd-s small select-text" data-code="{{$t->product->code}}"
+                           value="{{$t->discount}}">
                 </td>
-                <td class="text-right">{{money($p->quantity * ($p->product->price - $p->discount))}}</td>
+                <td class="text-right">{{money($t->quantity * ($t->product->price - $t->discount))}}</td>
             </tr>
-            <?php $total += $p->quantity * ($p->product->price - $p->dicount)?>
+            <?php $total += ($t->quantity * ($t->product->price - $t->discount));?>
         @endforeach
     @endif
+
     <tr>
         <td>#</td>
         <td colspan="5">
@@ -50,22 +51,26 @@
     </tbody>
     <tfooter>
         <tr>
-            <td colspan="5" class="text-right">Discount</td>
-            <td><input type="text" class="small form-control discount select-text" value="{{$invoice->delivery_charge}}"></td>
+            <td colspan="5" class="text-right">Net Total</td>
+            <td><input type="text" class="small form-control" value="{{money($total)}}" readonly="readonly"></td>
+        </tr>
+        <tr>
+            <td colspan="5" class="text-right">Other Discount</td>
+            <td><input type="text" class="small form-control select-text" name="other_discount" value="{{$invoice->other_discount}}"></td>
         </tr>
         <tr>
             <td colspan="5" class="text-right">Delivery Charge</td>
-            <td><input type="text" class="small form-control dc select-text" value="{{$invoice->delivery_charge}}"></td>
+            <td><input type="text" class="small form-control select-text" name="delivery_charge" value="{{$invoice->delivery_charge}}"></td>
         </tr>
         <tr>
-            <td colspan="5" class="text-right">TAX(%)</td>
-            <td><input type="text" class="small form-control tax select-text" value="{{$invoice->tax}}"></td>
+            <td colspan="5" class="text-right">TAX(<input type="text" class="form-control small select-text" style="width: 100px" value="{{$invoice->tax}}" name="tax">%)</td>
+            <td><input type="text" class="small form-control select-text" name="tax_amount" value="{{money($total*($invoice->tax/100))}}" readonly="readonly"></td>
         </tr>
 
         <tr>
 
-            <td colspan="5" class="text-right">Net Total :</td>
-            <td colspan="1" class="text-right">{{money($total+$invoice->delivery_charge+$invoice->tax/100*$total)}}</td>
+            <td colspan="5" class="text-right">Grand Total :</td>
+            <td colspan="1" class="text-right">{{money($total-($invoice->other_discount)+($invoice->delivery_charge)+($total*($invoice->tax/100)))}}</td>
         </tr>
     </tfooter>
 </table>

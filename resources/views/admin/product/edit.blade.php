@@ -33,7 +33,7 @@
                         <select name="brand_id" class="form-control">
                             <option value="">Select Brand</option>
                             @foreach($brands as $b)
-                                <option value="{{$b->id}}" {{$product->brand_id==$b->id?'selected':''}}>{{$b->brand_title}}</option>
+                                <option value="{{$b->id}}" {{$product->brand_id==$b->id?'selected':''}}>{{$b->title}}</option>
                             @endforeach
                         </select>
                     </div>

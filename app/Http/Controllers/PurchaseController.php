@@ -15,50 +15,37 @@ class PurchaseController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('access:purchase');
     }
 
-    public function get_index()
+    public function index(Request $request)
     {
-        $invoice_no = CoreTrait::PurchaseInvoiceId();
-        return redirect('purchase/new/' . $invoice_no);
-
-        // Session::forget('purchase_items');
-//        $phones = Customer::get(['customer_phone', 'customer_id']);
-//        $products = Product::get(['pro_code']);
-//        if (Session::has('purchase_items')) {
-//            $temp_pro = Session::get('purchase_items');
-//            $temp_pro = json_decode(json_encode($temp_pro), false);
-//        } else {
-//            $temp_pro = 0;
-//        }
-//
-//        return view('admin.buy.index')
-//            ->with(compact('products', 'temp_pro', 'phones'));
-    }
-
-    public function get_new($invoice_no)
-    {
-
-        $invoice = Invoice::where('invoice_no', $invoice_no)->first();
-        if (empty($invoice)) {
-            $invoice = new Invoice();
-            $invoice->invoice_no = $invoice_no;
-            $invoice->delivery_charge = 0;
-            $invoice->tax = 0;
-            $invoice->type = 'purchase';
-            $invoice->is_locked = 0;
-            $invoice->save();
+        if($request->invoice){
+            $invoice_no = $request->invoice;
+            $invoice = Invoice::where('invoice_no', $invoice_no)->first();
+            if (empty($invoice)) {
+                $invoice = new Invoice();
+                $invoice->invoice_no = $invoice_no;
+                $invoice->delivery_charge = 0;
+                $invoice->tax = 0;
+                $invoice->type = 'purchase';
+                $invoice->is_locked = 0;
+                $invoice->save();
+            }
+            session(['invoice_id' => $invoice->id]);
+            $products = Product::get(['code', 'title']);
+            $temp_pro = TempProduct::with('product')->where('type', 'purchase')->get();
+            $invoice = Invoice::find(session('invoice_id'));
+            return view('admin.purchase.index')
+                ->with(compact('products', 'temp_pro','invoice'));
+        }else{
+            $invoice_no = CoreTrait::PurchaseInvoiceId();
+            return redirect('purchase?invoice='.$invoice_no);
         }
-        session(['invoice_id' => $invoice->id]);
-        $products = Product::get(['code', 'title']);
-        $temp_pro = TempProduct::with('product')->where('type', 'purchase')->get();
-        $invoice = Invoice::find(session('invoice_id'));
-        return view('admin.buy.index')
-            ->with(compact('products', 'temp_pro','invoice'));
     }
 
-    public function get_product_list()
+
+    public function products()
     {
         $temp_pro = TempProduct::where('type', 'purchase')->get();
         $products = Product::get(['code', 'title']);
@@ -68,25 +55,25 @@ class PurchaseController extends Controller
     }
 
 
-    public function get_invoice()
+    public function invoice()
     {
         $customer = Session::get('purchase_customer');
         $customer = json_decode(json_encode($customer), false);
         $products = Session::get('purchase_items');
         $products = json_decode(json_encode($products), false);
 
-        return view('admin.buy.invoice')
+        return view('admin.purchase.invoice')
             ->with(compact('customer', 'products'));
     }
 
 
     public function history()
     {
-        return view('admin.buy.history');
+        return view('admin.purchase.history');
     }
 
 
-    public function post_store(Request $request)
+    public function store(Request $request)
     {
         $input = $request->all();
         unset($input['_token']);
@@ -111,7 +98,7 @@ class PurchaseController extends Controller
             ->with('success', 'Invoice Saved');
     }
 
-    public function post_add_product(Request $request)
+    public function add_product(Request $request)
     {
         $temp = TempProduct::where('type', 'purchase')
             ->where('invoice_id',session('invoice_id'))
@@ -130,33 +117,33 @@ class PurchaseController extends Controller
         $temp->save();
     }
 
-    public function get_remove_product($pro_code)
+    public function remove_product($pro_code)
     {
         TempProduct::where('product_code', $pro_code)->where('type', 'purchase')->delete();
     }
 
-    public function get_update_product($pro_code, $quantity)
+    public function update_product($pro_code, $quantity)
     {
         $temp = TempProduct::where('product_code', $pro_code)->where('type', 'purchase')->first();
         $temp->quantity = $quantity;
         $temp->save();
     }
 
-    public function get_discount_product($pro_code, $discount)
+    public function discount($pro_code, $discount)
     {
         $temp = TempProduct::where('product_code', $pro_code)->where('type', 'purchase')->first();
         $temp->discount = $discount;
         $temp->save();
     }
 
-    public function get_add_tax($tax)
+    public function tax($tax)
     {
         $invoice = Invoice::find(session('invoice_id'));
         $invoice->tax = $tax;
         $invoice->save();
     }
 
-    public function get_add_charge($charge)
+    public function charge($charge)
     {
         $invoice = Invoice::find(session('invoice_id'));
         $invoice->delivery_charge = $charge;

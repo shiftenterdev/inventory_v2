@@ -115,9 +115,8 @@ class AjaxController extends Controller
 
     public function get_customer_by_phone($phone)
     {
-        $customer = Customer::where('customer_phone', $phone)->first();
-
-        return $customer;
+        $customer = Customer::where('mobile', $phone)->first();
+        return response($customer,200);
     }
 
     public function post_store_sell_customer(Request $request)

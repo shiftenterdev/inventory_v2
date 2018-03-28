@@ -17,8 +17,8 @@
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Title</label>
 
-                    <div class="col-lg-6">
-                        <input class="form-control" placeholder="Title" type="text" name="brand_title" required>
+                    <div class="col-lg-7">
+                        <input class="form-control" placeholder="Title" type="text" name="title" required>
                     </div>
                 </div>
 
@@ -27,10 +27,15 @@
 
 
                     <div class="col-lg-7">
-                        <img src="preview.png" alt="" style="height:120px;max-width: 120px;margin-right: 20px"
-                             class="img-thumbnail prvImg">
-                        <input type="hidden" name="brand_logo_id" id="imgIdVal">
-                        <button class="btn btn-info uI" type="button">Upload</button>
+                        <div class="input-group">
+                           <span class="input-group-btn">
+                             <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                               <i class="fa fa-picture-o"></i> Choose
+                             </a>
+                           </span>
+                            <input id="thumbnail" class="form-control" type="text" name="image">
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;">
                     </div>
                 </div>
 
@@ -46,3 +51,11 @@
     </div>
 @endsection
 
+@section('script')
+    @parent
+    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+    <script>
+        var prefix = "{{config('lfm.url_prefix')}}";
+        $('#lfm').filemanager('image', {prefix: prefix});
+    </script>
+@stop

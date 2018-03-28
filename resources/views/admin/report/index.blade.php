@@ -20,20 +20,20 @@
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
             // The type of chart we want to create
-            type: 'bar',
+            type: 'line',
 
             // The data for our dataset
             data: {
                 labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                 datasets: [{
                     label: "Purchase History",
-                    fill:true,
+                    fill:false,
                     backgroundColor: 'rgb(41, 128, 185)',
                     borderColor: 'rgb(41, 128, 185)',
                     data: [20, 10, 5, 2, 20, 30, 31, 6, 7, 30, 32, 11]
                 },{
                     label: "Sell History",
-                    fill:true,
+                    fill:false,
                     backgroundColor: 'rgb(142, 68, 173)',
                     borderColor: 'rgb(142, 68, 173)',
                     data: [24, 10, 15, 12, 18, 26, 30, 8, 9, 32, 27, 10]

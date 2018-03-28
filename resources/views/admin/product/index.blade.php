@@ -33,7 +33,7 @@
                         <td><img src="{{$p->image}}" alt="" style="width: 100px"></td>
                         <td>{{$p->title}}</td>
                         <td>{{$p->category->cat_title}}</td>
-                        <td>{{$p->brand->brand_title}}</td>
+                        <td>{{$p->brand->title}}</td>
                         <td>{{money($p->price)}}</td>
                         <td>{{$p->status==1?'Active':'Inactive'}}</td>
                         <td>

@@ -564,3 +564,15 @@ table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus{
     color: #fff;
 }
+.r-slide{
+    position: fixed;
+    display: block;
+    width: 500px;
+    height: 100%;
+    z-index: 2000;
+    background: #fff;
+    top: 0;
+    right: 0;
+    box-shadow: 0 0 10px #000;
+    overflow-y: scroll;
+}

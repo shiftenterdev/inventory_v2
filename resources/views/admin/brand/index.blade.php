@@ -10,14 +10,14 @@
         <fieldset>
             <legend>
                 Brand List
-                <a href="brand/create" class="btn btn-sm btn-primary nB pull-right">
+                <a href="javascript:" class="btn btn-sm btn-primary nB pull-right openRight">
                     <i class="fa fa-plus"></i> New Brand</a>
             </legend>
             <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>SL</th>
-                    <th>Logo</th>
+                    <th>Image</th>
                     <th>Title</th>
                     <th>Action</th>
                 </tr>
@@ -27,11 +27,9 @@
                     <tr>
                         <td>{{$k+1}}</td>
                         <td>
-                            @if(!empty($b->logo))
-                            <img src="/uploads/{{$b->logo}}" alt="No Image" class="t-img">
-                                @endif
+                            <img src="{{$b->image}}" alt="{{$b->title}}" class="t-img">
                         </td>
-                        <td>{{$b->brand_title}}</td>
+                        <td>{{$b->title}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="brand/edit/{{$b->id}}" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
@@ -46,3 +44,4 @@
 
     </div>
 @endsection
+

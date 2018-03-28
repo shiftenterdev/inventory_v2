@@ -1,11 +1,17 @@
 <div class="list-group sidebar">
 
-    <a href="sell" class="list-group-item {{Request::segment(1)=='sell'?'active':''}}">
+    <a href="sell" class="list-group-item {{Request::is('sell')?'active':''}}">
         <i class="fa fa-shopping-bag"></i> Sell</a>
-    <a href="purchase" class="list-group-item {{Request::segment(1)=='purchase'?'active':''}}">
+    <a href="purchase" class="list-group-item {{Request::is('purchase')?'active':''}}">
         <i class="fa fa-shopping-basket"></i> Purchase</a>
-    <a href="payment" class="list-group-item {{Request::segment(1)=='payment'?'active':''}}">
+    <a href="payment" class="list-group-item {{Request::is('payment')?'active':''}}">
         <i class="fa fa-money"></i> Payment</a>
+    <hr>
+
+    <a href="sell/history" class="list-group-item {{Request::is('sell/history')?'active':''}}">
+        <i class="fa fa-list-alt"></i> Sell History</a>
+    <a href="purchase/history" class="list-group-item {{Request::is('purchase/history')?'active':''}}">
+        <i class="fa fa-list-ul"></i> Purchase History</a>
     <hr>
 
     <a href="brand" class="list-group-item {{Request::segment(1)=='brand'?'active':''}}">
@@ -19,12 +25,7 @@
     <hr>
     <a href="report" class="list-group-item {{Request::segment(1)=='report'?'active':''}}">
         <i class="fa fa-bar-chart"></i> Report</a>
-    <hr>
 
-    <a href="sells-history" class="list-group-item {{Request::segment(1)=='sells-history'?'active':''}}">
-        <i class="fa fa-list-alt"></i> Sell History</a>
-    <a href="purchase-history" class="list-group-item {{Request::segment(1)=='purchase-history'?'active':''}}">
-        <i class="fa fa-list-ul"></i> Purchase History</a>
     <hr>
     <a href="stock" class="list-group-item {{Request::segment(1)=='stock'?'active':''}}">
         <i class="fa fa-cubes"></i> Stock</a>
@@ -39,6 +40,6 @@
         <i class="fa fa-user"></i> Roles</a>
     <a href="permission" class="list-group-item {{Request::segment(1)=='permission'?'active':''}}">
         <i class="fa fa-cog"></i> Permission</a>
-    <a href="settings/update-password" class="list-group-item {{Request::segment(1)=='settings'?'active':''}}">
+    <a href="settings" class="list-group-item {{Request::segment(1)=='settings'?'active':''}}">
         <i class="fa fa-cogs"></i> Settings</a>
 </div>

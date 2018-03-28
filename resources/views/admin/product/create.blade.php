@@ -34,7 +34,7 @@
                         <select name="brand_id" class="form-control select">
                             <option value="">Select Brand</option>
                             @foreach($brands as $b)
-                                <option value="{{$b->id}}">{{$b->brand_title}}</option>
+                                <option value="{{$b->id}}">{{$b->title}}</option>
                             @endforeach
                         </select>
                     </div>

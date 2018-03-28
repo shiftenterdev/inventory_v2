@@ -8,12 +8,41 @@ Route::controller('auth', 'AuthController');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'AdminController@get_home');
     Route::controller('ajax', 'AjaxController');
-    Route::controller('settings', 'SettingsController');
-    Route::controller('sell', 'SellController');
-    Route::controller('purchase', 'PurchaseController');
     Route::controller('refund', 'RefundController');
 
+    Route::get('sell','SellController@index');
+    Route::get('sell/show/{invoice}','SellController@show');
+    Route::get('sell/products','SellController@products');
+    Route::get('sell/invoice','SellController@invoice');
+    Route::post('sell/store','SellController@store');
+    Route::get('sell/history','SellController@history');
+    Route::post('sell/product/add','SellController@add_product');
+    Route::get('sell/product/remove/{id}','SellController@remove_product');
+    Route::get('sell/product/update/{code}/{qty}','SellController@update_product');
+    Route::get('sell/product/discount/{code}/{qty}','SellController@discount');
+    Route::get('sell/tax/{charge}','SellController@tax');
+    Route::get('sell/other_discount/{charge}','SellController@other_discount');
+    Route::get('sell/charge/{charge}','SellController@charge');
+
+    Route::get('purchase', 'PurchaseController@index');
+    Route::get('purchase/show/{invoice}','PurchaseController@show');
+    Route::get('purchase/products','PurchaseController@products');
+    Route::get('purchase/invoice','PurchaseController@invoice');
+    Route::post('purchase/store','PurchaseController@store');
+    Route::get('purchase/history','PurchaseController@history');
+    Route::post('purchase/product/add','PurchaseController@add_product');
+    Route::get('purchase/product/remove/{id}','PurchaseController@remove_product');
+    Route::get('purchase/product/update/{code}/{qty}','PurchaseController@update_product');
+    Route::get('purchase/product/discount/{code}/{qty}','PurchaseController@discount');
+    Route::get('purchase/tax/{charge}','PurchaseController@tax');
+    Route::get('purchase/other_discount/{charge}','SellController@other_discount');
+    Route::get('purchase/charge/{charge}','PurchaseController@charge');
+
     Route::get('report','ReportController@index');
+
+    Route::get('settings','SettingsController@index');
+    Route::post('settings/password','SettingsController@password');
+    Route::post('settings/store','SettingsController@store');
 
     Route::get('payment','PaymentController@index');
     Route::get('payment/create','PaymentController@create');
@@ -90,8 +119,6 @@ Route::group(['middleware' => 'auth'], function () {
 /*
  * Custom Route
  */
-Route::get('sells-history', 'SellController@history');
-Route::get('purchase-history', 'PurchaseController@history');
 
 //get('pass', function () {
 //    return bcrypt('112233');

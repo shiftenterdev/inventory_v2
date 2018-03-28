@@ -19,10 +19,10 @@
                     <label class="col-lg-2 control-label">Product</label>
 
                     <div class="col-lg-8">
-                        <select name="pro_id" class="form-control parProduct select">
+                        <select name="code" class="form-control parProduct select">
                             <option value="">Product</option>
                             @foreach($products as $p)
-                                <option value="{{$p->code}}">{{$p->title}}</option>
+                                <option value="{{$p->code}}">{{$p->title}} [{{$p->code}}]</option>
                             @endforeach
                         </select>
                     </div>
@@ -31,14 +31,14 @@
                     <label class="col-lg-2 control-label">Quantity</label>
 
                     <div class="col-lg-8">
-                        <input type="text" name="pro_stock" class="form-control num" placeholder="Quantity">
+                        <input type="text" name="stock" class="form-control num" placeholder="Quantity">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Price</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Price" type="text" name="pro_price">
+                        <input class="form-control" placeholder="Price" type="text" name="price">
                     </div>
                 </div>
 

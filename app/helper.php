@@ -17,12 +17,17 @@ function app_date($date='')
 
 function money($amount)
 {
-    return number_format($amount,2);
+    return conf('currency').' '.number_format($amount,2);
 }
 
 function title($text)
 {
     return ucwords($text);
+}
+
+function conf($key)
+{
+    return \App\Models\Config::where('title',$key)->pluck('value');
 }
 
 function thumb($url){

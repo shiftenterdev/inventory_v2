@@ -12,9 +12,6 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::all();
-        foreach ($brands as $b) {
-            $b->logo = CoreTrait::imageById($b->brand_logo_id);
-        }
 
         return view('admin.brand.index')
             ->with(compact('brands'));
@@ -37,8 +34,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->except('_token');
-        Brand::create($input);
+        Brand::create($request->except('_token'));
 
         return redirect('/brand');
     }
@@ -64,11 +60,9 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brand = Brand::where('id', $id)->first();
-        $image = CoreTrait::imageById($brand->brand_logo_id);
-
+        $brand = Brand::find($id);
         return view('admin.brand.edit')
-            ->with(compact('brand', 'image'));
+            ->with(compact('brand'));
     }
 
     /**
