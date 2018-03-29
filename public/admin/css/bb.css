@@ -153,6 +153,7 @@ textarea {
     height: 90px;
     margin: auto;
     position: fixed;
+    padding-top: 22px;
     left: 0;
     right: 0;
     top: 0;
@@ -574,5 +575,4 @@ table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .
     top: 0;
     right: 0;
     box-shadow: 0 0 10px #000;
-    overflow-y: scroll;
 }

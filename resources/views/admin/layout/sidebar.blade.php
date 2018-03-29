@@ -32,6 +32,9 @@
     <a href="refund" class="list-group-item {{Request::segment(1)=='refund'?'active':''}}">
         <i class="fa fa-share-square-o"></i> Refund/Return</a>
     <hr>
+    <a href="employee" class="list-group-item {{Request::segment(1)=='employee'?'active':''}}">
+        <i class="fa fa-user-secret"></i> Employee</a>
+    <hr>
     <a href="customer" class="list-group-item {{Request::segment(1)=='customer'?'active':''}}">
         <i class="fa fa-user"></i> Customers</a>
     <a href="user" class="list-group-item {{Request::segment(1)=='user'?'active':''}}">

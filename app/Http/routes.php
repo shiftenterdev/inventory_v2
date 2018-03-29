@@ -51,6 +51,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('payment/update/{id}','PaymentController@update');
     Route::get('payment/delete/{id}','PaymentController@delete');
 
+    Route::get('employee','EmployeeController@index');
+    Route::get('employee/create','EmployeeController@create');
+    Route::post('employee/store','EmployeeController@store');
+    Route::get('employee/edit/{id}','EmployeeController@edit');
+    Route::post('employee/update/{id}','EmployeeController@update');
+    Route::get('employee/delete/{id}','EmployeeController@delete');
+
     Route::get('product','ProductController@index');
     Route::get('product/create','ProductController@create');
     Route::post('product/store','ProductController@store');

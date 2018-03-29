@@ -28,16 +28,16 @@ class SellController extends Controller
             if (empty($invoice)) {
                 $invoice = new Invoice();
                 $invoice->invoice_no = $invoice_no;
+                $invoice->other_discount = 0;
                 $invoice->delivery_charge = 0;
                 $invoice->tax = 0;
                 $invoice->type = 'sell';
                 $invoice->is_locked = 0;
                 $invoice->save();
             }
-            session(['invoice_id' => $invoice->id]);
+            session(['invoice_no' => $invoice_no]);
             $products = Product::get(['code', 'title']);
-            $temp_pro = TempProduct::with('product')->where('type', 'sell')->get();
-            $invoice = Invoice::find(session('invoice_id'));
+            $invoice = Invoice::where('invoice_no',\session('invoice_no'))->first();
             return view('admin.sell.index')
                 ->with(compact('products', 'temp_pro','invoice'));
         }else{
@@ -57,11 +57,10 @@ class SellController extends Controller
 
     public function products()
     {
-        $temp_pro = TempProduct::where('type', 'sell')->get();
         $products = Product::get(['code', 'title']);
-        $invoice = Invoice::find(session('invoice_id'));
+        $invoice = Invoice::where('invoice_no',\session('invoice_no'))->first();
         return view('admin.common.product_list')
-            ->with(compact('products', 'temp_pro', 'invoice'));
+            ->with(compact('products', 'invoice'));
     }
 
     public function invoice()
@@ -69,6 +68,7 @@ class SellController extends Controller
         $customer = Session::get('sell_customer');
         $customer = json_decode(json_encode($customer), false);
         $products = TempProduct::with('product')->get();
+
 
         return view('admin.sell.invoice')
             ->with(compact('customer', 'products'));
@@ -119,66 +119,54 @@ class SellController extends Controller
 
     public function add_product(Request $request)
     {
-        $temp = TempProduct::where('type', 'sell')
-            ->where('invoice_id',session('invoice_id'))
+        $products = InvoiceProduct::where('invoice_no',session('invoice_no'))
             ->where('product_code', $request->code)->first();
-        if (!empty($temp)) {
-            $temp->quantity = $temp->quantity + 1;
+        if (!empty($products)) {
+            $products->quantity = $products->quantity + 1;
         } else {
-            $temp = new TempProduct();
-            $temp->product_code= $request->code;
-            $temp->invoice_id = session('invoice_id');
-            $temp->quantity = 1;
-            $temp->discount = 0;
-            $temp->type = 'sell';
+            $products = new InvoiceProduct();
+            $products->product_code= $request->code;
+            $products->invoice_no = session('invoice_no');
+            $products->quantity = 1;
+            $products->discount = 0;
+            $products->type = 'sell';
         }
 
-        $temp->save();
+        $products->save();
     }
 
     public function remove_product($pro_code)
     {
-        TempProduct::where('product_code', $pro_code)->where('type', 'sell')->delete();
+        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->delete();
     }
 
     public function update_product($pro_code, $quantity)
     {
-        $temp = TempProduct::where('product_code', $pro_code)->where('type', 'sell')->first();
-        $temp->quantity = $quantity;
-        $temp->save();
+        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->update(['quantity'=>$quantity]);
     }
 
     public function discount($pro_code, $discount)
     {
-        $temp = TempProduct::where('product_code', $pro_code)->where('type', 'sell')->first();
-        $temp->discount = $discount;
-        $temp->save();
+        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->update(['discount'=>$discount]);
     }
 
     public function tax($tax)
     {
-        $invoice = Invoice::find(session('invoice_id'));
+        $invoice = Invoice::where('invoice_no',\session('invoice_no'))->first();
         $invoice->tax = $tax;
-        $invoice->save();
-    }
-
-    public function tax_amount($tax)
-    {
-        $invoice = Invoice::find(session('invoice_id'));
-        $invoice->tax_amount = $tax;
         $invoice->save();
     }
 
     public function charge($charge)
     {
-        $invoice = Invoice::find(session('invoice_id'));
+        $invoice = Invoice::where('invoice_no',\session('invoice_no'))->first();
         $invoice->delivery_charge = $charge;
         $invoice->save();
     }
 
     public function other_discount($charge)
     {
-        $invoice = Invoice::find(session('invoice_id'));
+        $invoice = Invoice::where('invoice_no',\session('invoice_no'))->first();
         $invoice->other_discount = $charge;
         $invoice->save();
     }

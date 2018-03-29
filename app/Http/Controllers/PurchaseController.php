@@ -5,6 +5,7 @@ namespace app\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Invoice;
+use App\Models\InvoiceProduct;
 use App\Models\Product;
 use App\Models\TempProduct;
 use App\Repo\CoreTrait;
@@ -32,12 +33,11 @@ class PurchaseController extends Controller
                 $invoice->is_locked = 0;
                 $invoice->save();
             }
-            session(['invoice_id' => $invoice->id]);
+            session(['invoice_no' => $invoice_no]);
             $products = Product::get(['code', 'title']);
-            $temp_pro = TempProduct::with('product')->where('type', 'purchase')->get();
-            $invoice = Invoice::find(session('invoice_id'));
+            $invoice = Invoice::where('invoice_no',\session('invoice_no'))->first();
             return view('admin.purchase.index')
-                ->with(compact('products', 'temp_pro','invoice'));
+                ->with(compact('products','invoice'));
         }else{
             $invoice_no = CoreTrait::PurchaseInvoiceId();
             return redirect('purchase?invoice='.$invoice_no);
@@ -47,11 +47,10 @@ class PurchaseController extends Controller
 
     public function products()
     {
-        $temp_pro = TempProduct::where('type', 'purchase')->get();
         $products = Product::get(['code', 'title']);
-        $invoice = Invoice::find(session('invoice_id'));
+        $invoice = Invoice::where('invoice_no',\session('invoice_no'))->first();
         return view('admin.common.product_list')
-            ->with(compact('products', 'temp_pro', 'invoice'));
+            ->with(compact('products', 'invoice'));
     }
 
 
@@ -100,40 +99,35 @@ class PurchaseController extends Controller
 
     public function add_product(Request $request)
     {
-        $temp = TempProduct::where('type', 'purchase')
-            ->where('invoice_id',session('invoice_id'))
+        $products = InvoiceProduct::where('invoice_no',session('invoice_no'))
             ->where('product_code', $request->code)->first();
-        if (!empty($temp)) {
-            $temp->quantity = $temp->quantity + 1;
+        if (!empty($products)) {
+            $products->quantity = $products->quantity + 1;
         } else {
-            $temp = new TempProduct();
-            $temp->product_code = $request->code;
-            $temp->invoice_id = session('invoice_id');
-            $temp->quantity = 1;
-            $temp->discount = 0;
-            $temp->type = 'purchase';
+            $products = new InvoiceProduct();
+            $products->product_code= $request->code;
+            $products->invoice_no = session('invoice_no');
+            $products->quantity = 1;
+            $products->discount = 0;
+            $products->type = 'purchase';
         }
 
-        $temp->save();
+        $products->save();
     }
 
     public function remove_product($pro_code)
     {
-        TempProduct::where('product_code', $pro_code)->where('type', 'purchase')->delete();
+        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->delete();
     }
 
     public function update_product($pro_code, $quantity)
     {
-        $temp = TempProduct::where('product_code', $pro_code)->where('type', 'purchase')->first();
-        $temp->quantity = $quantity;
-        $temp->save();
+        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->update(['quantity'=>$quantity]);
     }
 
     public function discount($pro_code, $discount)
     {
-        $temp = TempProduct::where('product_code', $pro_code)->where('type', 'purchase')->first();
-        $temp->discount = $discount;
-        $temp->save();
+        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->update(['discount'=>$discount]);
     }
 
     public function tax($tax)

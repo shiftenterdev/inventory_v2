@@ -11,8 +11,8 @@
     </thead>
     <tbody>
     <?php $total = 0;?>
-    @if(!empty($temp_pro))
-        @foreach($temp_pro as $k => $t)
+    @if(count($invoice->products) > 0)
+        @foreach($invoice->products as $k => $t)
             <tr>
                 <td>{{$k+1}}</td>
                 <td>

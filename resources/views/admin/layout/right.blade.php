@@ -1,4 +1,4 @@
-<div class="r-slide animated slideInRight" style="display: none">
+<div class="r-slide animated slideInRight" id="rightSide" style="display: none">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
