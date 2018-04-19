@@ -67,6 +67,9 @@
                     <a href="sells-history"><img src="imgs/order.svg" alt=""><span>History</span></a>
                 </div>
                 <div class="col-md-2 ball">
+                    <a href="employee"><img src="imgs/employees.svg" alt=""><span>Employee</span></a>
+                </div>
+                <div class="col-md-2 ball">
                     <a href="stock"><img src="imgs/warehouse.svg" alt=""><span>Stock</span></a>
                 </div>
                 <div class="col-md-2 ball">
@@ -74,7 +77,7 @@
                 </div>
                 <div class="col-md-2 ball">
                     <div class="n">{{$customers}}</div>
-                    <a href="customer"><i class="ion-android-people"></i><span>Customer</span></a>
+                    <a href="customer"><img src="imgs/employee.svg"><span>Customer</span></a>
                 </div>
                 <div class="col-md-2 ball">
                     <a href="settings"><img src="imgs/settings.svg" alt=""><span>Setting</span></a>
