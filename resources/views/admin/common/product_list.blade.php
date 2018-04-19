@@ -40,12 +40,7 @@
     <tr>
         <td>#</td>
         <td colspan="5">
-            <select id="pro_code" class="form-control input-sm spo select">
-                <option value="">Select</option>
-                @foreach($products as $p)
-                    <option value="{{$p->code}}">{{$p->title}} [{{$p->code}}]</option>
-                @endforeach
-            </select>
+            <input type="text" class="form-control" placeholder="Search by Name or Code" id="product">
         </td>
     </tr>
     </tbody>

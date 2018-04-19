@@ -44,7 +44,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['customer_id'] = CoreTrait::customerId();
+        $input['customer_no'] = CoreTrait::customerId();
         unset($input['_token']);
         Customer::create($input);
 
@@ -110,5 +110,13 @@ class CustomerController extends Controller
 
         return redirect('/customer')
                 ->with('success', 'Customer Deleted Successfully');
+    }
+
+    public function search(Request $request)
+    {
+        return Customer::where('mobile','LIKE','%'.$request->term.'%')
+            ->select('id','mobile','name','address','email')
+            ->get()
+            ->toArray();
     }
 }

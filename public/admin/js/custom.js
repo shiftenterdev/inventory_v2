@@ -281,11 +281,3 @@ $('.r-slide .cls').on('click', function () {
     $('.r-slide').addClass('slideOutRight').addClass('slideInRight');
 });
 
-window.addEventListener('click', function(e){
-    if (document.getElementById('rightSide').contains(e.target)){
-        // Clicked in box
-    } else{
-        // Clicked outside the box
-        $('.r-slide').addClass('slideOutRight').addClass('slideInRight');
-    }
-});

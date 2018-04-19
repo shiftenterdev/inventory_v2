@@ -21,8 +21,8 @@ class PurchaseController extends Controller
 
     public function index(Request $request)
     {
-        if($request->invoice){
-            $invoice_no = $request->invoice;
+        if($request->invoice_no){
+            $invoice_no = $request->invoice_no;
             $invoice = Invoice::where('invoice_no', $invoice_no)->first();
             if (empty($invoice)) {
                 $invoice = new Invoice();
@@ -33,14 +33,12 @@ class PurchaseController extends Controller
                 $invoice->is_locked = 0;
                 $invoice->save();
             }
-            session(['invoice_no' => $invoice_no]);
-            $products = Product::get(['code', 'title']);
-            $invoice = Invoice::where('invoice_no',\session('invoice_no'))->first();
+            $invoice = Invoice::where('invoice_no',$request->invoice_no)->first();
             return view('admin.purchase.index')
-                ->with(compact('products','invoice'));
+                ->with(compact('invoice'));
         }else{
             $invoice_no = CoreTrait::PurchaseInvoiceId();
-            return redirect('purchase?invoice='.$invoice_no);
+            return redirect('purchase?invoice_no='.$invoice_no);
         }
     }
 
@@ -95,6 +93,75 @@ class PurchaseController extends Controller
 
         return redirect('buy/view/'.$input['invoice_id'])
             ->with('success', 'Invoice Saved');
+    }
+
+    public function update(Request $request)
+    {
+        switch ($request->type) {
+            case 'products':
+                $invoice = Invoice::where('invoice_no', $request->invoice_no)->first();
+                return view('admin.common.product_list')
+                    ->with(compact('products', 'invoice'));
+                break;
+
+            case 'add':
+                $invoice_product = InvoiceProduct::where('invoice_no', $request->invoice_no)
+                    ->where('product_code', $request->code)->first();
+                if (!empty($invoice_product)) {
+                    $invoice_product->quantity = $invoice_product->quantity + 1;
+                } else {
+                    $invoice_product = new InvoiceProduct();
+                    $invoice_product->product_code = $request->code;
+                    $invoice_product->invoice_no = $request->invoice_no;
+                    $invoice_product->quantity = 1;
+                    $invoice_product->discount = 0;
+                    $invoice_product->type = 'purchase';
+                    $invoice_product->price = Product::where('code', $request->code)->first()->price;
+                }
+                $invoice_product->save();
+                break;
+
+            case 'remove':
+                InvoiceProduct::where('product_code', $request->code)
+                    ->where('invoice_no', $request->invoice_no)
+                    ->delete();
+                $count = InvoiceProduct::where('invoice_no', $request->invoice_no)->count();
+                if ($count == 0) {
+                    Invoice::where('invoice_no', $request->invoice_no)->update([
+                        'delivery_charge' => 0,
+                        'tax'             => 0,
+                        'other_discount'    => 0
+                    ]);
+                }
+                break;
+
+            case 'product_discount':
+                InvoiceProduct::where('product_code', $request->code)
+                    ->where('invoice_no', $request->invoice_no)
+                    ->update(['discount' => $request->discount]);
+                break;
+
+            case 'quantity':
+                InvoiceProduct::where('product_code', $request->code)
+                    ->where('invoice_no', $request->invoice_no)
+                    ->update(['discount' => $request->quantity]);
+                break;
+
+            case 'tax':
+                Invoice::where('invoice_no', $request->invoice_no)->update(['tax' => $request->tax]);
+                break;
+
+            case 'delivery_charge':
+                Invoice::where('invoice_no', $request->invoice_no)->update(['delivery_charge' => $request->delivery_charge]);
+                break;
+
+            case 'other_discount':
+                Invoice::where('invoice_no', $request->invoice_no)->update(['other_discount' => $request->other_discount]);
+                break;
+
+            default:
+                return 0;
+        }
     }
 
     public function add_product(Request $request)

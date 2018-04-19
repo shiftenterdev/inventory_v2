@@ -6,11 +6,7 @@
 
             <div class="col-lg-8">
                 <input type="text" name="mobile" class="form-control" placeholder="Mobile"
-                       required>
-            </div>
-            <div class="col-lg-1">
-                <button class="btn btn-primary check-customer" type="button"><i
-                            class="fa fa-search"></i></button>
+                       required id="cMobile">
             </div>
         </div>
         <div class="form-group">
@@ -44,7 +40,7 @@
 
             <div class="col-lg-6">
                 <input type="text" name="invoice_no" class="form-control" placeholder="Invoice No"
-                       required value="{{request()->invoice}}" readonly>
+                       required value="{{request()->invoice_no}}" readonly>
             </div>
         </div>
         <div class="form-group">
@@ -65,26 +61,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(".check-customer").on('click', function (e) {
-        var phone = $('input[name=mobile]').val();
-        if (phone != '') {
-            load.on();
-            $.get('ajax/customer-by-phone/' + phone).done(function (result) {
-
-                if (result.length == 0) {
-                    load.off();
-                    // alert('No Result');
-                } else {
-                    $('input[name=address]').val(result.address);
-                    $('input[name=name]').val(result.name);
-                    $('input[name=email]').val(result.email);
-                    load.off();
-                }
-            });
-        } else {
-            alert('Please enter customer phone number.');
-        }
-    });
-</script>

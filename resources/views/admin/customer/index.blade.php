@@ -18,6 +18,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Customer No</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Mobile</th>
@@ -28,6 +29,7 @@
                 @foreach($customers as $c)
                     <tr>
                         <td>{{$c->id}}</td>
+                        <td>{{$c->customer_no}}</td>
                         <td>{{$c->name}}</td>
                         <td>{{$c->email}}</td>
                         <td>{{$c->mobile}}</td>

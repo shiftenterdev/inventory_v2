@@ -14,7 +14,7 @@ trait CoreTrait
 {
     public static function customerId()
     {
-        $customer_id = Customer::orderBy('id', 'desc')->pluck('customer_id');
+        $customer_id = Customer::orderBy('id', 'desc')->pluck('customer_no');
         if (empty($customer_id)) {
             $customer_id = 1000001;
         } else {

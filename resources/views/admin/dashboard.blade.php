@@ -30,6 +30,14 @@
                     <a href="product"><img src="imgs/packing.svg" alt=""><span>Product</span></a>
                 </div>
                 <div class="col-md-2 ball">
+                    <div class="n">{{$foods}}</div>
+                    <a href="food"><img src="imgs/food.svg" alt=""><span>Food</span></a>
+                </div>
+                <div class="col-md-2 ball">
+                    <div class="n">{{$tables}}</div>
+                    <a href="table"><img src="imgs/table.svg" alt=""><span>Table</span></a>
+                </div>
+                <div class="col-md-2 ball">
                     <div class="n">{{$categories}}</div>
                     <a href="category"><img src="imgs/category.svg" alt=""><span>Category</span></a>
                 </div>

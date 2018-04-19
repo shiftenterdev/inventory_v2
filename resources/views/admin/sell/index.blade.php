@@ -10,7 +10,7 @@
         <legend>
             Customer Info
         </legend>
-        <form action="sell/save-invoice" method="post" id="customerForm" class="form-horizontal">
+        <form action="sell/save-invoice" method="post" id="customerForm" class="form-horizontal" autocomplete="off">
             @include('admin.common.invoice_head')
             <legend>
                 Product List
@@ -43,7 +43,8 @@
                                         <td>{{$p->method}}</td>
                                         <td>{{$p->trx_id}}</td>
                                         <td>{{$p->updated_at}}</td>
-                                        <td><a href="payment/delete/{{$p->id}}" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
+                                        <td><a href="payment/delete/{{$p->id}}" class="btn btn-danger"><i
+                                                        class="fa fa-times"></i></a></td>
                                     </tr>
                                 @endforeach
                             </table>
@@ -101,8 +102,64 @@
 @section('script')
     @parent
     <script>
+        var INVOICE_NO = "{{request('invoice_no')}}";
 
+        $("#cMobile").autocomplete({
+            source: function (request, response) {
+                $.post("customer/search", request, response);
+            },
+            minLength: 1,
+            focus: function (event, ui) {
+                $('input[name=mobile]').val(ui.item.mobile);
+                return false;
+            },
+            select: function (event, ui) {
+//                alert(ui.item.address);
+                $('input[name=mobile]').val(ui.item.mobile);
+                $('input[name=address]').val(ui.item.address);
+                $('input[name=name]').val(ui.item.name);
+                $('input[name=email]').val(ui.item.email);
+                return false;
+            },
+            response: function (event, ui) {
+                if (!ui.content.length) {
+                    ui.content.push({id: "", mobile: "No results found", name: ""});
+                }
+            }
+        }).autocomplete("instance")._renderItem = function (ul, item) {
+            return $("<li>")
+                .append("<div>" + item.mobile + " <ins>" + item.name + "</ins></div>")
+                .appendTo(ul);
+        };
 
+        $('#productList').on('input', '#product', function () {
+            $(this).autocomplete({
+                source: function (request, response) {
+                    $.post("product/search", {invoice_no: INVOICE_NO, term: request.term}, response);
+                },
+                minLength: 1,
+                select: function (event, ui) {
+                    var formData = {
+                        code: ui.item.code,
+                        invoice_no: INVOICE_NO,
+                        type: 'add'
+                    };
+                    $.post('sell/update', formData).done(function (result) {
+                        $('.spo').val('');
+                        reloadTable();
+                    });
+                },
+                response: function (event, ui) {
+                    if (!ui.content.length) {
+                        ui.content.push({id: "", title: "No results found", code: ""});
+                    }
+                }
+            }).autocomplete("instance")._renderItem = function (ul, item) {
+                return $("<li>")
+                    .append("<div>" + item.title + " <ins>" + item.code + "</ins></div>")
+                    .appendTo(ul);
+            };
+        });
 
         $('#productList').on('change', '#pro_code', function () {
             // e.preventDefault();
@@ -122,55 +179,82 @@
 
         $('#productList').on('click', '.rSI', function () {
             load.on();
-            var v = $(this).data('code');
-            $.get('sell/product/remove/' + v).done(function (result) {
+            var formData = {
+                code: $(this).data('code'),
+                invoice_no: INVOICE_NO,
+                type: 'remove'
+            };
+            $.post('sell/update', formData).done(function (result) {
                 reloadTable();
             });
         });
 
         $('#productList').on('change', '.pq-s', function () {
             load.on();
-            var v = $(this).data('code');
-            var q = $(this).val();
-            $.get('sell/product/update/' + v + '/' + q).done(function (result) {
+            var formData = {
+                code: $(this).data('code'),
+                invoice_no: INVOICE_NO,
+                type: 'quantity',
+                quantity: $(this).val()
+            };
+            $.post('sell/update', formData).done(function (result) {
                 reloadTable();
             });
         });
 
         $('#productList').on('change', '.pd-s', function () {
             load.on();
-            var v = $(this).data('code');
-            var q = $(this).val();
-            $.get('sell/product/discount/' + v + '/' + q).done(function (result) {
+            var formData = {
+                code: $(this).data('code'),
+                invoice_no: INVOICE_NO,
+                type: 'product_discount',
+                discount: $(this).val()
+            };
+            $.post('sell/update', formData).done(function (result) {
                 reloadTable();
             });
         });
         $('#productList').on('change', 'input[name=other_discount]', function () {
             load.on();
-            var q = $(this).val();
-            $.get('sell/other_discount/' + q).done(function (result) {
+            var formData = {
+                invoice_no: INVOICE_NO,
+                type: 'other_discount',
+                other_discount: $(this).val()
+            };
+            $.post('sell/update', formData).done(function (result) {
                 reloadTable();
             });
         });
 
         $('#productList').on('change', 'input[name=tax]', function () {
             load.on();
-            var q = $(this).val();
-            $.get('sell/tax/' + q).done(function (result) {
+            var formData = {
+                invoice_no: INVOICE_NO,
+                type: 'tax',
+                tax: $(this).val()
+            };
+            $.post('sell/update', formData).done(function (result) {
                 reloadTable();
             });
         });
-        
+
         $('#productList').on('change', 'input[name=delivery_charge]', function () {
             load.on();
-            var q = $(this).val();
-            $.get('sell/charge/' + q).done(function (result) {
+            var formData = {
+                invoice_no: INVOICE_NO,
+                type: 'delivery_charge',
+                delivery_charge: $(this).val()
+            };
+            $.post('sell/update', formData).done(function (result) {
                 reloadTable();
             });
         });
         var reloadTable = function () {
-            $('#productList').load('sell/products', function () {
-                $('.select').selectize();
+            var formData = {
+                invoice_no: INVOICE_NO,
+                type: 'products'
+            };
+            $('#productList').load('sell/update', formData, function () {
                 load.off();
             });
         }

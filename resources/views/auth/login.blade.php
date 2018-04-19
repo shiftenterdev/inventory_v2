@@ -26,22 +26,18 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <div class="alert alert-warning">
-                            user: <ins>admin@demo.com</ins> <br>
-                            pass: <ins>demo123</ins>
-                        </div>
                         <form action="auth" class="form-horizontal" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label for="inputEmail" class="col-lg-3 control-label">Email</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Email" autofocus="on" autocomplete="off">
+                                    <input type="text" class="form-control" name="email" id="inputEmail" value="admin@demo.com" placeholder="Email" autofocus="on" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword" class="col-lg-3 control-label">Password</label>
                                 <div class="col-lg-8">
-                                    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" autocomplete="off">
+                                    <input type="password" class="form-control" name="password" id="inputPassword" value="demo123" placeholder="Password" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group">

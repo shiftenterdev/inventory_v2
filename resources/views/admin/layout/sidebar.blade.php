@@ -13,7 +13,15 @@
     <a href="purchase/history" class="list-group-item {{Request::is('purchase/history')?'active':''}}">
         <i class="fa fa-list-ul"></i> Purchase History</a>
     <hr>
-
+    <a href="food" class="list-group-item {{Request::is('food')?'active':''}}">
+        <i class="fa fa-coffee"></i> Food</a>
+    <a href="food/category" class="list-group-item {{Request::is('food/category')?'active':''}}">
+        <i class="fa fa-tasks"></i> Food Category</a>
+    <a href="table" class="list-group-item {{Request::is('table')?'active':''}}">
+        <i class="fa fa-cutlery"></i> Table</a>
+    <a href="bill" class="list-group-item {{Request::is('bill')?'active':''}}">
+        <i class="fa fa-file-text"></i> Bill</a>
+    <hr>
     <a href="brand" class="list-group-item {{Request::segment(1)=='brand'?'active':''}}">
         <i class="fa fa-contao"></i> Brand</a>
     <a href="category" class="list-group-item {{Request::segment(1)=='category'?'active':''}}">

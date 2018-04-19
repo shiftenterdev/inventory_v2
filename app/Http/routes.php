@@ -16,13 +16,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('sell/invoice','SellController@invoice');
     Route::post('sell/store','SellController@store');
     Route::get('sell/history','SellController@history');
-    Route::post('sell/product/add','SellController@add_product');
-    Route::get('sell/product/remove/{id}','SellController@remove_product');
-    Route::get('sell/product/update/{code}/{qty}','SellController@update_product');
-    Route::get('sell/product/discount/{code}/{qty}','SellController@discount');
-    Route::get('sell/tax/{charge}','SellController@tax');
-    Route::get('sell/other_discount/{charge}','SellController@other_discount');
-    Route::get('sell/charge/{charge}','SellController@charge');
+    Route::post('sell/update','SellController@update');
 
     Route::get('purchase', 'PurchaseController@index');
     Route::get('purchase/show/{invoice}','PurchaseController@show');
@@ -30,13 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('purchase/invoice','PurchaseController@invoice');
     Route::post('purchase/store','PurchaseController@store');
     Route::get('purchase/history','PurchaseController@history');
-    Route::post('purchase/product/add','PurchaseController@add_product');
-    Route::get('purchase/product/remove/{id}','PurchaseController@remove_product');
-    Route::get('purchase/product/update/{code}/{qty}','PurchaseController@update_product');
-    Route::get('purchase/product/discount/{code}/{qty}','PurchaseController@discount');
-    Route::get('purchase/tax/{charge}','PurchaseController@tax');
-    Route::get('purchase/other_discount/{charge}','SellController@other_discount');
-    Route::get('purchase/charge/{charge}','PurchaseController@charge');
+    Route::post('purchase/update','PurchaseController@update');
 
     Route::get('report','ReportController@index');
 
@@ -58,7 +46,29 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('employee/update/{id}','EmployeeController@update');
     Route::get('employee/delete/{id}','EmployeeController@delete');
 
+    Route::get('table','TableController@index');
+    Route::get('table/create','TableController@create');
+    Route::post('table/store','TableController@store');
+    Route::get('table/edit/{id}','TableController@edit');
+    Route::post('table/update/{id}','TableController@update');
+    Route::get('table/delete/{id}','TableController@delete');
+
+    Route::get('food','FoodController@index');
+    Route::get('food/create','FoodController@create');
+    Route::post('food/store','FoodController@store');
+    Route::get('food/edit/{id}','FoodController@edit');
+    Route::post('food/update/{id}','FoodController@update');
+    Route::get('food/delete/{id}','FoodController@delete');
+
+    Route::get('food/category','FoodCategoryController@index');
+    Route::get('food/category/create','FoodCategoryController@create');
+    Route::post('food/category/store','FoodCategoryController@store');
+    Route::get('food/category/edit/{id}','FoodCategoryController@edit');
+    Route::post('food/category/update/{id}','FoodCategoryController@update');
+    Route::get('food/category/delete/{id}','FoodCategoryController@delete');
+
     Route::get('product','ProductController@index');
+    Route::post('product/search','ProductController@search');
     Route::get('product/create','ProductController@create');
     Route::post('product/store','ProductController@store');
     Route::get('product/edit/{id}','ProductController@edit');
@@ -73,6 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('stock/delete/{id}','StockController@delete');
 
     Route::get('customer','CustomerController@index');
+    Route::post('customer/search','CustomerController@search');
     Route::get('customer/create','CustomerController@create');
     Route::post('customer/store','CustomerController@store');
     Route::get('customer/edit/{id}','CustomerController@edit');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\InvoiceProduct;
 use App\Models\Product;
 use App\Models\ProductDetails;
 use App\Repo\CoreTrait;
@@ -19,7 +20,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('category','brand')->get();
+        $products = Product::with('category', 'brand')->get();
 
         return view('admin.product.index')
             ->with(compact('products'));
@@ -30,13 +31,13 @@ class ProductController extends Controller
         $categories = Category::with('parent')->get();
         foreach ($categories as $c) {
             if ($c->parent) {
-                $c->full_category = $c->parent->cat_title.' > '.$c->cat_title;
-            }else{
+                $c->full_category = $c->parent->cat_title . ' > ' . $c->cat_title;
+            } else {
                 $c->full_category = $c->cat_title;
             }
         }
 
-        $brands = Brand::get(['id', 'brand_title']);
+        $brands = Brand::get(['id', 'title']);
 
         return view('admin.product.create')
             ->with(compact('categories', 'brands'));
@@ -64,12 +65,12 @@ class ProductController extends Controller
         $categories = Category::with('parent')->get();
         foreach ($categories as $c) {
             if ($c->parent) {
-                $c->full_category = $c->parent->cat_title.' > '.$c->cat_title;
-            }else{
+                $c->full_category = $c->parent->cat_title . ' > ' . $c->cat_title;
+            } else {
                 $c->full_category = $c->cat_title;
             }
         }
-        $brands = Brand::get(['id', 'brand_title']);
+        $brands = Brand::get(['id', 'title']);
         $product = Product::where('id', $id)->first();
 
         return view('admin.product.edit')
@@ -89,5 +90,18 @@ class ProductController extends Controller
         Product::destroy($id);
 
         return redirect('product');
+    }
+
+    public function search(Request $request)
+    {
+        $exist_product = [];
+        if ($request->invoice_no) {
+            $exist_product = InvoiceProduct::where('invoice_no', $request->invoice_no)->lists('product_code');
+        }
+        return Product::where('code', 'LIKE', '%' . $request->term . '%')
+            ->orWhere('title', 'LIKE', '%' . $request->term . '%')
+            ->whereNotIn('code', $exist_product)
+            ->select('id', 'title', 'code')
+            ->get()->toArray();
     }
 }
