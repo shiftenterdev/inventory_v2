@@ -11,7 +11,7 @@ class Invoice extends Model
 
     public function customer()
     {
-        return $this->hasOne(Customer::class,'id','customer_id');
+        return $this->hasOne(InvoiceCustomer::class,'invoice_no','invoice_no');
     }
 
     public function products()

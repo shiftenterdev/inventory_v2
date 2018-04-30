@@ -19,9 +19,9 @@
                     <th>Invoice ID</th>
                     <th>Customer Mobile</th>
                     <th>Customer Name</th>
-                    <th>Payment Opt</th>
                     <th>Invoice Date</th>
-                    <th>Create Date</th>
+                    <th>Total</th>
+                    <th>Paid</th>
                     <th>Invoice</th>
                 </tr>
                 </thead>
@@ -29,11 +29,11 @@
                 @foreach($sells as $s)
                     <tr>
                         <td>{{$s->invoice_no}}</td>
-                        <td>{{$s->customer->customer_phone}}</td>
-                        <td>{{$s->customer->customer_name}}</td>
-                        <td>{{$s->payment_option}}</td>
+                        <td>{{$s->customer->mobile}}</td>
+                        <td>{{$s->customer->name}}</td>
                         <td>{{app_date($s->invoice_date)}}</td>
-                        <td>{{app_date($s->updated_at)}}</td>
+                        <td>{{money($s->total)}}</td>
+                        <td>{{money($s->payment)}}</td>
                         <td>
                             <a href="sell/show/{{$s->invoice_no}}" class="btn btn-sm btn-success"><i
                                         class="fa fa-file-text"></i></a>

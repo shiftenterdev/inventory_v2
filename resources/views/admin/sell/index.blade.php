@@ -10,7 +10,7 @@
         <legend>
             Customer Info
         </legend>
-        <form action="sell/save-invoice" method="post" id="customerForm" class="form-horizontal" autocomplete="off">
+        <form action="sell/store" method="post" id="customerForm" class="form-horizontal" autocomplete="off">
             @include('admin.common.invoice_head')
             <legend>
                 Product List
@@ -51,13 +51,16 @@
                             </table>
                         </div>
                     @endif
-                    <div class="text-center">
-                        <button type="button" class="btn btn-danger openRight"><i class="fa fa-money"></i> Payment
-                        </button>
-                        <button type="submit" class="btn btn-primary">Save Invoice</button>
-                    </div>
+
                 </div>
             </div>
+
+            <div class="text-center">
+                <button type="button" class="btn btn-danger openRight"><i class="fa fa-money"></i> Payment
+                </button>
+                <button type="submit" class="btn btn-primary">Save Invoice</button>
+            </div>
+
         </form>
 
 

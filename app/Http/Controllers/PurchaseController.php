@@ -30,7 +30,7 @@ class PurchaseController extends Controller
                 $invoice->delivery_charge = 0;
                 $invoice->tax = 0;
                 $invoice->type = 'purchase';
-                $invoice->is_locked = 0;
+                $invoice->status = 0;
                 $invoice->save();
             }
             $invoice = Invoice::where('invoice_no',$request->invoice_no)->first();

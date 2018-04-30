@@ -4,6 +4,8 @@ namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\InvoiceCustomer;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Sell;
@@ -32,7 +34,7 @@ class SellController extends Controller
                 $invoice->delivery_charge = 0;
                 $invoice->tax = 0;
                 $invoice->type = 'sell';
-                $invoice->is_locked = 0;
+                $invoice->status = 0;
                 $invoice->save();
             }
             $invoice = Invoice::where('invoice_no', $request->invoice_no)->first();
@@ -46,9 +48,9 @@ class SellController extends Controller
 
     public function show($invoice_no)
     {
-        $invoice = Invoice::with('details.product', 'customer')
-            ->where('invoice_no', $invoice_no)
+        $invoice = Invoice::where('invoice_no', $invoice_no)
             ->first();
+
         return view('admin.sell.invoice', compact('invoice'));
     }
 
@@ -87,7 +89,7 @@ class SellController extends Controller
                     Invoice::where('invoice_no', $request->invoice_no)->update([
                         'delivery_charge' => 0,
                         'tax'             => 0,
-                        'other_discount'    => 0
+                        'other_discount'  => 0
                     ]);
                 }
                 break;
@@ -101,7 +103,7 @@ class SellController extends Controller
             case 'quantity':
                 InvoiceProduct::where('product_code', $request->code)
                     ->where('invoice_no', $request->invoice_no)
-                    ->update(['discount' => $request->quantity]);
+                    ->update(['quantity' => $request->quantity]);
                 break;
 
             case 'tax':
@@ -134,26 +136,31 @@ class SellController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->all();
-        unset($input['_token']);
-        $customer = Session::get('sell_customer');
-        if ($customer['customer_id'] == '') {
-            $customer['customer_id'] = CoreTrait::customerId();
-            $customer = Customer::create($customer);
-        }
-        $input['customer_id'] = $customer['customer_id'];
-        $input['invoice_id'] = CoreTrait::SellInvoiceId();
-        Sell::create($input);
-        $products = Session::get('sell_items');
-        foreach ($products as $key => $p) {
-            unset($p['pro_title']);
-            $p['invoice_id'] = $input['invoice_id'];
-            InvoiceProduct::create($p);
-        }
-        Session::forget('sell_customer');
-        Session::forget('sell_items');
+        $input = $request->except('_token');
+        Invoice::where('invoice_no', $request->invoice_no)->update([
+            'status'       => 1,
+            'invoice_sl'   => $request->invoice_sl,
+            'invoice_date' => $request->invoice_date,
+        ]);
+        InvoiceCustomer::create([
+            'invoice_no' => $request->invoice_no,
+            'name'       => $request->name,
+            'email'      => $request->email,
+            'mobile'     => $request->mobile,
+            'address'    => $request->address
+        ]);
 
-        return redirect('sell/view/' . $input['invoice_id'])
+        $customer_exists = Customer::where('mobile', $request->mobile)->first();
+        if (empty($customer_exists)) {
+            Customer::create([
+                'name'    => $request->name,
+                'email'   => $request->email,
+                'mobile'  => $request->mobile,
+                'address' => $request->address
+            ]);
+        }
+
+        return redirect('sell/show/' . $input['invoice_no'])
             ->with('success', 'Invoice Saved');
     }
 
@@ -161,8 +168,22 @@ class SellController extends Controller
     public function history()
     {
         $sells = Invoice::where('type', 'sell')
-            ->where('is_locked', 1)
-            ->with('customer', 'details')->get();
+            ->where('status', 1)->get();
+
+        foreach ($sells as $s) {
+            $t = 0;
+            foreach ($s->products as $p) {
+                $t += $p->price * $p->quantity;
+            }
+            $t += $s->tax / 100 * $t;
+            $t += $s->delivery_charge;
+            $s->total = $t;
+        }
+
+        foreach ($sells as $s){
+            $s->payment = Payment::where('invoice_no',$s->invoice_no)->sum('amount');
+        }
+
         return view('admin.sell.history')
             ->with(compact('sells'));
     }
@@ -172,61 +193,6 @@ class SellController extends Controller
         $result = Sell::with('customer', 'products')->where('invoice_id', $sell_id)->first();
         return view('admin.sell.view')
             ->with(compact('result'));
-    }
-
-
-    public function add_product(Request $request)
-    {
-        $products = InvoiceProduct::where('invoice_no', session('invoice_no'))
-            ->where('product_code', $request->code)->first();
-        if (!empty($products)) {
-            $products->quantity = $products->quantity + 1;
-        } else {
-            $products = new InvoiceProduct();
-            $products->product_code = $request->code;
-            $products->invoice_no = session('invoice_no');
-            $products->quantity = 1;
-            $products->discount = 0;
-            $products->type = 'sell';
-        }
-
-        $products->save();
-    }
-
-    public function remove_product($pro_code)
-    {
-        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->delete();
-    }
-
-    public function update_product($pro_code, $quantity)
-    {
-        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->update(['quantity' => $quantity]);
-    }
-
-    public function discount($pro_code, $discount)
-    {
-        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->update(['discount' => $discount]);
-    }
-
-    public function tax($tax)
-    {
-        $invoice = Invoice::where('invoice_no', \session('invoice_no'))->first();
-        $invoice->tax = $tax;
-        $invoice->save();
-    }
-
-    public function charge($charge)
-    {
-        $invoice = Invoice::where('invoice_no', \session('invoice_no'))->first();
-        $invoice->delivery_charge = $charge;
-        $invoice->save();
-    }
-
-    public function other_discount($charge)
-    {
-        $invoice = Invoice::where('invoice_no', \session('invoice_no'))->first();
-        $invoice->other_discount = $charge;
-        $invoice->save();
     }
 
     public function post_save_invoice(Request $request)

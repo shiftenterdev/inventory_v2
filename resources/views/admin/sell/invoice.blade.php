@@ -14,15 +14,19 @@
                 <table>
                     <tr>
                         <td>Name</td>
-                        <td> : <strong>{{$invoice->customer->customer_name}}</strong></td>
+                        <td> : <strong>{{$invoice->customer->name or ''}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td> : <strong>{{$invoice->customer->email or ''}}</strong></td>
                     </tr>
                     <tr>
                         <td>Address</td>
-                        <td> : <strong>{{$invoice->customer->customer_address}}</strong></td>
+                        <td> : <strong>{{$invoice->customer->address or ''}}</strong></td>
                     </tr>
                     <tr>
                         <td>Phone</td>
-                        <td> : <strong>{{$invoice->customer->customer_phone}}</strong></td>
+                        <td> : <strong>{{$invoice->customer->mobile or ''}}</strong></td>
                     </tr>
                 </table>
             </div>
@@ -31,7 +35,15 @@
                 <table>
                     <tr>
                         <td>Invoice date</td>
-                        <td> : <strong>{{date('d-m-Y',strtotime($invoice->created_at))}}</strong></td>
+                        <td> : <strong>{{$invoice->invoice_date}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Invoice No</td>
+                        <td> : <strong>{{$invoice->invoice_no}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Invoice Sl</td>
+                        <td> : <strong>{{$invoice->invoice_sl}}</strong></td>
                     </tr>
 
 
@@ -54,14 +66,14 @@
             </thead>
             <tbody>
             <?php $total = 0; ?>
-            @foreach($invoice->details as $k => $p)
+            @foreach($invoice->products as $k => $p)
                 <tr>
                     <td>{{$k+1}}</td>
-                    <td>{{$p->product->pro_title}}</td>
+                    <td>{{$p->product->title}}</td>
                     <td class="text-center">{{$p->quantity}}</td>
-                    <td class="text-right">{{money($p->product->pro_price)}}</td>
-                    <td class="text-right">{{money($p->product->pro_price * $p->quantity)}}</td>
-                    <?php $total += $p->product->pro_price * $p->quantity ?>
+                    <td class="text-right">{{money($p->product->price)}}</td>
+                    <td class="text-right">{{money($p->product->price * $p->quantity)}}</td>
+                    <?php $total += $p->product->price * $p->quantity ?>
                 </tr>
             @endforeach
             <tr>
@@ -70,7 +82,7 @@
             </tr>
             <tr>
                 <td colspan="4" class="text-right">Delivery Charge</td>
-                <td class="total text-right">{{$invoice->delivery_charge}}</td>
+                <td class="total text-right">{{money($invoice->delivery_charge)}}</td>
             </tr>
             <tr>
                 <td colspan="4" class="text-right">Tax({{$invoice->tax}}%)</td>
@@ -81,9 +93,74 @@
                 <td colspan="4" class="text-right">Gross Total</td>
                 <td class="g-t text-right">{{money($total + $invoice->delivery_charge + $invoice->tax/100*$total)}}</td>
             </tr>
+            <tr>
+                <td colspan="4" class="text-right">Paid</td>
+                <td class="g-t text-right">{{money($invoice->payments->sum('amount'))}}</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="text-right">Total Due</td>
+                <td class="g-t text-right">{{money($total + $invoice->delivery_charge + $invoice->tax/100*$total - $invoice->payments->sum('amount'))}}</td>
+            </tr>
             </tbody>
         </table>
     </div>
+    <h5>Payment Details</h5>
+    @if(count($invoice->payments)>0)
+        <div id="payment">
+            <table class="table table-bordered table-stripped">
+                <thead>
+                <tr class="t-imp">
+                    <th>SL</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Trx No</th>
+                    <th>Date</th>
+                    <th>Option</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($invoice->payments as $k => $p)
+                    <tr>
+                        <td>{{$k+1}}</td>
+                        <td>{{$p->amount}}</td>
+                        <td>{{$p->method}}</td>
+                        <td>{{$p->trx_id}}</td>
+                        <td>{{$p->updated_at}}</td>
+                        <td><a href="payment/delete/{{$p->id}}" class="btn btn-danger"><i
+                                        class="fa fa-times"></i></a></td>
+                    </tr>
+                @endforeach
+            </table>
+            </table>
+        </div>
+    @endif
+    <form class="form-inline" method="post" action="payment/store">
+        {{csrf_field()}}
+        <input type="hidden" name="invoice_no" value="{{$invoice->invoice_no}}">
+        <div class="form-group">
+            <label for="exampleInputName2">Amount</label>
+            <input type="text" class="form-control" id="exampleInputName2" name="amount" placeholder="Amount">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail2">Method</label>
+            <select name="payment_method" id="" class="form-control" required>
+                <option value="">Select Method</option>
+                <option value="Cash">Cash</option>
+                <option value="Card">Card</option>
+                <option value="bKash">bKash</option>
+                <option value="Cheque">Cheque</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail2">Trx Id</label>
+            <input type="text" class="form-control" id="exampleInputEmail2" name="trx_id" placeholder="Trx ID">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail2">Other Info</label>
+            <input type="text" class="form-control" id="exampleInputEmail2" name="info" placeholder="Other Info">
+        </div>
+        <button type="submit" class="btn btn-default">Save Payment</button>
+    </form>
     <div style="margin-bottom: 150px"></div>
 
 @endsection

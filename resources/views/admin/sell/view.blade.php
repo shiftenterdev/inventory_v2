@@ -56,11 +56,11 @@
                     @foreach($result->products as $k => $p)
                         <tr>
                             <td>{{$k+1}}</td>
-                            <td>{{$p->pro_code}}</td>
-                            <td>{{$p->pro_quantity}}</td>
-                            <td>{{$p->pro_price}}</td>
-                            <td>{{$p->pro_price * $p->pro_quantity}}</td>
-                            <?php $total += $p->pro_price * $p->pro_quantity ?>
+                            <td>{{$p->code}}</td>
+                            <td>{{$p->quantity}}</td>
+                            <td>{{$p->price}}</td>
+                            <td>{{$p->price * $p->quantity}}</td>
+                            <?php $total += $p->price * $p->quantity ?>
                         </tr>
                     @endforeach
                     </tbody>
@@ -80,7 +80,7 @@
                 <hr>
                 <div class="condition">
                     <ul>
-                        <li>Return Product applicable within 1 weeks.(condithon apply)</li>
+                        <li>Return Product applicable within 1 weeks.(condition apply)</li>
                         <li>Product replacement available within 2 weeks.(condition apply)</li>
                     </ul>
                 </div>

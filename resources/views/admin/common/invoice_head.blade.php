@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-lg-3 control-label">Order No</label>
+            <label class="col-lg-3 control-label">Invoice Sl</label>
 
             <div class="col-lg-6">
                 <input type="text" name="invoice_sl" class="form-control" placeholder="Invoice Sl"
