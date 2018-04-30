@@ -22,7 +22,7 @@
 
                     <div class="panel-heading">
                         <div class="panel-title">
-                            Admin Console
+                            Raindrop Cafe Console
                         </div>
                     </div>
                     <div class="panel-body">
