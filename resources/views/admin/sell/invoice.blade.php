@@ -71,9 +71,9 @@
                     <td>{{$k+1}}</td>
                     <td>{{$p->product->title}}</td>
                     <td class="text-center">{{$p->quantity}}</td>
-                    <td class="text-right">{{money($p->product->price)}}</td>
-                    <td class="text-right">{{money($p->product->price * $p->quantity)}}</td>
-                    <?php $total += $p->product->price * $p->quantity ?>
+                    <td class="text-right">{{money($p->price)}}</td>
+                    <td class="text-right">{{money($p->price * $p->quantity)}}</td>
+                    <?php $total += $p->price * $p->quantity ?>
                 </tr>
             @endforeach
             <tr>
@@ -138,11 +138,11 @@
         {{csrf_field()}}
         <input type="hidden" name="invoice_no" value="{{$invoice->invoice_no}}">
         <div class="form-group">
-            <label for="exampleInputName2">Amount</label>
+            <label for="exampleInputName2">Amount</label> <br>
             <input type="text" class="form-control" id="exampleInputName2" name="amount" placeholder="Amount">
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail2">Method</label>
+            <label for="exampleInputEmail2">Method</label><br>
             <select name="payment_method" id="" class="form-control" required>
                 <option value="">Select Method</option>
                 <option value="Cash">Cash</option>
@@ -152,11 +152,11 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail2">Trx Id</label>
+            <label for="exampleInputEmail2">Trx Id</label><br>
             <input type="text" class="form-control" id="exampleInputEmail2" name="trx_id" placeholder="Trx ID">
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail2">Other Info</label>
+            <label for="exampleInputEmail2">Other Info</label><br>
             <input type="text" class="form-control" id="exampleInputEmail2" name="info" placeholder="Other Info">
         </div>
         <button type="submit" class="btn btn-default">Save Payment</button>

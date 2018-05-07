@@ -38,8 +38,9 @@ class SellController extends Controller
                 $invoice->save();
             }
             $invoice = Invoice::where('invoice_no', $request->invoice_no)->first();
+            $products = Product::take(15)->get();
             return view('admin.sell.index')
-                ->with(compact('invoice'));
+                ->with(compact('invoice','products'));
         } else {
             $invoice_no = CoreTrait::SellInvoiceId();
             return redirect('sell?invoice_no=' . $invoice_no);
@@ -75,7 +76,7 @@ class SellController extends Controller
                     $invoice_product->quantity = 1;
                     $invoice_product->discount = 0;
                     $invoice_product->type = 'sell';
-                    $invoice_product->price = Product::where('code', $request->code)->first()->price;
+                    $invoice_product->price = Product::where('code', $request->code)->first()->sell_price;
                 }
                 $invoice_product->save();
                 break;

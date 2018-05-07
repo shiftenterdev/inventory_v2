@@ -13,12 +13,39 @@
             </legend>
             <form action="product/store" class="form-horizontal" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Title</label>
 
+                    <div class="col-lg-8">
+                        <input class="form-control" placeholder="Title" type="text" name="title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Description</label>
+
+                    <div class="col-lg-8">
+                        <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Purchase Price</label>
+
+                    <div class="col-lg-8">
+                        <input class="form-control" placeholder="Purchase Price" type="text" name="purchase_price">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Sell Price</label>
+
+                    <div class="col-lg-8">
+                        <input class="form-control" placeholder="Sell Price" type="text" name="sell_price">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Category</label>
 
                     <div class="col-lg-8">
-                        <select name="category_id" class="form-control select" required>
+                        <select name="category_id[]" class="form-control select" required multiple>
                             <option value="">Select Category</option>
                             @foreach($categories as $c)
                                 <option value="{{$c->id}}">{{$c->full_category}}</option>
@@ -39,25 +66,12 @@
                         </select>
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Title</label>
+                    <label class="col-lg-2 control-label">Quantity</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Title" type="text" name="title">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Description</label>
-
-                    <div class="col-lg-8">
-                        <textarea name="description" class="form-control" placeholder="Description"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Price</label>
-
-                    <div class="col-lg-8">
-                        <input class="form-control" placeholder="Price" type="text" name="price">
+                        <input class="form-control" placeholder="Quantity" type="number" name="quantity">
                     </div>
                 </div>
 
@@ -113,8 +127,10 @@
 
 @section('script')
     @parent
+    <script src="https://cdn.ckeditor.com/4.9.2/basic/ckeditor.js"></script>
     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
     <script>
+        CKEDITOR.replace( 'description' );
         var prefix = "{{config('lfm.url_prefix')}}";
         $('#lfm').filemanager('image', {prefix: prefix});
     </script>

@@ -4,6 +4,7 @@ namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,22 +16,28 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::with('parent')->get();
+        $categories = Category::with('parent','products')->get();
         foreach ($categories as $c) {
             if ($c->parent) {
-                $c->full_category = $c->parent->cat_title.' > '.$c->cat_title;
+                $c->full_category = $c->parent->title.' > '.$c->title;
             }else{
-                $c->full_category = $c->cat_title;
+                $c->full_category = $c->title;
             }
         }
-
+        $trees = Category::select('id','parent_id as parent','title as text')->get();
+        foreach ($trees as $t){
+            $t->text = $t->text.' ('.$t->product_count.')';
+            if($t->parent=="0"){
+                $t->parent = "#";
+            }
+        }
         return view('admin.category.index')
-            ->with(compact('categories'));
+            ->with(compact('categories','trees'));
     }
 
     public function create()
     {
-        $categories = Category::where('cat_parent_id', '-1')->get();
+        $categories = Category::get();
 
         return view('admin.category.create')
             ->with(compact('categories'));
@@ -74,5 +81,20 @@ class CategoryController extends Controller
             return redirect('/category')
                 ->with('error', 'Please remove sub category first');
         }
+    }
+
+    public function change(Request $request)
+    {
+        Category::where('id',$request->child)->update(['parent_id'=>$request->parent]);
+        return response('Done',200);
+    }
+
+    public function products($id)
+    {
+        $category = Category::find($id);
+        $products = Product::whereHas('categories', function ($query) use ($id){
+            $query->where('id', $id);
+        })->get();
+        return view('admin.category.products',compact('products','category'));
     }
 }

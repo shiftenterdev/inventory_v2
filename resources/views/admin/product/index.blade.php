@@ -17,11 +17,13 @@
                 <thead>
                 <tr>
                     <th>Code</th>
-                    <th>Thumb</th>
+                    {{--<th>Thumb</th>--}}
                     <th>Title</th>
                     <th>Category</th>
                     <th>Brand</th>
-                    <th>Price</th>
+                    <th>Purchase Price</th>
+                    <th>Sell Price</th>
+                    <th>Quantity</th>
                     <th>Status</th>
                     <th width="10%">Action</th>
                 </tr>
@@ -30,12 +32,14 @@
                 @foreach($products as $p)
                     <tr>
                         <td>{{$p->code}}</td>
-                        <td><img src="{{$p->image}}" alt="" style="width: 100px"></td>
+                        {{--<td><img src="{{$p->image}}" alt="" style="width: 100px"></td>--}}
                         <td>{{$p->title}}</td>
-                        <td>{{$p->category->cat_title}}</td>
+                        <td>{{$p->category_names}}</td>
                         <td>{{$p->brand->title}}</td>
-                        <td>{{money($p->price)}}</td>
-                        <td>{{$p->status==1?'Active':'Inactive'}}</td>
+                        <td>{{money($p->purchase_price)}}</td>
+                        <td>{{money($p->sell_price)}}</td>
+                        <td>{{$p->quantity}}</td>
+                        <td>{!! $p->status==1?'<i class="fa fa-check"></i>':'<i class="fa fa-times"></i>' !!}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="product/edit/{{$p->id}}" class="btn btn-sm btn-warning"><i

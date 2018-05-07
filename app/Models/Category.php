@@ -11,11 +11,21 @@ class Category extends Model
 
     public function sub_category()
     {
-        return $this->hasMany($this,'cat_parent_id','id');
+        return $this->hasMany($this,'parent_id','id');
     }
 
     public function parent()
     {
-        return $this->hasOne($this,'id','cat_parent_id');
+        return $this->hasOne($this,'id','parent_id');
+    }
+
+    public function getProductCountAttribute()
+    {
+        return count($this->products);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class,'product_category');
     }
 }

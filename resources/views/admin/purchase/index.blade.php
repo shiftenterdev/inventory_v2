@@ -103,7 +103,7 @@
             source: function (request, response) {
                 $.post("customer/search", request, response);
             },
-            minLength: 1,
+            minLength: 2,
             focus: function (event, ui) {
                 $('input[name=mobile]').val(ui.item.mobile);
                 return false;
@@ -132,7 +132,7 @@
                 source: function (request, response) {
                     $.post("product/search", {invoice_no: INVOICE_NO, term: request.term}, response);
                 },
-                minLength: 1,
+                minLength: 2,
                 select: function (event, ui) {
                     var formData = {
                         code: ui.item.code,

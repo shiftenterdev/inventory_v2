@@ -1,4 +1,6 @@
-$('.select').selectize();
+$('.select').selectize({
+    plugins: ['remove_button'],
+});
 $('.date').datetimepicker({
     timepicker:false,
     format:'Y-m-d',

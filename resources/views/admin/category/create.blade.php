@@ -18,11 +18,11 @@
                     <label class="col-lg-2 control-label">Parent</label>
 
                     <div class="col-lg-6">
-                        <select name="cat_parent_id" class="form-control select">
+                        <select name="parent_id" class="form-control select">
                             <option value="">Select</option>
                             <option value="-1">No Parent</option>
                             @foreach($categories as $c)
-                                <option value="{{$c->id}}">{{$c->cat_title}}</option>
+                                <option value="{{$c->id}}">{{$c->title}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -32,7 +32,7 @@
                     <label class="col-lg-2 control-label">Title</label>
 
                     <div class="col-lg-6">
-                        <input class="form-control" placeholder="Title" type="text" name="cat_title">
+                        <input class="form-control" placeholder="Title" type="text" name="title">
                     </div>
                 </div>
 

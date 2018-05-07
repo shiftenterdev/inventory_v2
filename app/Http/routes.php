@@ -93,8 +93,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('category','CategoryController@index');
     Route::get('category/create','CategoryController@create');
     Route::post('category/store','CategoryController@store');
+    Route::post('category/change','CategoryController@change');
     Route::get('category/edit/{id}','CategoryController@edit');
     Route::post('category/update/{id}','CategoryController@update');
+    Route::get('category/products/{id}','CategoryController@products');
     Route::get('category/delete/{id}','CategoryController@delete');
 
     Route::get('brand','BrandController@index');

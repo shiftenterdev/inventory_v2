@@ -1,9 +1,9 @@
 <table class="table table-bordered">
     <thead>
     <tr class="t-imp">
-        <th>Sl</th>
+        <th width="3%">Sl</th>
         <th>Product</th>
-        <th>Price</th>
+        <th width="8%">Price</th>
         <th width="5%">Quantity</th>
         <th width="8%">Discount</th>
         <th width="10%">Total</th>
@@ -22,7 +22,8 @@
                             <i class="fa fa-times"></i> Remove</a>
                     </small>
                 </td>
-                <td class="text-right">{{money($t->product->price)}}</td>
+                <td><input type="text" class="input-sm form-control num pq-s small select-text" data-code="{{$t->product->code}}"
+                           value="{{$t->product->sell_price}}"></td>
                 <td>
                     <input type="text" class="input-sm form-control num pq-s small select-text" data-code="{{$t->product->code}}"
                            value="{{$t->quantity}}">
@@ -31,9 +32,9 @@
                     <input type="text" class="input-sm form-control num pd-s small select-text" data-code="{{$t->product->code}}"
                            value="{{$t->discount}}">
                 </td>
-                <td class="text-right">{{money($t->quantity * ($t->product->price - $t->discount))}}</td>
+                <td class="text-right">{{money($t->quantity * ($t->product->sell_price - $t->discount))}}</td>
             </tr>
-            <?php $total += ($t->quantity * ($t->product->price - $t->discount));?>
+            <?php $total += ($t->quantity * ($t->product->sell_price - $t->discount));?>
         @endforeach
     @endif
 

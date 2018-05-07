@@ -17,7 +17,7 @@
                 <thead>
                 <tr>
                     <th>SL</th>
-                    <th>Image</th>
+                    {{--<th>Image</th>--}}
                     <th>Title</th>
                     <th>Action</th>
                 </tr>
@@ -26,9 +26,9 @@
                 @foreach($brands as $k => $b)
                     <tr>
                         <td>{{$k+1}}</td>
-                        <td>
-                            <img src="{{$b->image}}" alt="{{$b->title}}" class="t-img">
-                        </td>
+                        {{--<td>--}}
+                            {{--<img src="{{$b->image}}" alt="{{$b->title}}" class="t-img">--}}
+                        {{--</td>--}}
                         <td>{{$b->title}}</td>
                         <td>
                             <div class="btn-group">

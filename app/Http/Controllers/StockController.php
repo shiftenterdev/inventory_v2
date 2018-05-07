@@ -42,8 +42,7 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->except('_token');
-        Product::where('code', $request->code)->update($input);
+        Product::where('code', $request->code)->update($request->except('_token'));
 
         return redirect('/product')
             ->with('success', 'Product stock added');

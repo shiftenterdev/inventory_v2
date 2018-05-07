@@ -31,14 +31,14 @@
                     <label class="col-lg-2 control-label">Quantity</label>
 
                     <div class="col-lg-8">
-                        <input type="text" name="stock" class="form-control num" placeholder="Quantity">
+                        <input type="text" name="quantity" class="form-control num" placeholder="Quantity">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Price</label>
+                    <label class="col-lg-2 control-label">Purchase Price</label>
 
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Price" type="text" name="price">
+                        <input class="form-control" placeholder="Purchase Price" type="text" name="purchase_price">
                     </div>
                 </div>
 

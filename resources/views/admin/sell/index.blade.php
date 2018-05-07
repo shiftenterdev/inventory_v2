@@ -1,6 +1,30 @@
 @extends('admin.layout.index')
 
 @section('content')
+    <style>
+        .pl{
+            padding: 0;
+            list-style: none;
+        }
+        .pl li{
+            border: 1px solid #149c82;
+            border-bottom: none;
+            padding: 7px 10px;
+        }
+        .pl li:hover{
+            background: #efefef;
+            /*cursor: pointer;*/
+        }
+        .pl li:last-child{
+            border-bottom: 1px solid #149c82;
+        }
+        .pl li a{
+            color: #149c82;
+            display: block;
+            text-decoration: none;
+        }
+
+    </style>
 
     <ul class="breadcrumb">
         <li><a href="#">Home</a></li>
@@ -12,53 +36,65 @@
         </legend>
         <form action="sell/store" method="post" id="customerForm" class="form-horizontal" autocomplete="off">
             @include('admin.common.invoice_head')
-            <legend>
-                Product List
-            </legend>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="productList">
-                        @include('admin.common.product_list')
-                    </div>
-                    @if(count($invoice->payments)>0)
-                        <div id="payment">
-                            <legend>Payment</legend>
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr class="t-imp">
-                                    <th>SL</th>
-                                    <th>Amount</th>
-                                    <th>Method</th>
-                                    <th>Trx No</th>
-                                    <th>Date</th>
-                                    <th>Option</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($invoice->payments as $k => $p)
-                                    <tr>
-                                        <td>{{$k+1}}</td>
-                                        <td>{{$p->amount}}</td>
-                                        <td>{{$p->method}}</td>
-                                        <td>{{$p->trx_id}}</td>
-                                        <td>{{$p->updated_at}}</td>
-                                        <td><a href="payment/delete/{{$p->id}}" class="btn btn-danger"><i
-                                                        class="fa fa-times"></i></a></td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                            </table>
-                        </div>
-                    @endif
-
-                </div>
+            <div class="col-md-3">
+                <legend>
+                    Popular Products
+                </legend>
+                <ul class="pl">
+                    @foreach($products as $p)
+                        <li><a href="javascript:" data-code="{{$p->code}}" class="top-product">{{$p->title}}</a></li>
+                    @endforeach
+                </ul>
             </div>
+            <div class="col-md-9">
+                <legend>
+                    Product List
+                </legend>
 
-            <div class="text-center">
-                <button type="button" class="btn btn-danger openRight"><i class="fa fa-money"></i> Payment
-                </button>
-                <button type="submit" class="btn btn-primary">Save Invoice</button>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="productList">
+                            @include('admin.common.product_list')
+                        </div>
+                        @if(count($invoice->payments)>0)
+                            <div id="payment">
+                                <legend>Payment</legend>
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr class="t-imp">
+                                        <th>SL</th>
+                                        <th>Amount</th>
+                                        <th>Method</th>
+                                        <th>Trx No</th>
+                                        <th>Date</th>
+                                        <th>Option</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($invoice->payments as $k => $p)
+                                        <tr>
+                                            <td>{{$k+1}}</td>
+                                            <td>{{$p->amount}}</td>
+                                            <td>{{$p->method}}</td>
+                                            <td>{{$p->trx_id}}</td>
+                                            <td>{{$p->updated_at}}</td>
+                                            <td><a href="payment/delete/{{$p->id}}" class="btn btn-danger"><i
+                                                            class="fa fa-times"></i></a></td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                                </table>
+                            </div>
+                        @endif
+
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="button" class="btn btn-danger openRight"><i class="fa fa-money"></i> Payment
+                    </button>
+                    <button type="submit" class="btn btn-primary">Save Invoice</button>
+                </div>
             </div>
 
         </form>
@@ -134,6 +170,19 @@
                 .append("<div>" + item.mobile + " <ins>" + item.name + "</ins></div>")
                 .appendTo(ul);
         };
+
+        $('.top-product').on('click',function(){
+            load.on();
+            var formData = {
+                code: $(this).data('code'),
+                invoice_no: INVOICE_NO,
+                type: 'add'
+            };
+            $.post('sell/update', formData).done(function (result) {
+                $('.spo').val('');
+                reloadTable();
+            });
+        });
 
         $('#productList').on('input', '#product', function () {
             $(this).autocomplete({

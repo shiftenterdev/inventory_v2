@@ -20,7 +20,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('category', 'brand')->get();
+        $products = Product::with('categories', 'brand')->get();
 
         return view('admin.product.index')
             ->with(compact('products'));
@@ -31,9 +31,9 @@ class ProductController extends Controller
         $categories = Category::with('parent')->get();
         foreach ($categories as $c) {
             if ($c->parent) {
-                $c->full_category = $c->parent->cat_title . ' > ' . $c->cat_title;
+                $c->full_category = $c->parent->title . ' > ' . $c->title;
             } else {
-                $c->full_category = $c->cat_title;
+                $c->full_category = $c->title;
             }
         }
 
@@ -45,18 +45,9 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // $input = $request->except('_token');
-        $product = new Product();
-        $product->code = CoreTrait::productCode();
-        $product->title = $request->title;
-        $product->brand_id = $request->brand_id;
-        $product->description = $request->description;
-        $product->status = $request->status;
-        $product->category_id = $request->category_id;
-        $product->price = $request->price;
-        $product->image = $request->image;
-        $product->save();
-
+        $request->merge(['code'=>CoreTrait::productCode()]);
+        $product = Product::create($request->except('_token','category_id'));
+        Product::find($product)->categoties()->sync($request->category_id);
         return redirect('product');
     }
 
@@ -65,9 +56,9 @@ class ProductController extends Controller
         $categories = Category::with('parent')->get();
         foreach ($categories as $c) {
             if ($c->parent) {
-                $c->full_category = $c->parent->cat_title . ' > ' . $c->cat_title;
+                $c->full_category = $c->parent->title . ' > ' . $c->title;
             } else {
-                $c->full_category = $c->cat_title;
+                $c->full_category = $c->title;
             }
         }
         $brands = Brand::get(['id', 'title']);
@@ -79,16 +70,15 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
-        $input = $request->except('_token');
-        Product::where('id', $id)->update($input);
-
+        $product = Product::find($id);
+        $product->update($request->except('_token','category_id'));
+        $product->categories()->sync($request->category_id);
         return redirect('/product');
     }
 
     public function delete($id)
     {
         Product::destroy($id);
-
         return redirect('product');
     }
 
