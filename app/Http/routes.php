@@ -12,6 +12,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('sell','SellController@index');
     Route::get('sell/show/{invoice}','SellController@show');
+    Route::get('sell/print/{invoice}','SellController@pdf');
     Route::get('sell/products','SellController@products');
     Route::get('sell/invoice','SellController@invoice');
     Route::post('sell/store','SellController@store');
@@ -112,6 +113,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('discount/edit/{id}','DiscountController@edit');
     Route::post('discount/update/{id}','DiscountController@update');
     Route::get('discount/delete/{id}','DiscountController@delete');
+
+    Route::get('slider','SliderController@index');
+    Route::get('slider/create','SliderController@create');
+    Route::post('slider/store','SliderController@store');
+    Route::get('slider/edit/{id}','SliderController@edit');
+    Route::post('slider/update/{id}','SliderController@update');
+    Route::get('slider/delete/{id}','SliderController@delete');
 
     Route::get('user','UserController@index');
     Route::get('user/create','UserController@create');

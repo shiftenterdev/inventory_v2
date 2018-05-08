@@ -9,10 +9,27 @@ class Invoice extends Model
     protected $table = 'invoices';
     protected $guarded = [];
 
-    public function customer()
+    public function getTotalAmountAttribute()
     {
-        return $this->hasOne(InvoiceCustomer::class,'invoice_no','invoice_no');
+        $t = 0;
+        foreach ($this->products as $p) {
+            $t += $p->price * $p->quantity;
+        }
+        $t += $this->tax / 100 * $t;
+        $t += $this->delivery_charge;
+        return $t;
     }
+
+    public function getPaidAttribute()
+    {
+        return $this->payments->sum('amount');
+    }
+
+//    public function customer()
+//    {
+//        return $this->hasOne(InvoiceCustomer::class,'invoice_no','invoice_no');
+//        return $this->customers();
+//    }
 
     public function products()
     {
@@ -22,5 +39,10 @@ class Invoice extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class,'invoice_no','invoice_no');
+    }
+
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class,'invoice_customers');
     }
 }

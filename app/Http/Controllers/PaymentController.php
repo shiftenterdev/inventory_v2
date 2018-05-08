@@ -3,8 +3,10 @@
 namespace app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\Sell;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -17,8 +19,8 @@ class PaymentController extends Controller
 
     public function create()
     {
-        $products = Product::get();
-        return view('admin.payment.create', compact('products'));
+        $invoices = Invoice::whereStatus('1')->get();
+        return view('admin.payment.create', compact('invoices'));
     }
 
     public function store(Request $request)

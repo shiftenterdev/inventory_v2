@@ -14,19 +14,19 @@
                 <table>
                     <tr>
                         <td>Name</td>
-                        <td> : <strong>{{$invoice->customer->name or ''}}</strong></td>
+                        <td> : <strong>{{$invoice->customers[0]->name or ''}}</strong></td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td> : <strong>{{$invoice->customer->email or ''}}</strong></td>
+                        <td> : <strong>{{$invoice->customers[0]->email or ''}}</strong></td>
                     </tr>
                     <tr>
                         <td>Address</td>
-                        <td> : <strong>{{$invoice->customer->address or ''}}</strong></td>
+                        <td> : <strong>{{$invoice->customers[0]->address or ''}}</strong></td>
                     </tr>
                     <tr>
                         <td>Phone</td>
-                        <td> : <strong>{{$invoice->customer->mobile or ''}}</strong></td>
+                        <td> : <strong>{{$invoice->customers[0]->mobile or ''}}</strong></td>
                     </tr>
                 </table>
             </div>
@@ -130,7 +130,6 @@
                                         class="fa fa-times"></i></a></td>
                     </tr>
                 @endforeach
-            </table>
             </table>
         </div>
     @endif

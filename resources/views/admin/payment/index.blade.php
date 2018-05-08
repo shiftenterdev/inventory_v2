@@ -22,9 +22,12 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
+                    <th>Invoice No</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Trx ID</th>
+                    <th>Other Info</th>
+                    <th>Date</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -32,9 +35,12 @@
                 @foreach($payments as $c)
                     <tr>
                         <td>{{$c->id}}</td>
-                        <td>{{$c->name}}</td>
-                        <td>{{$c->email}}</td>
-                        <td>{{$c->phone}}</td>
+                        <td>{{$c->invoice_no}}</td>
+                        <td>{{$c->amount}}</td>
+                        <td>{{$c->method}}</td>
+                        <td>{{$c->trx_id}}</td>
+                        <td>{{$c->info}}</td>
+                        <td>{{$c->created_at}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="customer/edit/{{$c->id}}" class="btn btn-sm btn-warning"><i

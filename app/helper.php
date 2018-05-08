@@ -20,6 +20,11 @@ function money($amount)
     return conf('currency').' '.number_format($amount,2);
 }
 
+function __d($amount)
+{
+    return number_format($amount,2);
+}
+
 function title($text)
 {
     return ucwords($text);

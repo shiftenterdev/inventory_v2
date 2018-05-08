@@ -12,42 +12,23 @@
             <legend>
                 Add Payment
             </legend>
-            <form action="discount/store" class="form-horizontal" method="post">
+            <form action="payment/store" class="form-horizontal" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Product</label>
+                    <label class="col-lg-2 control-label">Select Order/Invoice No</label>
 
                     <div class="col-lg-6">
-                        <select name="product_id" class="form-control select">
+                        <select name="invoice_no" class="form-control select">
                             <option value="">Select</option>
-                            @foreach($products as $p)
-                                <option value="{{$p->id}}">{{$p->title}} [{{$p->code}}]</option>
+                            @foreach($invoices as $p)
+                                <option value="{{$p->invoice_no}}">{{$p->invoice_no}}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Payment Type</label>
 
-                    <div class="col-lg-6">
-                        <div class="radio">
-                            <input name="type" id="radio1" value="1" checked="" type="radio">
-                            <label for="radio1">
-                                <mark></mark>
-                                Inward
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <input name="type" id="radio2" value="2" type="radio">
-                            <label for="radio2">
-                                <mark></mark>
-                                Forward
-                            </label>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label class="col-lg-2 control-label">Amount</label>
@@ -61,34 +42,33 @@
                     <label class="col-lg-2 control-label">Method</label>
 
                     <div class="col-lg-6">
-                        <div class="radio">
-                            <input name="method" id="radio3" value="1" checked="" type="radio">
-                            <label for="radio3">
-                                <mark></mark>
-                                Cheque
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <input name="method" id="radio4" value="2" type="radio">
-                            <label for="radio4">
-                                <mark></mark>
-                                Cash
-                            </label>
-                        </div>
+                        <select name="payment_method" id="" class="form-control">
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                            <option value="bKash">bKash</option>
+                            <option value="Cheque">Cheque</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">TRX ID/ CHQ NO</label>
+
+                    <div class="col-lg-6">
+                        <input type="text" name="trx_id" class="form-control" placeholder="Trx ID">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-lg-2 control-label">Date</label>
+                    <label class="col-lg-2 control-label">Bank/Other Info</label>
                     <div class="col-lg-6">
-                        <input type="text" placeholder="Date" name="date" class="form-control date">
+                        <input type="text" class="form-control" name="info" placeholder="Bank / Other Info">
                     </div>
 
                 </div>
 
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Save Payment Information</button>
                     </div>
                 </div>
             </form>

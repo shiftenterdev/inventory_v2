@@ -51,6 +51,8 @@
         <i class="fa fa-user"></i> Roles</a>
     <a href="permission" class="list-group-item {{Request::segment(1)=='permission'?'active':''}}">
         <i class="fa fa-cog"></i> Permission</a>
+    <a href="slider" class="list-group-item {{Request::segment(1)=='slider'?'active':''}}">
+        <i class="fa fa-cog"></i> Slider</a>
     <a href="settings" class="list-group-item {{Request::segment(1)=='settings'?'active':''}}">
         <i class="fa fa-cogs"></i> Settings</a>
 </div>

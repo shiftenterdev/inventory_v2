@@ -12,6 +12,7 @@ use App\Models\Sell;
 use App\Models\InvoiceProduct;
 use App\Models\TempProduct;
 use App\Repo\CoreTrait;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -39,8 +40,8 @@ class SellController extends Controller
             }
             $invoice = Invoice::where('invoice_no', $request->invoice_no)->first();
             $products = Product::take(15)->get();
-            return view('admin.sell.index')
-                ->with(compact('invoice','products'));
+            return view('admin.sell.create')
+                ->with(compact('invoice', 'products'));
         } else {
             $invoice_no = CoreTrait::SellInvoiceId();
             return redirect('sell?invoice_no=' . $invoice_no);
@@ -51,8 +52,16 @@ class SellController extends Controller
     {
         $invoice = Invoice::where('invoice_no', $invoice_no)
             ->first();
+        return view('admin.sell.show', compact('invoice'));
+    }
 
-        return view('admin.sell.invoice', compact('invoice'));
+    public function pdf($invoice_no)
+    {
+        $invoice = Invoice::where('invoice_no', $invoice_no)
+            ->first();
+//        return view('admin.sell.print',compact('invoice'));
+        $pdf = PDF::loadView('admin.sell.print', compact('invoice'));
+        return $pdf->stream();
     }
 
     public function update(Request $request)
@@ -138,28 +147,28 @@ class SellController extends Controller
     public function store(Request $request)
     {
         $input = $request->except('_token');
-        Invoice::where('invoice_no', $request->invoice_no)->update([
+        $invoice = Invoice::where('invoice_no', $request->invoice_no)->first();
+        $invoice->update([
             'status'       => 1,
             'invoice_sl'   => $request->invoice_sl,
             'invoice_date' => $request->invoice_date,
-        ]);
-        InvoiceCustomer::create([
-            'invoice_no' => $request->invoice_no,
-            'name'       => $request->name,
-            'email'      => $request->email,
-            'mobile'     => $request->mobile,
-            'address'    => $request->address
+            'total_amount' => $invoice->total_amount
         ]);
 
-        $customer_exists = Customer::where('mobile', $request->mobile)->first();
-        if (empty($customer_exists)) {
-            Customer::create([
-                'name'    => $request->name,
-                'email'   => $request->email,
-                'mobile'  => $request->mobile,
-                'address' => $request->address
+        $customer = Customer::where('mobile', $request->mobile)->orWhere('email', $request->email)->first();
+        if (empty($customer)) {
+            $customer = Customer::create([
+                'customer_no' => CoreTrait::customerId(),
+                'name'        => $request->name,
+                'email'       => $request->email,
+                'mobile'      => $request->mobile,
+                'address'     => $request->address,
+                'balance'     => 0.00,
+                'status'      => 1
             ]);
         }
+
+        $invoice->customers()->sync([$customer->id]);
 
         return redirect('sell/show/' . $input['invoice_no'])
             ->with('success', 'Invoice Saved');
@@ -171,21 +180,21 @@ class SellController extends Controller
         $sells = Invoice::where('type', 'sell')
             ->where('status', 1)->get();
 
-        foreach ($sells as $s) {
-            $t = 0;
-            foreach ($s->products as $p) {
-                $t += $p->price * $p->quantity;
-            }
-            $t += $s->tax / 100 * $t;
-            $t += $s->delivery_charge;
-            $s->total = $t;
-        }
+//        foreach ($sells as $s) {
+//            $t = 0;
+//            foreach ($s->products as $p) {
+//                $t += $p->price * $p->quantity;
+//            }
+//            $t += $s->tax / 100 * $t;
+//            $t += $s->delivery_charge;
+//            $s->total = $t;
+//        }
+//
+//        foreach ($sells as $s) {
+//            $s->payment = Payment::where('invoice_no', $s->invoice_no)->sum('amount');
+//        }
 
-        foreach ($sells as $s){
-            $s->payment = Payment::where('invoice_no',$s->invoice_no)->sum('amount');
-        }
-
-        return view('admin.sell.history')
+        return view('admin.sell.index')
             ->with(compact('sells'));
     }
 

@@ -22,6 +22,8 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Mobile</th>
+                    <th>Current Balance</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -33,13 +35,11 @@
                         <td>{{$c->name}}</td>
                         <td>{{$c->email}}</td>
                         <td>{{$c->mobile}}</td>
+                        <td>{{money($c->balance)}}</td>
+                        <td>{!! $c->status==1?'<i class="fa fa-check"></i>':'<i class="fa fa-times"></i>' !!}</td>
                         <td>
-                            <div class="btn-group">
                                 <a href="customer/edit/{{$c->id}}" class="btn btn-sm btn-warning"><i
-                                            class="fa fa-pencil"></i></a>
-                                <a href="customer/delete/{{$c->id}}" class="btn btn-sm btn-danger confirm"><i
-                                            class="fa fa-trash"></i></a>
-                            </div>
+                                            class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach
