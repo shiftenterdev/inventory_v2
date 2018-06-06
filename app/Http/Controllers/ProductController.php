@@ -29,14 +29,6 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::with('parent')->get();
-        foreach ($categories as $c) {
-            if ($c->parent) {
-                $c->full_category = $c->parent->title . ' > ' . $c->title;
-            } else {
-                $c->full_category = $c->title;
-            }
-        }
-
         $brands = Brand::get(['id', 'title']);
 
         return view('admin.product.create')
@@ -45,6 +37,11 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        if($request->ajax()){
+            $request->merge(['code'=>CoreTrait::productCode()]);
+            Product::create($request->except('_token','category_id'))->categories()->sync($request->category_id);
+            return response('Product Added Successfully',200);
+        }
         $request->merge(['code'=>CoreTrait::productCode()]);
         $product = Product::create($request->except('_token','category_id'));
         Product::find($product)->categoties()->sync($request->category_id);

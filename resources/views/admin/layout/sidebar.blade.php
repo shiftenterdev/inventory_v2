@@ -1,17 +1,17 @@
 <div class="list-group sidebar">
 
-    <a href="sell" class="list-group-item {{Request::is('sell')?'active':''}}">
-        <i class="fa fa-shopping-bag"></i> Sell</a>
-    <a href="purchase" class="list-group-item {{Request::is('purchase')?'active':''}}">
-        <i class="fa fa-shopping-basket"></i> Purchase</a>
+    <a href="sell/create" class="list-group-item {{Request::is('sell/create')?'active':''}}">
+        <i class="fa fa-shopping-bag"></i> New Sell</a>
+    <a href="purchase/create" class="list-group-item {{Request::is('purchase/create')?'active':''}}">
+        <i class="fa fa-shopping-basket"></i> New Purchase</a>
     <a href="payment" class="list-group-item {{Request::is('payment')?'active':''}}">
-        <i class="fa fa-money"></i> Payment</a>
+        <i class="fa fa-money"></i> Invoice Payment</a>
     <hr>
 
-    <a href="sell/history" class="list-group-item {{Request::is('sell/history')?'active':''}}">
-        <i class="fa fa-list-alt"></i> Sell History</a>
-    <a href="purchase/history" class="list-group-item {{Request::is('purchase/history')?'active':''}}">
-        <i class="fa fa-list-ul"></i> Purchase History</a>
+    <a href="sell" class="list-group-item {{Request::is('sell')?'active':''}}">
+        <i class="fa fa-list-alt"></i> Sell List</a>
+    <a href="purchase" class="list-group-item {{Request::is('purchase')?'active':''}}">
+        <i class="fa fa-list-ul"></i> Purchase List</a>
     <hr>
     <a href="food" class="list-group-item {{Request::is('food')?'active':''}}">
         <i class="fa fa-coffee"></i> Food</a>
@@ -19,8 +19,8 @@
         <i class="fa fa-tasks"></i> Food Category</a>
     <a href="table" class="list-group-item {{Request::is('table')?'active':''}}">
         <i class="fa fa-cutlery"></i> Table</a>
-    <a href="bill" class="list-group-item {{Request::is('bill')?'active':''}}">
-        <i class="fa fa-file-text"></i> Bill</a>
+    {{-- <a href="bill" class="list-group-item {{Request::is('bill')?'active':''}}">
+        <i class="fa fa-file-text"></i> Bill</a> --}}
     <hr>
     <a href="brand" class="list-group-item {{Request::segment(1)=='brand'?'active':''}}">
         <i class="fa fa-contao"></i> Brand</a>

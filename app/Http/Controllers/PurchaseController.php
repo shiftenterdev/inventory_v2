@@ -7,6 +7,8 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\InvoiceProduct;
 use App\Models\Product;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\TempProduct;
 use App\Repo\CoreTrait;
 use Illuminate\Http\Request;
@@ -21,6 +23,15 @@ class PurchaseController extends Controller
 
     public function index(Request $request)
     {
+        $purchases = Invoice::where('type', 'purchase')
+            ->where('status', 1)->get();
+
+        return view('admin.purchase.index')
+            ->with(compact('purchases'));
+    }
+
+    public function create(Request $request)
+    {
         if($request->invoice_no){
             $invoice_no = $request->invoice_no;
             $invoice = Invoice::where('invoice_no', $invoice_no)->first();
@@ -34,11 +45,14 @@ class PurchaseController extends Controller
                 $invoice->save();
             }
             $invoice = Invoice::where('invoice_no',$request->invoice_no)->first();
-            return view('admin.purchase.index')
-                ->with(compact('invoice'));
+            $products = Product::take(15)->get();
+            $categories = Category::with('parent')->get();
+            $brands = Brand::get(['id', 'title']);
+            return view('admin.purchase.create')
+                ->with(compact('invoice','products','categories','brands'));
         }else{
             $invoice_no = CoreTrait::PurchaseInvoiceId();
-            return redirect('purchase?invoice_no='.$invoice_no);
+            return redirect('purchase/create?invoice_no='.$invoice_no);
         }
     }
 
@@ -61,12 +75,6 @@ class PurchaseController extends Controller
 
         return view('admin.purchase.invoice')
             ->with(compact('customer', 'products'));
-    }
-
-
-    public function history()
-    {
-        return view('admin.purchase.history');
     }
 
 
@@ -116,7 +124,7 @@ class PurchaseController extends Controller
                     $invoice_product->quantity = 1;
                     $invoice_product->discount = 0;
                     $invoice_product->type = 'purchase';
-                    $invoice_product->price = Product::where('code', $request->code)->first()->price;
+                    $invoice_product->price = Product::where('code', $request->code)->first()->purchase_price;
                 }
                 $invoice_product->save();
                 break;
@@ -141,6 +149,12 @@ class PurchaseController extends Controller
                     ->update(['discount' => $request->discount]);
                 break;
 
+            case 'price':
+                Product::where('code',$request->code)->update(['purchase_price'=>$request->price]);
+                InvoiceProduct::where('product_code',$request->code)
+                    ->where('invoice_no',$request->invoice_no)
+                    ->update(['price'=>$request->price]);
+
             case 'quantity':
                 InvoiceProduct::where('product_code', $request->code)
                     ->where('invoice_no', $request->invoice_no)
@@ -164,86 +178,5 @@ class PurchaseController extends Controller
         }
     }
 
-    public function add_product(Request $request)
-    {
-        $products = InvoiceProduct::where('invoice_no',session('invoice_no'))
-            ->where('product_code', $request->code)->first();
-        if (!empty($products)) {
-            $products->quantity = $products->quantity + 1;
-        } else {
-            $products = new InvoiceProduct();
-            $products->product_code= $request->code;
-            $products->invoice_no = session('invoice_no');
-            $products->quantity = 1;
-            $products->discount = 0;
-            $products->type = 'purchase';
-        }
-
-        $products->save();
-    }
-
-    public function remove_product($pro_code)
-    {
-        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->delete();
-    }
-
-    public function update_product($pro_code, $quantity)
-    {
-        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->update(['quantity'=>$quantity]);
-    }
-
-    public function discount($pro_code, $discount)
-    {
-        InvoiceProduct::where('product_code', $pro_code)->where('type', 'sell')->update(['discount'=>$discount]);
-    }
-
-    public function tax($tax)
-    {
-        $invoice = Invoice::find(session('invoice_id'));
-        $invoice->tax = $tax;
-        $invoice->save();
-    }
-
-    public function charge($charge)
-    {
-        $invoice = Invoice::find(session('invoice_id'));
-        $invoice->delivery_charge = $charge;
-        $invoice->save();
-    }
-
-    public function post_save_invoice(Request $request)
-    {
-        $invoice_id = session('invoice_id');
-        $temp = TempProduct::where('invoice_id',$invoice_id)->get();
-
-        foreach($temp as $t){
-            $invoice_product = new InvoiceProduct();
-            $invoice_product->invoice_id = session('invoice_id');
-            $invoice_product->product_id = $t->product_id;
-            $invoice_product->quantity = $t->quantity;
-            $invoice_product->discount = $t->discount;
-            $invoice_product->save();
-        }
-
-        $customer = Customer::where('customer_phone',$request->customer_phone)->first();
-        if(empty($customer)){
-            $customer = new Customer();
-            $customer->customer_phone = $request->customer_phone;
-        }
-        $customer->customer_email = $request->customer_email;
-        $customer->customer_address = $request->customer_address;
-        $customer->customer_name = $request->customer_name;
-        $customer->save();
-
-        $invoice = Invoice::find(session('invoice_id'));
-        $invoice->customer_id = $customer->id;
-        $invoice->invoice_date = $request->invoice_date;
-        $invoice->is_locked = 1;
-        $invoice->type = 'purchase';
-        $invoice->save();
-
-        TempProduct::where('invoice_id',$invoice_id)->delete();
-        return redirect('purchase-history');
-
-    }
+    
 }

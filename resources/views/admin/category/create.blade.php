@@ -22,7 +22,7 @@
                             <option value="">Select</option>
                             <option value="-1">No Parent</option>
                             @foreach($categories as $c)
-                                <option value="{{$c->id}}">{{$c->title}}</option>
+                                <option value="{{$c->id}}">{{$c->full_category}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -31,4 +31,17 @@ class SliderController extends Controller
         Slider::create($request->except('_token'));
         return redirect('slider');
     }
+
+    public function edit($id)
+    {
+        return view('admin.slider.edit')->with([
+            'slider' => Slider::find($id)
+        ]);
+    }
+
+    public function update(Request $request,$id)
+    {
+        Slider::find($id)->update($request->except('_token'));
+        return redirect('slider');
+    }
 }

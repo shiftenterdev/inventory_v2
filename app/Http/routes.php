@@ -11,20 +11,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('refund', 'RefundController');
 
     Route::get('sell','SellController@index');
+    Route::get('sell/create','SellController@create');
     Route::get('sell/show/{invoice}','SellController@show');
     Route::get('sell/print/{invoice}','SellController@pdf');
     Route::get('sell/products','SellController@products');
     Route::get('sell/invoice','SellController@invoice');
     Route::post('sell/store','SellController@store');
-    Route::get('sell/history','SellController@history');
     Route::post('sell/update','SellController@update');
 
     Route::get('purchase', 'PurchaseController@index');
+    Route::get('purchase/create', 'PurchaseController@create');
     Route::get('purchase/show/{invoice}','PurchaseController@show');
     Route::get('purchase/products','PurchaseController@products');
     Route::get('purchase/invoice','PurchaseController@invoice');
     Route::post('purchase/store','PurchaseController@store');
-    Route::get('purchase/history','PurchaseController@history');
     Route::post('purchase/update','PurchaseController@update');
 
     Route::get('report','ReportController@index');

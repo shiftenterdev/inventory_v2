@@ -25,6 +25,15 @@ class SellController extends Controller
 
     public function index(Request $request)
     {
+        $sells = Invoice::where('type', 'sell')
+            ->where('status', 1)->get();
+
+        return view('admin.sell.index')
+            ->with(compact('sells'));
+    }
+
+    public function create(Request $request)
+    {
         if ($request->invoice_no) {
             $invoice_no = $request->invoice_no;
             $invoice = Invoice::where('invoice_no', $invoice_no)->first();
@@ -44,7 +53,7 @@ class SellController extends Controller
                 ->with(compact('invoice', 'products'));
         } else {
             $invoice_no = CoreTrait::SellInvoiceId();
-            return redirect('sell?invoice_no=' . $invoice_no);
+            return redirect('sell/create?invoice_no=' . $invoice_no);
         }
     }
 
@@ -175,29 +184,6 @@ class SellController extends Controller
     }
 
 
-    public function history()
-    {
-        $sells = Invoice::where('type', 'sell')
-            ->where('status', 1)->get();
-
-//        foreach ($sells as $s) {
-//            $t = 0;
-//            foreach ($s->products as $p) {
-//                $t += $p->price * $p->quantity;
-//            }
-//            $t += $s->tax / 100 * $t;
-//            $t += $s->delivery_charge;
-//            $s->total = $t;
-//        }
-//
-//        foreach ($sells as $s) {
-//            $s->payment = Payment::where('invoice_no', $s->invoice_no)->sum('amount');
-//        }
-
-        return view('admin.sell.index')
-            ->with(compact('sells'));
-    }
-
     public function get_view($sell_id)
     {
         $result = Sell::with('customer', 'products')->where('invoice_id', $sell_id)->first();
@@ -205,39 +191,5 @@ class SellController extends Controller
             ->with(compact('result'));
     }
 
-    public function post_save_invoice(Request $request)
-    {
-        $invoice_id = session('invoice_id');
-        $temp = TempProduct::where('invoice_id', $invoice_id)->get();
-
-        foreach ($temp as $t) {
-            $invoice_product = new InvoiceProduct();
-            $invoice_product->invoice_id = session('invoice_id');
-            $invoice_product->product_id = $t->product_id;
-            $invoice_product->quantity = $t->quantity;
-            $invoice_product->discount = $t->discount;
-            $invoice_product->save();
-        }
-
-        $customer = Customer::where('customer_phone', $request->customer_phone)->first();
-        if (empty($customer)) {
-            $customer = new Customer();
-            $customer->customer_phone = $request->customer_phone;
-        }
-        $customer->customer_email = $request->customer_email;
-        $customer->customer_address = $request->customer_address;
-        $customer->customer_name = $request->customer_name;
-        $customer->save();
-
-        $invoice = Invoice::find(session('invoice_id'));
-        $invoice->customer_id = $customer->id;
-        $invoice->invoice_date = $request->invoice_date;
-        $invoice->is_locked = 1;
-        $invoice->type = 'sell';
-        $invoice->save();
-
-        TempProduct::where('invoice_id', $invoice_id)->delete();
-        return redirect('sells-history');
-
-    }
+    
 }

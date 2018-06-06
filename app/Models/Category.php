@@ -28,4 +28,13 @@ class Category extends Model
     {
         return $this->belongsToMany(Product::class,'product_category');
     }
+
+    public function getFullCategoryAttribute()
+    {
+        if ($this->parent) {
+            return $this->parent->title.' > '.$this->title;
+        }else{
+            return $this->title;
+        }
+    }
 }

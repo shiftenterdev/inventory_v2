@@ -43,10 +43,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        $input['customer_no'] = CoreTrait::customerId();
-        unset($input['_token']);
-        Customer::create($input);
+        $request->merge(['customer_no'=>CoreTrait::customerId()]);
+        Customer::create($request->except('_token'));
 
         return redirect('/customer')
                 ->with('success', 'Customer Added');
@@ -89,9 +87,7 @@ class CustomerController extends Controller
      */
     public function update($id, Request $request)
     {
-        $input = $request->all();
-        unset($input['_token']);
-        Customer::where('id', $id)->update($input);
+        Customer::where('id', $id)->update($request->except('_token'));
 
         return redirect('/customer')
                 ->with('success', 'Customer Updated');
@@ -104,13 +100,13 @@ class CustomerController extends Controller
      *
      * @return Response
      */
-    public function delete($id)
-    {
-        Customer::destroy($id);
-
-        return redirect('/customer')
-                ->with('success', 'Customer Deleted Successfully');
-    }
+//    public function delete($id)
+//    {
+//        Customer::destroy($id);
+//
+//        return redirect('/customer')
+//                ->with('success', 'Customer Deleted Successfully');
+//    }
 
     public function search(Request $request)
     {

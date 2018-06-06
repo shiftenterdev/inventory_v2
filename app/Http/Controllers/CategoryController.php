@@ -17,13 +17,6 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::with('parent','products')->get();
-        foreach ($categories as $c) {
-            if ($c->parent) {
-                $c->full_category = $c->parent->title.' > '.$c->title;
-            }else{
-                $c->full_category = $c->title;
-            }
-        }
         $trees = Category::select('id','parent_id as parent','title as text')->get();
         foreach ($trees as $t){
             $t->text = $t->text.' ('.$t->product_count.')';

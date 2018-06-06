@@ -38,8 +38,10 @@
                         <td>{{money($c->balance)}}</td>
                         <td>{!! $c->status==1?'<i class="fa fa-check"></i>':'<i class="fa fa-times"></i>' !!}</td>
                         <td>
-                                <a href="customer/edit/{{$c->id}}" class="btn btn-sm btn-warning"><i
+                                <a href="customer/edit/{{$c->id}}" class="btn btn-xs btn-info"><i
                                             class="fa fa-pencil"></i> Edit</a>
+                            <a href="customer/payment/{{$c->id}}" class="btn btn-xs btn-success"><i
+                                            class="fa fa-money"></i> Payment</a>
                         </td>
                     </tr>
                 @endforeach

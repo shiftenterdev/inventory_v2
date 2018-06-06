@@ -229,7 +229,7 @@
             }
         });
 
-        $('#productList').on('click', '.rSI', function () {
+        $('#productList').on('click', '.remove', function () {
             load.on();
             var formData = {
                 code: $(this).data('code'),
@@ -241,7 +241,7 @@
             });
         });
 
-        $('#productList').on('change', '.pq-s', function () {
+        $('#productList').on('change', '.quantity', function () {
             load.on();
             var formData = {
                 code: $(this).data('code'),
@@ -254,7 +254,7 @@
             });
         });
 
-        $('#productList').on('change', '.pd-s', function () {
+        $('#productList').on('change', '.discount', function () {
             load.on();
             var formData = {
                 code: $(this).data('code'),
